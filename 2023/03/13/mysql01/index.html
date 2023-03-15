@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"huangzhw0221.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="在面试的时候碰到了用索引优化数据库的问题，完全懵逼，所以特意来看一下这段视频，并做了这篇笔记。 本篇笔记是参考MySQL索引失效原理_哔哩哔哩_bilibili 做的。 什么是mvcc？Multi-Version Concurrency Control，主要是为了提高数据库的并发性能，避免同一个数据在不同事务之间的竞争，让数据库不用在读写时加锁，MVCC主要用于处理读请求，这个读指的是快照读也就是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySql索引、事务、MVCC学习">
+<meta property="og:url" content="https://huangzhw0221.github.io/2023/03/13/mysql01/index.html">
+<meta property="og:site_name" content="Huang&#39;s Matrix">
+<meta property="og:description" content="在面试的时候碰到了用索引优化数据库的问题，完全懵逼，所以特意来看一下这段视频，并做了这篇笔记。 本篇笔记是参考MySQL索引失效原理_哔哩哔哩_bilibili 做的。 什么是mvcc？Multi-Version Concurrency Control，主要是为了提高数据库的并发性能，避免同一个数据在不同事务之间的竞争，让数据库不用在读写时加锁，MVCC主要用于处理读请求，这个读指的是快照读也就是">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312154820857.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312150744864.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312153731484.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312162058555.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312162446216.png">
+<meta property="article:published_time" content="2023-03-13T06:09:33.000Z">
+<meta property="article:modified_time" content="2023-03-13T06:11:11.327Z">
+<meta property="article:author" content="Huang Zhiwei">
+<meta property="article:tag" content="数据库">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312154820857.png">
+
+<link rel="canonical" href="https://huangzhw0221.github.io/2023/03/13/mysql01/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MySql索引、事务、MVCC学习 | Huang's Matrix</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Huang's Matrix</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://huangzhw0221.github.io/2023/03/13/mysql01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Huang Zhiwei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Huang's Matrix">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MySql索引、事务、MVCC学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-03-13 14:09:33 / 修改时间：14:11:11" itemprop="dateCreated datePublished" datetime="2023-03-13T14:09:33+08:00">2023-03-13</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在面试的时候碰到了用索引优化数据库的问题，完全懵逼，所以特意来看一下这段视频，并做了这篇笔记。</p>
+<p>本篇笔记是参考<a class="link"   target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1t5411u7Fg/?p=3&spm_id_from=pageDriver&vd_source=2d293d5c5006c6769e4551faeba1caee" >MySQL索引失效原理_哔哩哔哩_bilibili <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>做的。</p>
+<h4 id="什么是mvcc？"><a href="#什么是mvcc？" class="headerlink" title="什么是mvcc？"></a>什么是mvcc？</h4><p>Multi-Version Concurrency Control，主要是为了提高数据库的并发性能，避免同一个数据在不同事务之间的竞争，让数据库不用在读写时加锁，MVCC主要用于处理读请求，这个读指的是快照读也就是普通的select读。</p>
+<h4 id="快照读和当前读"><a href="#快照读和当前读" class="headerlink" title="快照读和当前读"></a>快照读和当前读</h4><ul>
+<li>快照读指的是普通的select读；</li>
+<li>当前读指的是一种悲观锁的操作，它读取最新的数据库记录并且会对当前在读的数据加锁，防止其他事务修改数据。共享锁、排他锁、串行化都是当前读。</li>
+</ul>
+<h4 id="数据库acid的实现"><a href="#数据库acid的实现" class="headerlink" title="数据库acid的实现"></a>数据库acid的实现</h4><p>原子性：通过undolog实现；</p>
+<p>持久性：redolog</p>
+<p>隔离性：通过加锁和mvcc实现，而加锁操作是对”写-写“实现隔离，通过加上表锁、行锁让数据库资源加锁，实现只能被一个事务使用加锁的数据库资源；而mvcc实现的是”读-写“的隔离，在常用的隔离级别”读已提交“和”可重复读“下，它的快照读都是通过mvcc实现的。</p>
+<p>一致性：通过保证上面的三个特性来保证一致性。</p>
+<h4 id="事务隔离级别和问题"><a href="#事务隔离级别和问题" class="headerlink" title="事务隔离级别和问题"></a>事务隔离级别和问题</h4><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312154820857.png"
+                      alt="image-20230312154820857"
+                ></p>
+<p>四种隔离级别对应解决三种问题：</p>
+<ul>
+<li>脏读：由于读到未提交的数据，两次读可能读到不一样的数据，因为别的事务正在修改这条数据，这就是脏读。</li>
+<li>不可重复读：两次读取到的数据不一样，但在两次读取之间这条数据被其他事务修改并提交了，就会导致两次数据不一样。</li>
+<li>幻读：指的是读取到的数据量不一样，当事务不是独立执行时容易发生这个情况。比如两个事务同时向数据库插入编号为6的数据，两个人都以为自己插入的数据是6，插入完总量变成6，但实际上变成了7；又比如一个事务修改所有数据行，另一个事务添加一行数据，这时第一个事务执行完发现还有一行数据没被修改。</li>
+</ul>
+<h4 id="undolog日志和版本链"><a href="#undolog日志和版本链" class="headerlink" title="undolog日志和版本链"></a>undolog日志和版本链</h4><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312150744864.png"
+                      alt="image-20230312150744864"
+                ></p>
+<p>如上图，对于一条数据做多次修改，将张三改成了李四、王五、赵六，它们的id没变表示是在原来的数据上修改的，但是他们的事务id和回滚指针会在修改的过程中改变。而undolog就保存历史版本的信息，版本链则是由回滚指针和undolog链接起来得到的。</p>
+<h4 id="ReadView"><a href="#ReadView" class="headerlink" title="ReadView"></a>ReadView</h4><p>ReadView其实就是一个保存事务ID的list列表。记录的是本事务执行时，MySQL还有哪些事务在执行，且还没有提交。在版本链中有很多条记录，readview就是通过一些规则让我们知道该选取那个记录。</p>
+<p>它主要包含四个字段：</p>
+<ul>
+<li>m_ids，当前有哪些事务正在执行，且还没有提交，这些事务的 id 就会存在这里，称为当前活跃的事务；</li>
+<li>min_trx_id，是指 m_ids 里最小的值，就是活跃的读写事务中的最小的id值；</li>
+<li>max_trx_id，是指下一个要生成的事务 id。下一个要生成的事务 id 肯定比现在所有事务的 id 都大；</li>
+<li>creator_trx_id，表示生成readview事务的事务id。每开启一个事务都会生成一个 ReadView，而 creator_trx_id 就是这个开启的事务的 id。</li>
+</ul>
+<p>readview的判断逻辑：</p>
+<ul>
+<li>trx_id &#x3D;&#x3D; creator_trx_id：可以访问这个版本，因为数据的事务id和创建这个数据的事务id一样，表示这个数据就是由这个书屋创建的，所以可以访问；</li>
+<li>trx_id &lt; min_trx_id：可以访问这个版本，因为数据的事务id比当前活跃的未提交事务id小，那就是已提交的数据，所以是可以访问的；</li>
+<li>trx_id &gt; max_trx_id：不可以访问这个版本，因为数据的事务id大于下一个事务的id，违规了。</li>
+<li>min_trx_id &lt;&#x3D; trx_id &lt;&#x3D; max_trx_id：不可以访问这个版本，这里指的是要访问的trx_id在m_ids中，即在活跃事务id列表中的，表示未提交，所以不可读；当然，如果trx_id不在m_ids中，也是可以访问的，因为表示已提交的事务。</li>
+</ul>
+<h4 id="MVCC如何实现”读已提交“和”可重复读“"><a href="#MVCC如何实现”读已提交“和”可重复读“" class="headerlink" title="MVCC如何实现”读已提交“和”可重复读“"></a>MVCC如何实现”读已提交“和”可重复读“</h4><p>在读已提交隔离级别下，mvcc就是在执行每一条select语句时创建一个readview，根据上述判据判断是否可以读到某一个版本。</p>
+<p>在可重复读隔离级别下，mvcc会根据事务创建readview，即多条select语句使用一个readview，那么在这个事务中读到的数据版本就不会改动了。</p>
+<p>以一个例子来说明：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312153731484.png"
+                      alt="image-20230312153731484"
+                ></p>
+<p>其中，张三是最早的版本，后续有一个事务修改了两次这个数据的值但是未提交，那么它们的事务id就改变了，显然越新的越大，注意这里王五的trx_id不是20，我们修改为60。然后根据判据：</p>
+<p>当前m_ids有：20（李四）、60（王五）；min_trx_id：20；max_trx_id：61（比王五还要大1）；creator_trx_id：10（张三）</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>trx_id &#x3D;&#x3D; creator_trx_id（10）</th>
+<th>trx_id &lt; min_trx_id（20）</th>
+<th>trx_id &gt; max_trx_id（60）</th>
+<th>trx_id 在m_ids（20，60）中？</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>王五60</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+<td>是</td>
+</tr>
+<tr>
+<td>李四20</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+<td>是</td>
+</tr>
+<tr>
+<td>张三10</td>
+<td>是（读的到）</td>
+<td>是</td>
+<td>否</td>
+<td>否</td>
+</tr>
+</tbody></table>
+<p>所以读到张三这个版本</p>
+<h4 id="快照读和当前读如何解决幻读"><a href="#快照读和当前读如何解决幻读" class="headerlink" title="快照读和当前读如何解决幻读"></a>快照读和当前读如何解决幻读</h4><p>按上述所说，快照读会在select执行时生成一个readview，那后续数据的变化不会再影响这个readview，所以读到的数据量和数据信息不再改变了；</p>
+<p>当前读通过加间隙锁的方式解决，首先让数据id形如1、3、5、7这样间隙递增，然后读的时候把要读的一段加锁，这样如果同时有一个事务想要插入id&#x3D;4的数据就不能成功，以此方式解决了幻读。</p>
+<h4 id="Mysql数据库索引的底层数据结构"><a href="#Mysql数据库索引的底层数据结构" class="headerlink" title="Mysql数据库索引的底层数据结构"></a>Mysql数据库索引的底层数据结构</h4><p>结论：使用了b+树这个数据结构，b+树的叶子节点是双向链表，非叶子节点的每个节点可以存放两个数据。</p>
+<p>使用b+树的好处是：降低了树的高度，又是一颗查找树，可以使用二分查找快速查到数据，同时避免了大于、小于这类查询时的回退查找的问题，可以直接将双向链表的后续或者向前的全部一次性返回。（如果是b树、平衡二叉树要返回上一个节点，磁头反转是一个很昂贵的操作，特别慢）</p>
+<p>三种树的动画演示可以查看：<a class="link"   target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/AVLtree.html" >AVL Tree Visualzation (usfca.edu) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/BTree.html" >B-Tree Visualization (usfca.edu) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html" >B+ Tree Visualization (usfca.edu) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>三种树的数据结构可看：<a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/wyqwilliam/article/details/82935922" > 二叉树，平衡二叉树，红黑树，B-树、B+树、B*树的区别_红黑树是平衡二叉树吗_道法—自然的博客-CSDN博客 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h4 id="索引Index和索引失效"><a href="#索引Index和索引失效" class="headerlink" title="索引Index和索引失效"></a>索引Index和索引失效</h4><p><strong>索引</strong>是在你存储的数据之外，额外保存一些路标（一般是B+树），以减少检索数据的时间。所以索引是主数据衍生的附加结构。</p>
+<p>常用的索引有：</p>
+<ul>
+<li>单列索引：只包含一个字段的索引叫做单列索引；</li>
+<li>复合索引：包含两个或以上字段的索引叫做复合索引；</li>
+<li>唯一索引：是在表上<strong>一个或者多个字段</strong>组合建立的索引，这个（或这几个）字段的值组合起来在表中<strong>不可以重复</strong>。一张表可以建立<strong>任意多个唯一索引</strong>，但一般只建立一个。主键可以作为一种唯一索引。</li>
+<li>聚簇索引：<strong>聚簇索引</strong>的叶子节点就是数据节点  innodb；</li>
+<li>非聚簇索引：<strong>非聚簇索引</strong>的叶子节点仍然是索引节点，只不过有指向对应数据块的指针；</li>
+</ul>
+<p>组合索引会先按照第一个字段排序，在第一个字段相同的情况下又按照第二个字段排序，以此类推。所以当查询语句掠过了第一个字段时，索引就失效了。同理出现模糊查询时也容易导致索引失效，因为都是略过了第一个字段，比如用通配符：‘%aa’ 就导致索引失效了。</p>
+<p>Innodb和MyISAM的区别：</p>
+<p>简要概括为一下几点：</p>
+<p>外键：Innodb支持，MyISAM不支持；</p>
+<p>索引：Innodb是聚簇索引，索引指向数据，MyISAM是非聚簇索引，索引指向地址；</p>
+<p>锁粒度：Innodb是行锁，MyISAM是表锁；</p>
+<h4 id="如何利用索引优化数据库"><a href="#如何利用索引优化数据库" class="headerlink" title="如何利用索引优化数据库"></a>如何利用索引优化数据库</h4><p>首先需要建立索引，以视频中的数据库为例，包含的字段如下表。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312162058555.png"
+                      alt="image-20230312162058555"
+                ></p>
+<p>创建数据库的代码如下：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> `test_user`&#123;</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> `id` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">not</span> <span class="keyword">null</span> AUTO_INCREMENT comment <span class="string">&#x27;主键id&#x27;</span>,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> `user_id` <span class="type">varchar</span>(<span class="number">36</span>) <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;用户id&#x27;</span>,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> `user_name` <span class="type">varchar</span>(<span class="number">30</span>) <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;用户名称&#x27;</span>,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> `phone` <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;手机号码&#x27;</span>,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> `lan_id` <span class="type">int</span>(<span class="number">9</span>) <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;本地网&#x27;</span>,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> `region_id` <span class="type">int</span>(<span class="number">9</span>) <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;区域&#x27;</span>,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> `create_time` datetime <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;创建时间&#x27;</span>,</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> <span class="keyword">primary</span> key (`id`)</span><br><span class="line">    <span class="operator">-</span><span class="operator">&gt;</span> &#125;engine<span class="operator">=</span>InnoDB AUTO_INCREMENT<span class="operator">=</span><span class="number">5000</span> <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb4;</span><br></pre></td></tr></table></figure></div>
+
+<p>我们可以创建组合索引：</p>
+<div class="highlight-container" data-rel="Sql"><figure class="iseeu highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> test_user <span class="keyword">add</span> index idx_phone_lan_region(phone,lan_id,region_id);</span><br></pre></td></tr></table></figure></div>
+
+<p>这样查询的速度会快非常多，当然我们可以创建多个索引，只要符合索引规范即可。</p>
+<p>以我们自己项目中的数据库为例，这是一个数据量也达到百万级的数据库，只是并发非常低可以忽略不计：</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312162446216.png"
+                      alt="image-20230312162446216"
+                ></p>
+<p>我们的优化思路是，除了主键id外，可以将ip、warnstyle、warnlog构成索引，这是因为只有这三个可以唯一确定一条记录，报警时间也有很多重复的。</p>
+<p>也可以添加更多的索引，如warnstyle、warntime、warnlog构成索引，以应对条件查询限定报警类型的情况。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/03/06/leetcode01/" rel="prev" title="力扣学习录01">
+      <i class="fa fa-chevron-left"></i> 力扣学习录01
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/03/13/mysql02/" rel="next" title="数据库索引、日志和mvcc的补充">
+      数据库索引、日志和mvcc的补充 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFmvcc%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">什么是mvcc？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BF%AB%E7%85%A7%E8%AF%BB%E5%92%8C%E5%BD%93%E5%89%8D%E8%AF%BB"><span class="nav-number">2.</span> <span class="nav-text">快照读和当前读</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93acid%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">数据库acid的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E5%92%8C%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">事务隔离级别和问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undolog%E6%97%A5%E5%BF%97%E5%92%8C%E7%89%88%E6%9C%AC%E9%93%BE"><span class="nav-number">5.</span> <span class="nav-text">undolog日志和版本链</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ReadView"><span class="nav-number">6.</span> <span class="nav-text">ReadView</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MVCC%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E2%80%9D%E8%AF%BB%E5%B7%B2%E6%8F%90%E4%BA%A4%E2%80%9C%E5%92%8C%E2%80%9D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AF%BB%E2%80%9C"><span class="nav-number">7.</span> <span class="nav-text">MVCC如何实现”读已提交“和”可重复读“</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BF%AB%E7%85%A7%E8%AF%BB%E5%92%8C%E5%BD%93%E5%89%8D%E8%AF%BB%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%B9%BB%E8%AF%BB"><span class="nav-number">8.</span> <span class="nav-text">快照读和当前读如何解决幻读</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95%E7%9A%84%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">9.</span> <span class="nav-text">Mysql数据库索引的底层数据结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95Index%E5%92%8C%E7%B4%A2%E5%BC%95%E5%A4%B1%E6%95%88"><span class="nav-number">10.</span> <span class="nav-text">索引Index和索引失效</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">11.</span> <span class="nav-text">如何利用索引优化数据库</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Huang Zhiwei</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Huang Zhiwei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
