@@ -271,31 +271,71 @@
             <div class="article-content markdown-body">
                 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​	在部署完成个人博客后，可以编写文章了，这里推荐使用Typora。虽然说.md文件打开方式有很多，JetBrean系列、vscode甚至记事本都可阅读，但学习记录常常会贴一些图，这个时候用以上软件就不那么方便了，而Typora提供了一个非常方便的解决方案，不仅可以随意插入、预览，它可以连接到图床，使我们设定好图床后一边写就可以一边传了，突出一个丝滑。</p>
 <p>​	在未设置图床之前，我们插入到文档中的图片会保存到本地的一个文件夹。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\xxxxx\AppData\Roaming\Typora\typora-user-images</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\xxxxx\AppData\Roaming\Typora\typora-user-images</span><br></pre></td></tr></table></figure></div>
 
 <p>​	如果直接将这个md文档作为博客内容发布，别人访问是看不到里面的图片的，而那些下载下来就能看到图片的md文档，里面的图片仔细看都是一个网页连接，这就是我们设置图床的好处。</p>
 <h2 id="下载软件"><a href="#下载软件" class="headerlink" title="下载软件"></a>下载软件</h2><p>​	在Typora的偏好设置中，有一个图像设置，其中提供了一个上传服务设定选项，在windows上提供了三个选择，分别是picgo的命令行模式、picgo的app模式、普通命令行模式。如果有硬核的想法，你可以选择用命令行；如果更硬核一点，你也可以自己做一个上传图床的软件，但博主属于一点都不硬核的人，为了操作的简便肯定是选择app模式的。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/img/image-20230304214118239.png" alt="image-20230304214118239"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/img/image-20230304214118239.png"
+                      alt="image-20230304214118239"
+                ></p>
 <p>​	点击它提供的下载链接，下载它的最新版，点击安装，这个东西装哪里都无所谓。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/img/image-20230304214524590.png" alt="image-20230304214524590"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/img/image-20230304214524590.png"
+                      alt="image-20230304214524590"
+                ></p>
 <p>​	最后记得将picgo路径设置一下。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/img/image-20230304220435422.png" alt="image-20230304220435422"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/img/image-20230304220435422.png"
+                      alt="image-20230304220435422"
+                ></p>
 <h2 id="设置图床"><a href="#设置图床" class="headerlink" title="设置图床"></a>设置图床</h2><p>​	接着就准备填写它的图床设置，如下图所示，这里其他一些我不用的图床已经被隐藏掉了。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/img/image-20230304214649763.png" alt="image-20230304214649763"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/img/image-20230304214649763.png"
+                      alt="image-20230304214649763"
+                ></p>
 <p>​	那么一项一项地看，第一个需要设置一个仓库名，那么我们就要创建一个新的public的github仓库，然后将他填入。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/img/image-20230304215139374.png" alt="image-20230304215139374"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/img/image-20230304215139374.png"
+                      alt="image-20230304215139374"
+                ></p>
 <p>​	这里的存储路径就是子文件夹名称，如果有强迫症的老哥，可以用更具体的名称设置，或者建个readme文档，方便遇到其他使用图床的需求时分得清哪个文件夹是哪个应用的图床。</p>
 <p>​	在token一栏，需要我们填入一个新生成的token，如图所示，进入settings –&gt;Developer settings 点击生成一个新token。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/img/image-20230304162635903.png"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/img/image-20230304162635903.png"
+                     
+                ></p>
 <p>​	在note一栏填一个用途方便自己记住，过期时间根据自己定，scopes只需要勾选一个repo。它生成的token只会显示这一次，所以别直接关闭了页面就忘记了。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/img/image-20230304215736524.png" alt="image-20230304215736524"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/img/image-20230304215736524.png"
+                      alt="image-20230304215736524"
+                ></p>
 <p>​	在自定义域名处输入一下地址即可大功告成，这里加上的一段是使用了jsDelivr 加速，可以让我们无须担心中国防火墙问题而影响使用，现在可以测试一下啦。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://cdn.jsdelivr.net/gh/&quot;githubname&quot;/&quot;repo name&quot;</span><br></pre></td></tr></table></figure>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://cdn.jsdelivr.net/gh/&quot;githubname&quot;/&quot;repo name&quot;</span><br></pre></td></tr></table></figure></div>
 
-<p><img src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/img/image-20230304220453746.png" alt="image-20230304220453746"></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/img/image-20230304220453746.png"
+                      alt="image-20230304220453746"
+                ></p>
 <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>​	趁着还没忘记这个搭建博客的过程，将这些内容都记录下来，写了两篇博客。这也是使用个人博客的一个好处，它可以让人用朴素的编辑方式随心所欲地记录，比起在csdn、知乎这样的网站写文章，显然要轻松自由很多。</p>
-<p>​	原本打算再写一个使用hugo academic和netlify搭建动态个人网页的博客的，但想了想还是算了，原因有三。一方面我完全不懂这套搭建和部署流程的原理，只是看着别人的教程照本宣科意义不大；另一方面它极为华丽，我在体验了它的两个主题后发现它的内容过分丰富了，学术主页和课题组主页都需要丰富的内容取填充，对于我来说没有什么学术成果也显得空空荡荡，所以思索再三我只是用了它的minimal创建，作为联系主页，关联到我的博客就行了；最后一个原因是它的教程已经尽善尽美了，无论是它的主页教程：<a target="_blank" rel="noopener" href="https://wowchemy.com/templates/">Best Hugo Themes &amp; Hugo Website Builder | Wowchemy</a>还是哔哩哔哩的视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Gz4y1f7Qj/?spm_id_from=333.880.my_history.page.click">零编程基础搭建个人主页 | 学术主页 | 网页制作 | Github妙用_哔哩哔哩_bilibili</a>都非常好。</p>
-<p>​	最后欢迎访问我的主页：<a target="_blank" rel="noopener" href="https://huangzhw-links.netlify.app/">Huang’s Matrix (huangzhw-links.netlify.app)</a>和个人博客：<a href="https://huangzhw0221.github.io/">Huang’s Matrix (huangzhw0221.github.io)</a>，拜拜！</p>
+<p>​	原本打算再写一个使用hugo academic和netlify搭建动态个人网页的博客的，但想了想还是算了，原因有三。一方面我完全不懂这套搭建和部署流程的原理，只是看着别人的教程照本宣科意义不大；另一方面它极为华丽，我在体验了它的两个主题后发现它的内容过分丰富了，学术主页和课题组主页都需要丰富的内容取填充，对于我来说没有什么学术成果也显得空空荡荡，所以思索再三我只是用了它的minimal创建，作为联系主页，关联到我的博客就行了；最后一个原因是它的教程已经尽善尽美了，无论是它的主页教程：<a class="link"   target="_blank" rel="noopener" href="https://wowchemy.com/templates/" >Best Hugo Themes &amp; Hugo Website Builder | Wowchemy <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>还是哔哩哔哩的视频教程：<a class="link"   target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Gz4y1f7Qj/?spm_id_from=333.880.my_history.page.click" >零编程基础搭建个人主页 | 学术主页 | 网页制作 | Github妙用_哔哩哔哩_bilibili <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>都非常好。</p>
+<p>​	最后欢迎访问我的主页：<a class="link"   target="_blank" rel="noopener" href="https://huangzhw-links.netlify.app/" >Huang’s Matrix (huangzhw-links.netlify.app) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>和个人博客：<a href="https://huangzhw0221.github.io/">Huang’s Matrix (huangzhw0221.github.io)</a>，拜拜！</p>
 
             </div>
 
