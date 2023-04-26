@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Huang Zhiwei">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://evan.beee.top" crossorigin>
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://huangzhw0221.github.io/2023/04/25/linux常用指令/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="linux常用指令系统操作常用指令lslist 的缩写，可以查看 linux 文件夹包含的文件、文件权限、目录、文件夹等信息。  ls -a：列出目录所有文件，包含以。开始的隐藏文件。 ls -A：列出除。及。. 的其它文件。 ls -l：除了文件名之外，还将文件的权限、所有者、文件大小等信息详细列出来。  pwd pwd：查看当前路径。 pwd -P：查看软链接的实际路径。  mkdir用于创建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux常用指令">
+<meta property="og:url" content="https://huangzhw0221.github.io/2023/04/25/linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Huang&#39;s Matrix">
+<meta property="og:description" content="linux常用指令系统操作常用指令lslist 的缩写，可以查看 linux 文件夹包含的文件、文件权限、目录、文件夹等信息。  ls -a：列出目录所有文件，包含以。开始的隐藏文件。 ls -A：列出除。及。. 的其它文件。 ls -l：除了文件名之外，还将文件的权限、所有者、文件大小等信息详细列出来。  pwd pwd：查看当前路径。 pwd -P：查看软链接的实际路径。  mkdir用于创建">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230426113013838.png">
+<meta property="article:published_time" content="2023-04-25T13:38:13.000Z">
+<meta property="article:modified_time" content="2023-04-26T05:26:34.499Z">
+<meta property="article:author" content="Huang Zhiwei">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230426113013838.png">
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-favicon.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/redefine-favicon.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            linux常用指令 -
+        
+        Huang&#39;s Matrix
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/assets/fonts.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"huangzhw0221.github.io","root":"/","language":"zh-CN"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true},"home_banner":{"enable":true,"image":{"light":"https://images.pexels.com/photos/691668/pexels-photo-691668.jpeg","dark":"https://images.pexels.com/photos/461956/pexels-photo-461956.jpeg"},"title":"白云怡意 清泉洗心","subtitle":{"text":[],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.1.2","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"}},"search":{"enable":false,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}}};
+    Global.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="main-content-container">
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Huang&#39;s Matrix
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        首页
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                首页
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+            
+                <div class="article-title">
+                    <h1 class="article-title-regular">linux常用指令</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/redefine-avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Huang Zhiwei</span>
+                            
+                                <span class="author-label"></span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-04-25 21:38:13</span>
+        <span class="mobile">2023-04-25 21:38</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-04-26 13:26:34</span>
+            <span class="mobile">2023-04-26 13:26</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <h1 id="linux常用指令"><a href="#linux常用指令" class="headerlink" title="linux常用指令"></a>linux常用指令</h1><h2 id="系统操作常用指令"><a href="#系统操作常用指令" class="headerlink" title="系统操作常用指令"></a>系统操作常用指令</h2><h4 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h4><p>list 的缩写，可以查看 linux 文件夹包含的文件、文件权限、目录、文件夹等信息。</p>
+<ul>
+<li><code>ls -a</code>：列出目录所有文件，包含以。开始的隐藏文件。</li>
+<li><code>ls -A</code>：列出除。及。. 的其它文件。</li>
+<li><code>ls -l</code>：除了文件名之外，还将文件的权限、所有者、文件大小等信息详细列出来。</li>
+</ul>
+<h4 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h4><ul>
+<li><code>pwd</code>：查看当前路径。</li>
+<li><code>pwd -P</code>：查看软链接的实际路径。</li>
+</ul>
+<h4 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h4><p>用于创建文件夹。</p>
+<ul>
+<li><code>mkdir newfolder</code>：在当前目录创建名字为 newfolder 的文件夹。</li>
+<li><code>mkdir -p /tmp/test/t1/t</code>：在 tmp 目录下创建路径为 test&#x2F;t1&#x2F;t 的目录，系统会自动建立那些不存在的目录。</li>
+</ul>
+<h4 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h4><p>删除一个目录中的一个或多个文件或目录。</p>
+<ul>
+<li><code>rm -i *.log</code>：删除任何。log 文件，删除前逐一询问确认。</li>
+<li><code>rm -rf test</code>：递归删除 test 子目录及其子目录中所有档案，并且不用一一确认。</li>
+</ul>
+<h4 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h4><p>用来移动或修改文件名，参数为目录时移动文件，否则重命名文件。</p>
+<ul>
+<li><code>mv test.log test1.txt</code>：将文件 test.log 重命名为 test1.txt。</li>
+<li><code>mv llog1.txt log2.txt log3.txt /test3</code>：将文件 log1.txt,log2.txt,log3.txt 移动到根的 test3 目录中。</li>
+<li><code>mv -i log1.txt log2.txt</code>：将文件 file1 改名为 file2，如果 file2 已经存在，则询问是否覆。</li>
+<li><code>mv * ../</code>：移动当前文件夹下的所有文件到上一级目录。</li>
+</ul>
+<h4 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h4><p>将源文件复制至目标文件，或将多个源文件复制至目标目录。</p>
+<ul>
+<li><code>cp -i</code>：提示出现文件的覆盖。</li>
+<li><code>cp -r</code>：复制目录及目录内所有项目。</li>
+<li><code>cp -a</code>：复制的文件与原文件时间一样。</li>
+<li><code>cp -ai a.txt test</code>：复制 a.txt 到 test 目录下，保持原文件时间，如果原文件存在提示是否覆盖。</li>
+<li><code>cp -s a.txt link_a.txt</code>：为 a.txt 建议一个链接（快捷方式）。</li>
+</ul>
+<h4 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h4><p>主要用来显示文件内容、创建新文件和合并文件。</p>
+<ul>
+<li><code>cat -b</code>：对非空输出行号。</li>
+<li><code>cat -n</code>：输出所有行号。</li>
+<li><code>cat test.log</code>：创建 test.log 文件。</li>
+<li><code>cat -n log2012.log log2013.log</code>：把 log2012.log 的文件内容加上行号后添加到 log2013.log。</li>
+<li><code>cat -b log2012.log log2013.log log.log</code>：把 log2012.log 和 log2013.log 的文件内容加上行号后添加到 log.log。</li>
+</ul>
+<h4 id="head"><a href="#head" class="headerlink" title="head"></a>head</h4><p>显示文件的开头几行，默认显示文件的前 10 行。</p>
+<ul>
+<li><code>head -n</code>：行数，最后 n 行使用负数。</li>
+<li><code>head -c</code>：字节数。</li>
+<li><code>head -n 10 1.log</code>：显示 1.log 文件中前 20 行。</li>
+<li><code>head -c 20 log2014.log</code>：显示 1.log 文件前 20 个字节。</li>
+<li><code>head -n -10 t.log</code>：显示 t.log 最后 10 行。</li>
+</ul>
+<h4 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h4><p>用于显示指定文件末尾内容，不指定文件时，使用输入信息进行处理，常用查看日志文件。</p>
+<ul>
+<li><code>tail -f</code>：循环读取，常用于查看递增的日志文件。</li>
+<li><code>tail -n</code>：行数。</li>
+</ul>
+<h4 id="which"><a href="#which" class="headerlink" title="which"></a>which</h4><p>在 PATH 中搜索某个系统命令的位置，并返回第一个搜索结果。使用 which 命令可以看到某个系统命令是否存在，以及执行的到底是哪一个位置的命令。</p>
+<ul>
+<li><code>which ls</code>：查看 ls 命令是否存在，执行哪个。</li>
+<li><code>which cd</code>：显示 cd 是内建命令。</li>
+</ul>
+<h4 id="whereis"><a href="#whereis" class="headerlink" title="whereis"></a>whereis</h4><p>whereis 命令只能用于程序名的搜索，whereis 及 locate 都是基于系统内建的数据库进行搜索，因此效率很高，而 find 则是遍历硬盘查找文件。</p>
+<ul>
+<li><code>whereis python</code>：返回所有相关的文件。</li>
+<li><code>whereis -b python</code>：搜索二进制可执行文件。</li>
+<li><code>whereis -m python</code>：搜索说明帮助文件。</li>
+<li><code>whereis -s python</code>：搜索源代码文件。</li>
+<li><code>whereis -u python</code>：搜索默认路径下以上文件之外的其它文件。</li>
+</ul>
+<h4 id="find"><a href="#find" class="headerlink" title="find"></a>find</h4><p>用于查找文件，可以配合使用正则表达式。</p>
+<ul>
+<li><code>find ./ -name &#39;*.log&#39;</code>：在当前目录查找 以。log 结尾的文件。</li>
+<li><code>find / -name filename.txt</code>：查找&#x2F;目录下的 filename.txt 文件。</li>
+</ul>
+<h4 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h4><p>用来压缩和解压文件。文件系统中，打包和压缩是不同的。打包是将一大堆文件或目录变成一个总的文件，压缩是将一个大的文件通过一些压缩算法变成一个小文件。</p>
+<p>tar 本身只具有打包功能，而压缩及解压是调用其它的程序完成的。</p>
+<ul>
+<li><code>tar -c</code>：建立新的压缩文件。</li>
+<li><code>tar -f</code>：指定压缩文件。</li>
+<li><code>tar -x</code>：从压缩包中抽取文件。</li>
+<li><code>tar -z</code>：支持 gzip 压缩。</li>
+<li><code>tar -v</code>：显示操作过程。</li>
+<li><code>tar -xvzf test.tar.gz</code>：解压 test.tar.gz 文件。</li>
+<li><code>tar -zcvf test.tar.gz ./</code>：压缩当前文件夹为 test.tar.gz。</li>
+</ul>
+<h4 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h4><p>用于修改 linux 系统文件或目录的访问权限。有两种用法：一种是包含字母和操作符表达式的文字设定法，另一种是包含数字的数字设定法。 </p>
+<ul>
+<li><code>chmod 777 file</code>：设置所有人可以读写及执行。</li>
+<li><code>chmod 600 file</code>：设置拥有者可读写，其他人不可读写执行。</li>
+<li><code>chmod ugo+r a.conf &amp;&amp; chmod a+r a.conf</code>：设置所有用户可读取文件 a.conf。</li>
+<li><code>chmod u+rwx c.sh</code>：设置 c.sh 只有拥有者可以读写及执行。</li>
+<li><code>chmod a+r,ug+w,o-w a.conf b.xml</code>：设置文件 a.conf 与 b.xml 权限为拥有者与所属的群组可读写，其它组可读不可写。</li>
+<li><code>chmod -R a+rw *</code>：设置当前目录下的所有档案与子目录皆设为任何人可读写。</li>
+</ul>
+<h4 id="df"><a href="#df" class="headerlink" title="df"></a>df</h4><p>通过文件系统来快速获取空间大小的信息，当我们删除一个文件的时候，这个文件不是马上就在文件系统当中消失了，而是暂时消失了，当所有程序都不用时，才会根据 OS 的规则释放掉已经删除的文件， <code>df</code>记录的是通过文件系统获取到的文件的大小。</p>
+<p><code>df</code>和<code>du</code>不同的地方是计算大小时会加上还没有释放的已删除文件，更加精确。</p>
+<ul>
+<li><code>df -a</code>：全部文件系统列表。</li>
+<li><code>df -h</code>：易读模式显示信息。</li>
+<li><code>df -l</code>：显示本地磁盘使用情况。</li>
+</ul>
+<h4 id="du"><a href="#du" class="headerlink" title="du"></a>du</h4><p>通过搜索文件然后计算每个文件的大小累加得到空间的大小信息。<code>du</code>能看到的文件只是一些当前存在的，没有被删除的，计算的大小就是当前存在的所有文件大小的累加和。</p>
+<ul>
+<li><code>du -s</code>：只显示总和的大小。</li>
+<li><code>du logxxx.log</code>：显示指定文件的所占空间，如果文件为多个则分别显示。</li>
+<li><code>du -a scf/</code>：显示文件夹内文件夹和文件的大小。</li>
+<li><code>du -h scf/</code>：以易读方式显示文件夹内及子文件夹大小。</li>
+<li><code>du -c test/ scf/</code>：显示几个文件或目录各自占用磁盘空间的大小，并统计它们的总和。</li>
+</ul>
+<h4 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h4><p>grep 在一个或多个文件中搜索字符串或者正则表达式模版，模板后的所有字符串被看作文件名，搜索的结果被送到标准输出，不影响原文件内容。</p>
+<ul>
+<li><code>ps -ef | grep java</code>：查看 java 有关进程。</li>
+</ul>
+<h4 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h4><p>用来查看进程的状态。</p>
+<ul>
+<li><code>ps -ef</code>：显示当前所有进程及进程间关系。</li>
+<li><code>ps -ef | grep java</code>：查看 java 有关进程。</li>
+<li>&#96;ps -ef | head -5’：列出前五的进程。</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230426113013838.png"
+                      alt="image-20230426113013838"
+                ></p>
+<ul>
+<li>UID：用户 ID。</li>
+<li>PID：进程 ID。</li>
+<li>PPID：父进程号。</li>
+<li>C：CPU 的占用率。</li>
+<li>STIME：进程的启动时间。</li>
+<li>TTY：登入者的终端机位置。</li>
+<li>TIME：进程执行起到现在总的 CPU 占用时间。</li>
+<li>CMD：启动这个进程的命令。</li>
+</ul>
+<h4 id="top"><a href="#top" class="headerlink" title="top"></a>top</h4><p>显示当前系统正在执行的进程的相关信息，包括进程 ID、内存占用率、CPU 占用率等</p>
+<ul>
+<li><code>top -p pid</code>：显示指定 pid 的信息。</li>
+<li><code>top -n</code>：前 n 行信息。</li>
+</ul>
+<h4 id="kill"><a href="#kill" class="headerlink" title="kill"></a>kill</h4><ul>
+<li><code>kill -9 19979</code>：终止线程号位 19979 的线程。</li>
+</ul>
+<h4 id="free"><a href="#free" class="headerlink" title="free"></a>free</h4><p>显示系统内存使用情况，包括物理内存、交互区内存 (swap) 和内核缓冲区内存。</p>
+<ul>
+<li><code>free -t</code>：显示内存总和的使用信息。</li>
+<li><code>free -s</code>：周期显示内存使用信息。</li>
+<li><code>free -b/-k/-m/-g</code>：使用不同的单位显示内存使用情况。</li>
+</ul>
+<h2 id="docker常用指令"><a href="#docker常用指令" class="headerlink" title="docker常用指令"></a>docker常用指令</h2><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#info|version</span><br><span class="line">docker info       #显示docker的系统信息，包括镜像和容器的数量</span><br><span class="line">docker version    #显示docker的版本信息。</span><br><span class="line">#帮助命令</span><br><span class="line">docker 命令 --help #帮助命令</span><br><span class="line">#镜像命令</span><br><span class="line">docker images #查看所有本地主机上的镜像 可以使用docker image ls代替</span><br><span class="line">docker search #搜索镜像</span><br><span class="line">docker pull #下载镜像 docker image pull</span><br><span class="line">docker rmi #删除镜像 docker image rm</span><br><span class="line">#容器命令</span><br><span class="line">docker run 镜像id #新建容器并启动</span><br><span class="line">docker ps 列出所有运行的容器 docker container list</span><br><span class="line">docker rm 容器id #删除指定容器</span><br><span class="line">docker rm -f $(docker ps -aq)  	 #删除所有的容器</span><br><span class="line">docker ps -a -q|xargs docker rm  #删除所有的容器</span><br><span class="line">#启动和停止容器</span><br><span class="line">docker start 容器id	#启动容器</span><br><span class="line">docker restart 容器id	#重启容器</span><br><span class="line">docker stop 容器id	#停止当前正在运行的容器</span><br><span class="line">docker kill 容器id	#强制停止当前容器</span><br><span class="line">#退出容器</span><br><span class="line">exit 		#容器直接退出</span><br><span class="line">ctrl +P +Q  #容器不停止退出 	---注意：这个很有用的操作</span><br><span class="line">#其他常用命令</span><br><span class="line">docker run -d 镜像名  #后台启动命令</span><br><span class="line">docker logs 		#查看日志</span><br><span class="line">docker top 容器id 	#查看容器中进程信息ps</span><br><span class="line">docker inspect 容器id  #查看镜像的元数据</span><br><span class="line">docker exec 		#进入当前容器后开启一个新的终端，可以在里面操作。（常用）</span><br><span class="line">docker attach 		# 进入容器正在执行的终端</span><br><span class="line">docker cp 容器id:容器内路径  主机目的路径	#从容器内拷贝到主机上</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br></pre></td><td class="code"><pre><span class="line">docker attach	#连接到正在运行中的容器</span><br><span class="line">docker build	#使用 Dockerfile 创建镜像</span><br><span class="line">docker builder	#管理builds</span><br><span class="line">    docker builder prune	#清除build缓存</span><br><span class="line">docker checkpoint	#管理checkpoints</span><br><span class="line">    docker checkpoint create	#从正在运行的容器创建检查点</span><br><span class="line">    docker checkpoint ls	#列出容器的检查点</span><br><span class="line">    docker checkpoint rm	#删除指定的检查点</span><br><span class="line">docker commit	#从容器创建一个新的镜像</span><br><span class="line">docker config	#管理Docker配置</span><br><span class="line">    docker config create	#创建配置文件</span><br><span class="line">    docker config inspect	#查看配置文件信息</span><br><span class="line">    docker config ls		#显示docker里已经保存得配置文件</span><br><span class="line">    docker config rm		#删除配置文件</span><br><span class="line">docker container	#管理容器</span><br><span class="line">    docker container prune	#删除所有已停止的容器</span><br><span class="line">docker context	#管理contexts</span><br><span class="line">    docker context create	#创建一个上下文</span><br><span class="line">    docker context export	#将上下文导出到tar或kubecconfig文件中</span><br><span class="line">    docker context import	#从tar或zip文件导入上下文</span><br><span class="line">    docker context inspect	#在一个或多个上下文上显示详细信息</span><br><span class="line">    docker context ls		#列出上下文</span><br><span class="line">    docker context rm		#删除一个或多个上下文</span><br><span class="line">    docker context update	#更新</span><br><span class="line">    docker context use		#设置当前docker的上下文</span><br><span class="line">docker cp		#用于容器与主机之间的数据拷贝</span><br><span class="line">docker create	#创建一个新的容器但不启动它</span><br><span class="line">docker diff		#检查容器里文件结构的更改</span><br><span class="line">docker events	#从服务器获取实时事件</span><br><span class="line">docker exec		#在运行的容器中执行命令</span><br><span class="line">docker export	#将文件系统作为一个tar归档文件导出到STDOUT</span><br><span class="line">docker history	#查看指定镜像的创建历史</span><br><span class="line">docker image	#管理镜像</span><br><span class="line">    docker image inspect	#显示一个或多个镜像的元数据</span><br><span class="line">    docker image ls			#列出本地镜像</span><br><span class="line">    docker image prune		#删除没有使用的镜像</span><br><span class="line">    docker image rm			#删除一个或多个镜像</span><br><span class="line">docker images	#列出本地镜像</span><br><span class="line">docker import	#从归档文件中创建镜像</span><br><span class="line">docker info		#显示 Docker 系统信息，包括镜像和容器数</span><br><span class="line">docker inspect	#获取容器/镜像的元数据</span><br><span class="line">docker kill		#杀掉一个运行中的容器</span><br><span class="line">docker load		#导入使用 docker save 命令导出的镜像</span><br><span class="line">docker login	#登陆到一个Docker镜像仓库，如果未指定镜像仓库地址，默认为官方仓库 Docker Hub</span><br><span class="line">docker logout	#登出一个Docker镜像仓库，如果未指定镜像仓库地址，默认为官方仓库 Docker Hub</span><br><span class="line">docker logs		#获取容器的日志</span><br><span class="line">docker manifest	#管理manifest(实验，不应用于生产环境)</span><br><span class="line">    docker manifest annotate	#向本地镜像清单添加附加信息</span><br><span class="line">    docker manifest create		#创建用于注释和推入注册表的本地清单列表</span><br><span class="line">    docker manifest inspect		#显示镜像清单或清单列表</span><br><span class="line">    docker manifest push		#将清单列表推入仓库</span><br><span class="line">    docker manifest rm			#从本地存储中删除一个或多个清单列表</span><br><span class="line">docker network	#管理网络</span><br><span class="line">    docker network connect		#将容器连接到网络</span><br><span class="line">    docker network create		#创建一个网络</span><br><span class="line">    docker network disconnect	#断开容器的网络</span><br><span class="line">    docker network inspect		#显示一个或多个网络的元数据</span><br><span class="line">    docker network ls			#列出网络</span><br><span class="line">    docker network prune		#删除所有没有使用的网络</span><br><span class="line">    docker network rm			#删除一个或多个网络</span><br><span class="line">docker node		#管理集群(swarm)节点</span><br><span class="line">    docker node demote			#从群集(swarm)管理器中降级一个或多个节点</span><br><span class="line">    docker node inspect			#显示一个或多个节点的元数据</span><br><span class="line">    docker node ls				#列出群集(swarm)中的节点</span><br><span class="line">    docker node promote			#将一个或多个节点推入到群集管理器中</span><br><span class="line">    docker node ps				#列出在一个或多个节点上运行的任务，默认为当前节点</span><br><span class="line">    docker node rm				#从群集(swarm)删除一个或多个节点</span><br><span class="line">    docker node update			#更新一个节点</span><br><span class="line">docker pause	#暂停容器中所有的进程</span><br><span class="line">docker plugin	#管理插件</span><br><span class="line">    docker plugin create		#从rootfs和配置创建一个插件。插件数据目录必须包含config.json和rootfs目录。</span><br><span class="line">    docker plugin disable		#禁用插件</span><br><span class="line">    docker plugin enable		#启用插件</span><br><span class="line">    docker plugin inspect		#显示一个或多个插件的元数据</span><br><span class="line">    docker plugin install		#安装一个插件</span><br><span class="line">    docker plugin ls			#列出所有插件</span><br><span class="line">    docker plugin push			#将插件推送到注册表</span><br><span class="line">    docker plugin rm			#删除一个或多个插件</span><br><span class="line">    docker plugin set			#更改插件的设置</span><br><span class="line">    docker plugin upgrade		#升级现有插件</span><br><span class="line">docker port		#列出指定的容器的端口映射，或者查找将PRIVATE_PORT NAT到面向公众的端口</span><br><span class="line">docker ps		#列出容器</span><br><span class="line">docker pull		#从镜像仓库中拉取或者更新指定镜像</span><br><span class="line">docker push		#将本地的镜像上传到镜像仓库,要先登陆到镜像仓库</span><br><span class="line">docker rename	#重命名容器</span><br><span class="line">docker restart	#重启容器</span><br><span class="line">docker rm		#删除一个或多个容器</span><br><span class="line">docker rmi		#删除一个或多个镜像</span><br><span class="line">docker run		#创建一个新的容器并运行一个命令</span><br><span class="line">docker save		#将指定镜像保存成 tar 归档文件</span><br><span class="line">docker search	#从Docker Hub查找镜像</span><br><span class="line">docker secret	#管理Docker secrets</span><br><span class="line">    docker secret create	#从文件或STDIN创建一个秘密作为内容</span><br><span class="line">    docker secret inspect	#显示有关一个或多个秘密的详细信息</span><br><span class="line">    docker secret ls		#列出秘密</span><br><span class="line">    docker secret rm		#删除一个或多个秘密</span><br><span class="line">docker service	#管理服务</span><br><span class="line">    docker service create	#创建一个服务</span><br><span class="line">    docker service inspect	#查看服务的元数据</span><br><span class="line">    docker service logs		#获取服务的日志</span><br><span class="line">    docker service ls		#列出服务</span><br><span class="line">    docker service ps		#列出一个或多个服务的任务</span><br><span class="line">    docker service rm		#删除一个或多个服务</span><br><span class="line">    docker service rollback	#将更改恢复到服务的配置</span><br><span class="line">    docker service scale	#缩放一个或多个复制服务</span><br><span class="line">    docker service update	#更新服务</span><br><span class="line">docker stack	#管理堆栈</span><br><span class="line">    docker stack deploy		#部署新的堆栈或更新现有堆栈</span><br><span class="line">    docker stack ls			#列出现有堆栈</span><br><span class="line">    docker stack ps			#列出堆栈中的任务</span><br><span class="line">    docker stack rm			#删除堆栈	</span><br><span class="line">    docker stack services	#列出堆栈中的服务</span><br><span class="line">docker start	#启动一个或多个已经被停止的容器</span><br><span class="line">docker stats	#显示容器的实时流资源使用统计信息</span><br><span class="line">docker stop		#停止一个运行中的容器</span><br><span class="line">docker swarm	#管理集群(Swarm)</span><br><span class="line">    docker swarm ca			#查看或旋转当前群集CA证书。此命令必须针对管理器节点</span><br><span class="line">    docker swarm init		#初始化一个群集(Swarm)</span><br><span class="line">    docker swarm join		#加入群集作为节点和/或管理器</span><br><span class="line">    docker swarm join-token	#管理加入令牌</span><br><span class="line">    docker swarm leave		#离开群集(Swarm)</span><br><span class="line">    docker swarm unlock		#解锁群集(Swarm)</span><br><span class="line">    docker swarm unlock-key	#管理解锁钥匙</span><br><span class="line">    docker swarm update		#更新群集(Swarm)</span><br><span class="line">docker system	#管理Docker</span><br><span class="line">    docker system df		#显示docker磁盘使用情况</span><br><span class="line">    docker system events	#从服务器获取实时事件</span><br><span class="line">    docker system info		#显示系统范围的信息</span><br><span class="line">    docker system prune		#删除未使用的数据</span><br><span class="line">docker tag		#标记本地镜像，将其归入某一仓库</span><br><span class="line">docker top		#查看容器中运行的进程信息，支持 ps 命令参数</span><br><span class="line">docker trust	#管理Docker镜像的信任</span><br><span class="line">    docker trust inspect	#返回有关key和签名的低级信息</span><br><span class="line">    docker trust key		#管理登入Docker镜像的keys</span><br><span class="line">    	docker trust key generate	#生成并加载签名密钥对</span><br><span class="line">		docker trust key load		#加载私钥文件以进行签名</span><br><span class="line">    docker trust revoke		#删除对镜像的认证</span><br><span class="line">    docker trust sign		#镜像签名</span><br><span class="line">    docker trust signer		#管理可以登录Docker镜像的实体</span><br><span class="line">    	docker trust signer add		#新增一个签名者</span><br><span class="line">		docker trust signer remove	#删除一个签名者</span><br><span class="line">docker unpause	#恢复容器中所有的进程</span><br><span class="line">docker update	#更新一个或多个容器的配置</span><br><span class="line">docker version	#显示 Docker 版本信息</span><br><span class="line">docker volume	#管理volumes</span><br><span class="line">    docker volume create	#创建一个卷</span><br><span class="line">    docker volume inspect	#显示一个或多个卷的元数据</span><br><span class="line">    docker volume ls		#列出卷</span><br><span class="line">    docker volume prune		#删除所有未使用的卷</span><br><span class="line">    docker volume rm		#删除一个或多个卷</span><br><span class="line">docker wait		#阻塞运行直到容器停止，然后打印出它的退出代码</span><br></pre></td></tr></table></figure></div>
+
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> linux常用指令</li>
+        <li><strong>作者:</strong> Huang Zhiwei</li>
+        <li><strong>创建于:</strong> 2023-04-25 21:38:13</li>
+        
+            <li>
+                <strong>更新于:</strong> 2023-04-26 13:26:34
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://huangzhw0221.github.io/2023/04/25/linux常用指令/
+        </li>
+        <li>
+            <strong>版权声明:</strong> 本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a> 进行许可。
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/linux/">#linux</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/04/25/%E6%96%87%E7%AB%A0%E5%90%8D/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">算法：dfs和bfs</span>
+                                    <span class="post-nav-item">下一篇</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+ 
+    <div id="waline"></div>
+    <script type="module"  data-pjax>
+        import { init } from 'https://evan.beee.top/js/waline.mjs';
+
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'https://example.example.com',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
+        }
+
+        if ('true') {
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadWaline);
+        }
+        
+    </script>
+
+
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">linux常用指令</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="nav-text">linux常用指令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%93%8D%E4%BD%9C%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="nav-text">系统操作常用指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4"><span class="nav-text">docker常用指令</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Huang Zhiwei</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a> 驱动</span>
+                <br>
+            <span class="theme-version-container">主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.1.2</a>
+        </div>
+        
+        
+        
+            <div id="start_div" style="display:none">
+                2022/8/17 11:45:14
+            </div>
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/navbarShrink.js"></script>
+
+<script src="/js/tools/scrollTopBottom.js"></script>
+
+<script src="/js/tools/lightDarkSwitch.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/layouts/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/tocToggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax',
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>
