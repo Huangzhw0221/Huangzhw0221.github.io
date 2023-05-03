@@ -13,33 +13,27 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="https://huangzhw0221.github.io/2023/04/25/bfs_dfs/"/>
+    <link rel="canonical" href="https://huangzhw0221.github.io/2023/05/03/测试方法基础/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="BFS广度优先搜索算法本节参考视频深度优先搜索_哔哩哔哩_bilibili  树的广度优先搜索 如上图，对于一颗数，广度优先搜索就是一个节点出队时，它的所有子节点都要入队。相当于数的层序遍历。 1234第一步：1入队第二步：1出队 2，3，4入队第三步：2出队 5，6入队----------------------------以此类推  图的广度优先搜索 对于一个图，图没有根节点的说法，从任意一个">
+        <meta name="description" content="边界值分析法边界是指对于输入等价类和输出等价类而言，稍高于其边界值及稍低于其边界值的一些特定情况。 边界值分析法也是一种常用的黑盒测试方法。 分析边界的原因：大量的错误是发生在输入或输出范围的边界上，而不是在输入范围的内部。  标准边界值分析标准边界值分析一般使用 5 个值作为测试用例：  min：输入变量的最小值； min+：稍大于最小值； nom：域内任意值，一般为中间值； max-：稍小于最">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法：dfs和bfs">
-<meta property="og:url" content="https://huangzhw0221.github.io/2023/04/25/bfs_dfs/index.html">
+<meta property="og:title" content="测试方法基础">
+<meta property="og:url" content="https://huangzhw0221.github.io/2023/05/03/%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="Huang&#39;s Matrix">
-<meta property="og:description" content="BFS广度优先搜索算法本节参考视频深度优先搜索_哔哩哔哩_bilibili  树的广度优先搜索 如上图，对于一颗数，广度优先搜索就是一个节点出队时，它的所有子节点都要入队。相当于数的层序遍历。 1234第一步：1入队第二步：1出队 2，3，4入队第三步：2出队 5，6入队----------------------------以此类推  图的广度优先搜索 对于一个图，图没有根节点的说法，从任意一个">
+<meta property="og:description" content="边界值分析法边界是指对于输入等价类和输出等价类而言，稍高于其边界值及稍低于其边界值的一些特定情况。 边界值分析法也是一种常用的黑盒测试方法。 分析边界的原因：大量的错误是发生在输入或输出范围的边界上，而不是在输入范围的内部。  标准边界值分析标准边界值分析一般使用 5 个值作为测试用例：  min：输入变量的最小值； min+：稍大于最小值； nom：域内任意值，一般为中间值； max-：稍小于最">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230425203942716.png">
-<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230425204214209.png">
-<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230425204853567.png">
-<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230425205617885.png">
-<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230425205902877.png">
-<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230425210308048.png">
-<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230425210319931.png">
-<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230425211317709.png">
-<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230425211421943.png">
-<meta property="article:published_time" content="2023-04-25T12:35:57.000Z">
-<meta property="article:modified_time" content="2023-04-25T13:18:10.425Z">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/a16d11009afd42388fbf6c7c4cb84df3.png">
+<meta property="og:image" content="https://zfyao666.github.io/2022/09/28/%E6%B5%8B%E8%AF%95/%E8%BE%B9%E7%95%8C%E5%80%BC%E5%88%86%E6%9E%90%E6%B3%95/37ee9a22d58f497fab934a604df31669-4342623.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/f2818b68fcda47a6b381b117141a3a1e-4342804.png">
+<meta property="article:published_time" content="2023-05-03T10:45:46.000Z">
+<meta property="article:modified_time" content="2023-05-03T11:15:51.761Z">
 <meta property="article:author" content="Huang Zhiwei">
-<meta property="article:tag" content="算法">
+<meta property="article:tag" content="测试">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230425203942716.png">
+<meta name="twitter:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/a16d11009afd42388fbf6c7c4cb84df3.png">
     
     <!--- Icon Part-->
     <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
@@ -50,7 +44,7 @@
     
     <title>
         
-            算法：dfs和bfs -
+            测试方法基础 -
         
         Huang&#39;s Matrix
     </title>
@@ -205,7 +199,7 @@
             
             
                 <div class="article-title">
-                    <h1 class="article-title-regular">算法：dfs和bfs</h1>
+                    <h1 class="article-title-regular">测试方法基础</h1>
                 </div>
             
                 
@@ -227,15 +221,15 @@
                             <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2023-04-25 20:35:57</span>
-        <span class="mobile">2023-04-25 20:35</span>
+        <span class="desktop">2023-05-03 18:45:46</span>
+        <span class="mobile">2023-05-03 18:45</span>
         <span class="hover-info">创建</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-04-25 21:18:10</span>
-            <span class="mobile">2023-04-25 21:18</span>
+            <span class="desktop">2023-05-03 19:15:51</span>
+            <span class="mobile">2023-05-03 19:15</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -247,7 +241,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>&nbsp;
+                        <a href="/tags/%E6%B5%8B%E8%AF%95/">测试</a>&nbsp;
                     </li>
                 
             </ul>
@@ -270,76 +264,115 @@
             
 
             <div class="article-content markdown-body">
-                <h2 id="BFS广度优先搜索算法"><a href="#BFS广度优先搜索算法" class="headerlink" title="BFS广度优先搜索算法"></a>BFS广度优先搜索算法</h2><p>本节参考视频<a class="link"   target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1JU4y1p7Ue/?p=2&spm_id_from=pageDriver&vd_source=2d293d5c5006c6769e4551faeba1caee" >深度优先搜索_哔哩哔哩_bilibili <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h4 id="树的广度优先搜索"><a href="#树的广度优先搜索" class="headerlink" title="树的广度优先搜索"></a>树的广度优先搜索</h4><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230425203942716.png"
-                      alt="image-20230425203942716"
-                ></p>
-<p>如上图，对于一颗数，广度优先搜索就是一个节点出队时，它的所有子节点都要入队。相当于数的层序遍历。</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">第一步：1入队</span><br><span class="line">第二步：1出队 2，3，4入队</span><br><span class="line">第三步：2出队 5，6入队</span><br><span class="line">----------------------------以此类推</span><br></pre></td></tr></table></figure></div>
-
-<h4 id="图的广度优先搜索"><a href="#图的广度优先搜索" class="headerlink" title="图的广度优先搜索"></a>图的广度优先搜索</h4><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230425204214209.png"
-                      alt="image-20230425204214209"
-                ></p>
-<p>对于一个图，图没有根节点的说法，从任意一个节点开始。如从2节点开始。</p>
-<p>构造一个节点是否被访问的数组visited，开始时所有值都为false。为了便于理解，下标和数组id一致，从1开始计。</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">第一步：2入队，将visited[2]置为true；</span><br><span class="line">第二步：2出队 1，3，5，6入队，visit[1,3,5,6]置为true；</span><br><span class="line">第三步：1出队 2，3，4入队，但2，3都访问过了，所以跳过，只有4入队；</span><br><span class="line">----------------------------以此类推</span><br></pre></td></tr></table></figure></div>
-
+                <h1 id="边界值分析法"><a href="#边界值分析法" class="headerlink" title="边界值分析法"></a>边界值分析法</h1><p>边界是指对于输入等价类和输出等价类而言，稍高于其边界值及稍低于其边界值的一些特定情况。</p>
+<p>边界值分析法也是一种常用的黑盒测试方法。</p>
+<p>分析边界的原因：大量的错误是发生在输入或输出范围的边界上，而不是在输入范围的内部。</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230425204853567.png"
-                      alt="image-20230425204853567"
+                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/a16d11009afd42388fbf6c7c4cb84df3.png"
+                      alt="img"
                 ></p>
-<p>图通常由邻接表或者邻接矩阵存储，所以当我们要看一个节点的相邻节点时，用邻接矩阵存放的话就可以得到固定的遍历序列；但如果用边链表存储的话，这个边链表可以是随意排序的，所以遍历序列也不固定。</p>
-<p>在复杂度上，空间复杂度是O(n)，时间复杂度取决于图的存储方式，用邻接矩阵存储的话是O(n2)，邻接表的存储是O(n+v)。</p>
-<h4 id="广度优先生成"><a href="#广度优先生成" class="headerlink" title="广度优先生成"></a>广度优先生成</h4><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230425205617885.png"
-                      alt="image-20230425205617885"
-                ></p>
-<p>按图的邻接矩阵广度优先的方式生成一颗树，那么从A出发，子节点是B,C,D，再看B没有子节点，看C有子节点E，所以生成的树如下图，且是唯一的。</p>
+<h2 id="标准边界值分析"><a href="#标准边界值分析" class="headerlink" title="标准边界值分析"></a>标准边界值分析</h2><p>标准边界值分析一般使用 5 个值作为测试用例：</p>
+<ul>
+<li><strong>min：</strong>输入变量的最小值；</li>
+<li><strong>min+：</strong>稍大于最小值；</li>
+<li><strong>nom：</strong>域内任意值，一般为中间值；</li>
+<li><strong>max-：</strong>稍小于最大值；</li>
+<li><strong>max：</strong>最大值；</li>
+</ul>
+<p>在多个变量的情况下，只使其中一个变量设为上述 5 个值，其他所有变量均取正常值来进行测试。对于一个 n 变量的程序，使用标准边界值分析需要设计 4n+1 个测试用例。</p>
+<p>如果测试边界没有明确给出，可以人工设置边界。例如在三角形问题中设置边长的下界为 1。上界在默认情况下可以使用最大可表示的数值（例如 <code>MAXINT</code>），或者根据实际需求确定一个数作为上界。</p>
+<p>用直观的图来表示标准边界值分析法的取值，如图所示：</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230425205902877.png"
-                      alt="image-20230425205902877"
+                     data-src="https://zfyao666.github.io/2022/09/28/%E6%B5%8B%E8%AF%95/%E8%BE%B9%E7%95%8C%E5%80%BC%E5%88%86%E6%9E%90%E6%B3%95/37ee9a22d58f497fab934a604df31669-4342623.png"
+                      alt="img"
                 ></p>
-<p>按图的邻接表生成树，由于邻接表的形态不唯一，所以生成的树也不唯一。</p>
-<h2 id="DFS深度优先搜索"><a href="#DFS深度优先搜索" class="headerlink" title="DFS深度优先搜索"></a>DFS深度优先搜索</h2><h4 id="树的深度优先搜索"><a href="#树的深度优先搜索" class="headerlink" title="树的深度优先搜索"></a>树的深度优先搜索</h4><p>树的深度优先搜索和树的中序遍历类似，可以用递归或队列模拟，非常简单，这里略过。</p>
-<h4 id="图的深度优先搜索"><a href="#图的深度优先搜索" class="headerlink" title="图的深度优先搜索"></a>图的深度优先搜索</h4><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230425210308048.png"
-                      alt="image-20230425210308048"
-                ></p>
+<h2 id="健壮性边界值分析"><a href="#健壮性边界值分析" class="headerlink" title="健壮性边界值分析"></a>健壮性边界值分析</h2><p>健壮性是指在异常情况下，软件还能正常运行的能力。健壮性测试是标准边界值分析的一种简单扩展。除了上述的 5 个常见边界值，还要考虑一下两个值：</p>
+<ul>
+<li><strong>max+：</strong>略超过最大值；</li>
+<li><strong>min-：</strong>略小于最小值；</li>
+</ul>
+<p>健壮性测试的最大价值在于观察处理异常情况，它是检测软件系统容错性的重要手段。对于一个n变量的程序，健壮性边界值分析测试会产生 6n+1 个测试用例。边界值分析大部分的测试都可直接用于健壮性测试。健壮性测试最有意义的部分不是输入而是输出，观察边界之外的异常情况如何处理。</p>
+<p>用直观的图来表示健壮性边界值分析法的取值，如图所示：</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230425210319931.png"
-                      alt="image-20230425210319931"
+                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/f2818b68fcda47a6b381b117141a3a1e-4342804.png"
+                      alt="img"
                 ></p>
-<p>图的深度优先搜索需要辅助队列，固定的邻接矩阵或者邻接表。如上图，那么它的顺序如下：</p>
-<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">第一步：假设从3开始，3入栈，[3];</span><br><span class="line">第二步：3和1，2，4，7，8相邻，1排在最前面，1入栈，[1,3];</span><br><span class="line">第三步：1和2，3，4相邻，2入栈，[2,1,3];</span><br><span class="line">第四步：2和1，3，5，6相邻，1，3 访问过了，5入栈，[5,2,1,3];</span><br><span class="line">第五步：5走到头了，没有未被访问的相邻顶点了，5出栈，[2,1,3]；</span><br><span class="line">接下来回到2，将6入栈，将7入栈，[7,6,2,1,3];</span><br><span class="line">接下来7、6、2相邻的顶点都访问过了，依次出栈；</span><br><span class="line"></span><br><span class="line">最后按入栈的顺序：3，1，2，5，6，7，4，8，9</span><br><span class="line">出栈的顺序有：5，7，6，2，8，9，4，1，3</span><br></pre></td></tr></table></figure></div>
-
-<h4 id="深度优先生成"><a href="#深度优先生成" class="headerlink" title="深度优先生成"></a>深度优先生成</h4><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230425211317709.png"
-                      alt="image-20230425211317709"
-                ></p>
-<h4 id="有向图遍历"><a href="#有向图遍历" class="headerlink" title="有向图遍历"></a>有向图遍历</h4><p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230425211421943.png"
-                      alt="image-20230425211421943"
-                ></p>
+<h1 id="等价类划分法"><a href="#等价类划分法" class="headerlink" title="等价类划分法"></a>等价类划分法</h1><p>等价类划分法是一种重要的、常用的黑盒测试方法，它将不能穷举的测试过程进行合理分类，从而保证设计出来的测试用例具有完整性和代表性。等价类划分法是把所有可能的输入数据，即程序的输入划分成若干部分（子集），然后从每一个子集中选取少量具有代表性的数据作为测试用例。<strong>采用等价类划分法时，完全不用考虑程序内部结构，设计测试用例的唯一依据是软件需求规格说明书</strong></p>
+<p><strong>原因：</strong>不可能实现穷举测试，可以从大量的可能数据中选取一部分具有代表性的数据作为测试用例。</p>
+<p><strong>效果：</strong>经过类别划分后，每一类的代表性数据在测试中的作用都等价于这一类中的其他值。</p>
+<p><strong>手段：</strong>在设计测试用例时，在需求说明的基础上划分等价类，列出等价表，从而确定测试用例。</p>
+<p>等价类划分法设计测试用例要经历2个步骤：划分等价类（列出等价类表）；选取测试用例</p>
+<p>等价类的划分有2种不同的情况：有效等价类、无效等价类</p>
+<h2 id="如何划分等价类"><a href="#如何划分等价类" class="headerlink" title="如何划分等价类"></a>如何划分等价类</h2><p>一下节选自<a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/112810758" >《等价类划分》-有这篇就够了 - 知乎 (zhihu.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<ul>
+<li>如果输入条件规定了一个取值范围（例如，“数量可以是1到999”），那么就应确定出一个有效等价类（1&lt;数量&lt;999）,以及两个无效等价类（数量&lt;1，数量&gt;999）。</li>
+<li>如果输入条件规定了取值的个数（例如，“汽车可登记一至六名车主”），那么就应确定出一个有效等价类和两个无效等价类（没有车主，或车主多于六个）。</li>
+<li>如果输入条件规定了一个输入值的集合，而且有理由认为程序会对每个值进行不同处理（例如，“交通工具的类型必须是公共汽车、卡车、出租车、火车或摩托车”），那么就应为每个输入值确定一个有效等价类和一个无效等价类（例如，“拖车”）。</li>
+<li>如果存在输入条件规定了“必须是”的情况，例如“标识符的第一个字符必须是字母”，那么就应确定一个有效等价类（首字符是字母）和一个无效等价类（首字符不是字母）。</li>
+<li>以上是基于字面上的需求划分的等价类，而细化等价类依据的是数据在内存或数据库中存储的类型。（举例，测试加法器，两个文本框，要求输入-99~99之间的整数。整数的存储在计算机底层中会使用不同的算法，正整数和负整数算法不同。所以测试时正整数和负整数应该分开来测（一般对有效等价类数据应用，无效等价类数据一般不需要正、负分别测）。所以将有效等价类细分为：-99–（-1）负整数、0—99 正整数。</li>
+</ul>
+<p>划分等价类应当考虑一下几个方面：</p>
+<ul>
+<li>完备测试、避免冗余;</li>
+<li>划分等价类重要的是：集合的划分，划分为互不相交的一组子集，而子集的并是整个集合;</li>
+<li>并是整个集合：完备性;</li>
+<li>子集互不相交：保证一种形式的无冗余性;</li>
+<li>同一类中标识（选择）一个测试用例，同一等价类中，往往处理相同，相同处理映射到”相同的执行路径”。</li>
+</ul>
+<h2 id="等价类划分的优缺点"><a href="#等价类划分的优缺点" class="headerlink" title="等价类划分的优缺点"></a>等价类划分的优缺点</h2><ul>
+<li>优点：等价类划分的测试用例设计方法减少了穷举法带来的大量测试用例，保证测试效果和测试效率，一般是有输入性需求的被测对象可以采用的方法；</li>
+<li>缺点：输入与输入之间的关系考虑少，可能产生一些逻辑错误。还需要其他用例设计方法来补充测试。</li>
+</ul>
+<h1 id="幂等测试"><a href="#幂等测试" class="headerlink" title="幂等测试"></a>幂等测试</h1><p>幂等就是一个操作或者接口，不管你调多少次，每次执行的结果都跟第一次一样。</p>
+<p>试想这样的一种场景：在电商平台上支付后，因为网络原因导致系统提示你支付失败，于是你又重新付款了一次，等完成后检查网银发现被系统扣了两次款，这显然不对。</p>
+<h2 id="使用幂等的场景"><a href="#使用幂等的场景" class="headerlink" title="使用幂等的场景"></a>使用幂等的场景</h2><p>1、前端重复提交</p>
+<p>用户注册，用户创建商品等操作，前端都会提交一些数据给后台服务，后台需要根据用户提交的数据在数据库中创建记录。如果用户不小心多点了几次，后端收到了好几次提交，这时就会在数据库中重复创建了多条记录。这就是接口没有幂等性带来的 bug。</p>
+<p>2、接口超时重试</p>
+<p>对于给第三方调用的接口，有可能会因为网络原因而调用失败，这时，一般在设计的时候会对接口调用加上失败重试的机制。如果第一次调用已经执行了一半时，发生了网络异常。这时再次调用时就会因为脏数据的存在而出现调用异常。</p>
+<p>3、消息重复消费</p>
+<p>在使用消息中间件来处理消息队列，且手动 ack 确认消息被正常消费时。如果消费者突然断开连接，那么已经执行了一半的消息会重新放回队列。当消息被其他消费者重新消费时，如果没有幂等性，就会导致消息重复消费时结果异常，如数据库重复数据，数据库数据冲突，资源重复等。</p>
+<p>那么测试的思路如下：</p>
+<ul>
+<li>第一，从产品的业务逻辑设计和实现上，查看是否做了幂等，比如与时间戳进行幂等</li>
+<li>第二，遇到支付这些业务的时候，跟多的需要考虑构造支付失败，检查失败之后的处理机制</li>
+<li>第三，前端测试，通过快速点击，手动的难以实现，可以使用UI自动化手段进行实现</li>
+<li>第四，后端接口调用。使用jmeter或者postman多次重复发送参数相同的请求，查看服务器返回给我们的response</li>
+</ul>
+<h2 id="实现幂等的思路"><a href="#实现幂等的思路" class="headerlink" title="实现幂等的思路"></a>实现幂等的思路</h2><ul>
+<li>MVCC: 多版本并发控制，乐观锁的一种实现，在数据更新时需要去比较持有数据的版本号，版本号不一致的操作无法成功；</li>
+<li>去重表： 利用数据库表单的特性来实现幂等，常用的一个思路是在表上构建唯一性索引，保证某一类数据一旦执行完毕，后续同样的请求再也无法成功写入。 比如博客上面要想防止一个人重复点赞，可以设计一张表，将博客id与用户id绑定建立唯一索引，每当用户点赞时就往表中写入一条数据，这样重复点赞的数据就无法写入。</li>
+<li>TOKEN机制: 这种机制就比较重要了，适用范围较广，有多种不同的实现方式。其核心思想是为每一次操作生成一个唯一性的凭证，也就是token。一个token在操作的每一个阶段只有一次执行权，一旦执行成功则保存执行结果。对重复的请求，返回同一个结果。以电商平台为例子，电商平台上的订单id就是最适合的token。当用户下单时，会经历多个环节，比如生成订单，减库存，减优惠券等等。每一个环节执行时都先检测一下该订单id是否已经执行过这一步骤，对未执行的请求，执行操作并缓存结果，而对已经执行过的id，则直接返回之前的执行结果，不做任何操作。这样可以在最大程度上避免操作的重复执行问题，缓存起来的执行结果也能用于事务的控制等。</li>
+</ul>
+<p>具体的实现流程如下：摘自<a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/345512692" >阿里面试官：接口的幂等性怎么设计？ - 知乎 (zhihu.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h3 id="基于Token"><a href="#基于Token" class="headerlink" title="基于Token"></a>基于Token</h3><ol>
+<li>客户端会先发送一个请求去获取 token，服务端会生成一个全局唯一的 ID 作为 token 保存在 redis 中，同时把这个 ID 返回给客户端</li>
+<li>客户端第二次调用业务请求的时候必须携带这个 token</li>
+<li>服务端会校验这个 token，如果校验成功，则执行业务，并删除 redis 中的 token</li>
+<li>如果校验失败，说明 redis 中已经没有对应的 token，则表示重复操作，直接返回指定的结果给客户端</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>对 redis 中是否存在 token 以及删除的代码逻辑建议用 Lua 脚本实现，保证原子性</li>
+<li>全局唯一 ID 可以用百度的 uid-generator、美团的 Leaf 去生成</li>
+</ol>
+<h3 id="基于-mysql-实现"><a href="#基于-mysql-实现" class="headerlink" title="基于 mysql 实现"></a>基于 mysql 实现</h3><ol>
+<li>建立一张去重表，其中某个字段需要建立唯一索引</li>
+<li>客户端去请求服务端，服务端会将这次请求的一些信息插入这张去重表中</li>
+<li>因为表中某个字段带有唯一索引，如果插入成功，证明表中没有这次请求的信息，则执行后续的业务逻辑</li>
+<li>如果插入失败，则代表已经执行过当前请求，直接返回</li>
+</ol>
+<h3 id="基于-redis-实现（SETNX-）"><a href="#基于-redis-实现（SETNX-）" class="headerlink" title="基于 redis 实现（SETNX ）"></a>基于 redis 实现（SETNX ）</h3><ol>
+<li>客户端先请求服务端，会拿到一个能代表这次请求业务的唯一字段</li>
+<li>将该字段以 SETNX 的方式存入 redis 中，并根据业务设置相应的超时时间</li>
+<li>如果设置成功，证明这是第一次请求，则执行后续的业务逻辑</li>
+<li>如果设置失败，则代表已经执行过当前请求，直接返回</li>
+</ol>
 
             </div>
 
@@ -347,16 +380,16 @@
                 <div class="post-copyright-info">
                     <div class="article-copyright-info-container">
     <ul>
-        <li><strong>标题:</strong> 算法：dfs和bfs</li>
+        <li><strong>标题:</strong> 测试方法基础</li>
         <li><strong>作者:</strong> Huang Zhiwei</li>
-        <li><strong>创建于:</strong> 2023-04-25 20:35:57</li>
+        <li><strong>创建于:</strong> 2023-05-03 18:45:46</li>
         
             <li>
-                <strong>更新于:</strong> 2023-04-25 21:18:10
+                <strong>更新于:</strong> 2023-05-03 19:15:51
             </li>
         
         <li>
-            <strong>链接:</strong> https://huangzhw0221.github.io/2023/04/25/bfs_dfs/
+            <strong>链接:</strong> https://huangzhw0221.github.io/2023/05/03/测试方法基础/
         </li>
         <li>
             <strong>版权声明:</strong> 本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a> 进行许可。
@@ -371,7 +404,7 @@
                 <ul class="post-tags-box">
                     
                         <li class="tag-item">
-                            <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>&nbsp;
+                            <a href="/tags/%E6%B5%8B%E8%AF%95/">#测试</a>&nbsp;
                         </li>
                     
                 </ul>
@@ -382,29 +415,14 @@
             
                 <div class="article-nav">
                     
-                        <div class="article-prev">
-                            <a class="prev"
-                            rel="prev"
-                            href="/2023/04/25/linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/"
-                            >
-                                <span class="left arrow-icon flex-center">
-                                    <i class="fa-solid fa-chevron-left"></i>
-                                </span>
-                                <span class="title flex-center">
-                                    <span class="post-nav-title-item">linux常用指令</span>
-                                    <span class="post-nav-item">上一篇</span>
-                                </span>
-                            </a>
-                        </div>
-                    
                     
                         <div class="article-next">
                             <a class="next"
                             rel="next"
-                            href="/2023/04/23/leetcode02/"
+                            href="/2023/05/03/Notion%E5%92%8C%E5%9B%BE%E5%BA%8A/"
                             >
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item">力扣学习录02</span>
+                                    <span class="post-nav-title-item">Notion和图床</span>
                                     <span class="post-nav-item">下一篇</span>
                                 </span>
                                 <span class="right arrow-icon flex-center">
@@ -469,8 +487,8 @@
                 <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
-        <div class="page-title">算法：dfs和bfs</div>
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#BFS%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95"><span class="nav-text">BFS广度优先搜索算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DFS%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2"><span class="nav-text">DFS深度优先搜索</span></a></li></ol>
+        <div class="page-title">测试方法基础</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BE%B9%E7%95%8C%E5%80%BC%E5%88%86%E6%9E%90%E6%B3%95"><span class="nav-text">边界值分析法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E8%BE%B9%E7%95%8C%E5%80%BC%E5%88%86%E6%9E%90"><span class="nav-text">标准边界值分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%A5%E5%A3%AE%E6%80%A7%E8%BE%B9%E7%95%8C%E5%80%BC%E5%88%86%E6%9E%90"><span class="nav-text">健壮性边界值分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AD%89%E4%BB%B7%E7%B1%BB%E5%88%92%E5%88%86%E6%B3%95"><span class="nav-text">等价类划分法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%88%92%E5%88%86%E7%AD%89%E4%BB%B7%E7%B1%BB"><span class="nav-text">如何划分等价类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AD%89%E4%BB%B7%E7%B1%BB%E5%88%92%E5%88%86%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="nav-text">等价类划分的优缺点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B9%82%E7%AD%89%E6%B5%8B%E8%AF%95"><span class="nav-text">幂等测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%B9%82%E7%AD%89%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-text">使用幂等的场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E5%B9%82%E7%AD%89%E7%9A%84%E6%80%9D%E8%B7%AF"><span class="nav-text">实现幂等的思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8EToken"><span class="nav-text">基于Token</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-mysql-%E5%AE%9E%E7%8E%B0"><span class="nav-text">基于 mysql 实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-redis-%E5%AE%9E%E7%8E%B0%EF%BC%88SETNX-%EF%BC%89"><span class="nav-text">基于 redis 实现（SETNX ）</span></a></li></ol></li></ol></li></ol>
 
     </div>
 </div>

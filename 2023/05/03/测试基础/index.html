@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Huang Zhiwei">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://evan.beee.top" crossorigin>
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://huangzhw0221.github.io/2023/05/03/测试基础/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="测试概念软件测试是以用户需求为基准，运用科学的测试方法对被测对象进行检测，发现其与需求偏离的需求实现。是为了尽快尽早发现在软件产品中所存在的各种软件缺陷而展开的贯穿整个软件开发生命周期、对软件产品（包括阶段性产品）进行验证和确认的活动过程。 测试执行可以分为单元测试执行、集成测试执行、系统测试执行：  单元测试执行（UT执行）：一个测试用例的测试执行； 集成测试执行（IT执行）：一个测试用例集的测">
+<meta property="og:type" content="article">
+<meta property="og:title" content="测试基础">
+<meta property="og:url" content="https://huangzhw0221.github.io/2023/05/03/%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Huang&#39;s Matrix">
+<meta property="og:description" content="测试概念软件测试是以用户需求为基准，运用科学的测试方法对被测对象进行检测，发现其与需求偏离的需求实现。是为了尽快尽早发现在软件产品中所存在的各种软件缺陷而展开的贯穿整个软件开发生命周期、对软件产品（包括阶段性产品）进行验证和确认的活动过程。 测试执行可以分为单元测试执行、集成测试执行、系统测试执行：  单元测试执行（UT执行）：一个测试用例的测试执行； 集成测试执行（IT执行）：一个测试用例集的测">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/1024732/201712/1024732-20171207162122409-1562020224.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/1024732/201712/1024732-20171207162237988-1328992266.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/1024732/201712/1024732-20171207162317581-271403902.png">
+<meta property="og:image" content="https://images2017.cnblogs.com/blog/1024732/201712/1024732-20171207162357519-789615123.png">
+<meta property="article:published_time" content="2023-05-03T08:05:17.000Z">
+<meta property="article:modified_time" content="2023-05-03T10:45:55.477Z">
+<meta property="article:author" content="Huang Zhiwei">
+<meta property="article:tag" content="测试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://images2017.cnblogs.com/blog/1024732/201712/1024732-20171207162122409-1562020224.png">
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-favicon.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/redefine-favicon.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            测试基础 -
+        
+        Huang&#39;s Matrix
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/assets/fonts.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"huangzhw0221.github.io","root":"/","language":"zh-CN"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true},"home_banner":{"enable":true,"image":{"light":"https://images.pexels.com/photos/691668/pexels-photo-691668.jpeg","dark":"https://images.pexels.com/photos/461956/pexels-photo-461956.jpeg"},"title":"白云怡意 清泉洗心","subtitle":{"text":[],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.1.2","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"}},"search":{"enable":false,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}}};
+    Global.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="main-content-container">
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Huang&#39;s Matrix
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        首页
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                首页
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+            
+                <div class="article-title">
+                    <h1 class="article-title-regular">测试基础</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/redefine-avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Huang Zhiwei</span>
+                            
+                                <span class="author-label"></span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-05-03 16:05:17</span>
+        <span class="mobile">2023-05-03 16:05</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-05-03 18:45:55</span>
+            <span class="mobile">2023-05-03 18:45</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%B5%8B%E8%AF%95/">测试</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <h1 id="测试概念"><a href="#测试概念" class="headerlink" title="测试概念"></a>测试概念</h1><p>软件测试是以用户需求为基准，运用科学的测试方法对被测对象进行检测，发现其与需求偏离的需求实现。是为了尽快尽早发现在软件产品中所存在的各种软件缺陷而展开的贯穿整个软件开发生命周期、对软件产品（包括阶段性产品）进行验证和确认的活动过程。</p>
+<p>测试执行可以分为单元测试执行、集成测试执行、系统测试执行：</p>
+<ul>
+<li>单元测试执行（UT执行）：一个测试用例的测试执行；</li>
+<li>集成测试执行（IT执行）：一个测试用例集的测试执行；</li>
+<li>系统测试执行（ST执行）：不同测试阶段的测试执行。</li>
+</ul>
+<p>本节内容摘自师兄的博客：<a class="link"   target="_blank" rel="noopener" href="https://zfyao666.github.io/2022/10/15/%E6%B5%8B%E8%AF%95/%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95/#%E4%BB%8E%E7%A8%8B%E5%BA%8F%E5%86%85%E9%83%A8%E6%98%AF%E5%90%A6%E5%8F%AF%E8%A7%81%E5%88%86%E7%B1%BB" >测试方法 | Yao’s Blog (zfyao666.github.io) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<h1 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h1><p>测试方法的分类可以从多个角度来划分</p>
+<ul>
+<li>测试流程上划分：单元测试、集成测试、系统测试、验收测试、Alpha 测试和 Beta 测试。</li>
+<li>测试过程中程序执行状态：静态测试和动态测试。</li>
+<li>从代码和软件的具体实现细节和系统内部结构的情况：黑盒测试、白盒测试和灰盒测试。</li>
+<li>根据测试方向划分：功能测试、安全性测试、兼容性测试、界面测试、压力测试、性能测试和需求测试等。</li>
+<li>其他测试方法：灰度测试、冒烟测试和回归测试等。</li>
+</ul>
+<h2 id="从测试流程分类"><a href="#从测试流程分类" class="headerlink" title="从测试流程分类"></a>从测试流程分类</h2><h3 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h3><p>单元测试主要对软件的组成模块或函数进行测试，是测试中的最细粒度。通常情况下是白盒且静态的，目的是确保模块和函数的正确编码，及早发现代码、程序结构和业务逻辑中不易显现的错误。分为：</p>
+<ul>
+<li>孤立单元测试：只测试某一个单元模块，是最好的单元测试策略。</li>
+<li>自底向上单元测试：比较合理的策略，缺点是测试周期较长。</li>
+<li>自顶向下单元测试：比孤立单元测试的成本高很多。</li>
+</ul>
+<h3 id="集成测试"><a href="#集成测试" class="headerlink" title="集成测试"></a>集成测试</h3><p>集成测试又被称为联合测试，该阶段会采用适当的集成策略组装程序单元模块，然后测试系统的接口和集成之后的功能。因为集成测试是界于单元测试和系统测试之间的，所以有着承上启下的作用。</p>
+<p>常见有以下三种方式：</p>
+<ul>
+<li>一次性集成测试：一次性集成所有模块，适合于维护型项目或者规模较小的软件。如果软件体量较大，应该避免一次性集成而使用增量集成。</li>
+<li>自定向下集成测试：集成的顺序为首先集成主模块，然后按照控制层次结构向下进行集成。这种集成方式适合结构清晰和稳定的产品，因为高层接口的变化较小，而底层接口通常尚未定义或者可以被修改，需要尽早被验证。</li>
+<li>自底向上集成测试：从底层的原子模块开始构造和测试。适用于底层接口比较稳定而高层接口变化频繁的产品。</li>
+</ul>
+<p>集成测试中往往使用黑盒与白盒相结合的方法进行测试，验证该阶段设计的合理性和是否实现需求功能。</p>
+<h3 id="系统测试"><a href="#系统测试" class="headerlink" title="系统测试"></a>系统测试</h3><p>将整个软件看作一个系统进行测试，通常使用黑盒测试法对功能、性能、界面及安全性等进行测试。由于在系统测试阶段不断变更需求造成功能的删除或增加，从而使程序不断出现相应的更改，而程序在更改后可能会出现新的问题，或者原本没有问题的功能由于更改导致出现问题。所以，测试人员必须进行回归测试。</p>
+<h3 id="验收测试"><a href="#验收测试" class="headerlink" title="验收测试"></a>验收测试</h3><p>验收测试是软件交付最后一个阶段的测试，又称为交付测试。测试对象主要为当前系统，主要是用黑盒测试对功能进行最后的测试。除了功能之外还需要从用户的角度进行 Alpha、Beta 测试。</p>
+<h4 id="Alpha-测试"><a href="#Alpha-测试" class="headerlink" title="Alpha 测试"></a>Alpha 测试</h4><p>指软件开发公司组织内部人员模拟各类用户行为对即将面市软件产品进行测试，环境可以使开发环境或者是模拟实际环境。Alpha 测试不能由程序员或是测试人员完成。经过 Alpha 测试的软件产品称为 Beta 版本。</p>
+<h4 id="Beta-测试"><a href="#Beta-测试" class="headerlink" title="Beta 测试"></a>Beta 测试</h4><p>软件产品公司组织典型用户在实际使用环境中测试，并要求用户报告异常情况，提出改进意见，然后软件开发公司再对 Beta 版本进行改错和完善。</p>
+<h2 id="从程序执行状态分类"><a href="#从程序执行状态分类" class="headerlink" title="从程序执行状态分类"></a>从程序执行状态分类</h2><h3 id="静态测试"><a href="#静态测试" class="headerlink" title="静态测试"></a>静态测试</h3><p>不运行测试软件或者代码，只是静态检查源程序的语句、结构、过程等来检查程序是否有错误。通常包括代码评审、UI 界面检查、需求规则说明书，用户手册检查。</p>
+<h3 id="动态测试"><a href="#动态测试" class="headerlink" title="动态测试"></a>动态测试</h3><p>动态测试通过运行被测试程序，检查运行的结果和预期结果的差异，并分析运行效率、正确性和健壮性等性能。</p>
+<h2 id="从程序内部是否可见分类"><a href="#从程序内部是否可见分类" class="headerlink" title="从程序内部是否可见分类"></a>从程序内部是否可见分类</h2><h3 id="黑盒测试"><a href="#黑盒测试" class="headerlink" title="黑盒测试"></a>黑盒测试</h3><p>黑盒测试一般用来确认软件功能的正确性和可操作性，目的是检测软件的各个功能是否得以实现，把被侧程序当作一个黑盒，不考虑其内部结构，在知道该程序的输入和输出之间的关系或程序功能的情况下，依靠软件规格说明书来确定测试用例和推断测试结果的正确性。</p>
+<p>常见的黑盒测试方法：等价类划分法、边界值分析法、场景法等。</p>
+<p>优点：</p>
+<ol>
+<li>比较简单，不需要了解程序内部的代码及实现，与软件的内部实现无关。</li>
+<li>从用户角度出发，能很容易的知道用户会用到哪些功能，会遇到哪些问题。</li>
+<li>基于软件开发文档，所以也能知道软件实现了文档中的哪些功能，在做软件自动化测试时较为方便。</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>不可能覆盖所有的代码，覆盖率较低，大概只能达到总代码量的30%。</li>
+<li>自动化测试中用例的复用性较低。</li>
+</ol>
+<h3 id="白盒测试"><a href="#白盒测试" class="headerlink" title="白盒测试"></a>白盒测试</h3><p>白盒测试根据软件内部的逻辑结构分析来进行测试，是基于代码的测试。测试人员通过阅读程序代码或者通过使用开发工具中的单步调试来判断软件的质量。白盒测试的主要目的是检查各个逻辑结构是否合理，对应的模块独立路径是否正常以及内部结构是否有效。白盒测试的原则：</p>
+<ol>
+<li>保证所有的独立路径至少被测试一次。</li>
+<li>所有判定语句中的逻辑值均需要测试为真和假两种情况。</li>
+<li>程序的内部数据结构都需要检查并保证其结构的有效性。</li>
+<li>在上下边界及可操作范围内运行所有循环。</li>
+</ol>
+<p>优点：可以帮助软件测试人员增大代码的覆盖率，提高代码的质量，发现代码中隐藏的问题。</p>
+<p>缺点：</p>
+<ol>
+<li>程序运行会有很多不同的路径，不可能测试所有的运行路径。</li>
+<li>测试基于代码，只能测试开发人员做的对不对，而不能知道设计的正确与否，可能会漏掉一些功能需求。</li>
+<li>系统庞大时，测试开销会非常大。</li>
+</ol>
+<p>逻辑覆盖法是主要的白盒测试方法，覆盖点主要有：</p>
+<ol>
+<li>语句覆盖：程序中的每个语句至少被覆盖一次。</li>
+<li>判定覆盖：程序中的每个判定至少为真和假一次。</li>
+<li>条件覆盖：程序中的每个条件语句应该获得各种可能的结果。</li>
+<li>判定&#x2F;条件覆盖：程序中同时满足判定覆盖和条件覆盖。</li>
+<li>条件组合覆盖：程序中的每个判定条件的各种可能组合至少出现一次。</li>
+</ol>
+<p>但即使使用逻辑覆盖法穷举所有的逻辑路径并测试，程序仍然可能会出现错误，因为：</p>
+<ul>
+<li>测试者无法知道程序本身是否不符合设计规范。</li>
+<li>测试者不可能检查到程序因为遗漏路径而出错。</li>
+<li>可能无法发现和数据相关的错误。</li>
+</ul>
+<h3 id="灰盒测试"><a href="#灰盒测试" class="headerlink" title="灰盒测试"></a>灰盒测试</h3><p>灰盒测试则介于黑盒测试和白盒测试之间。灰盒测试除了重视输出相对于出入的正确性，也看重其内部表现。但是它不可能像白盒测试那样详细和完整。它只是简单的靠一些象征性的现象或标志来判断其内部的运行情况，因此在内部结果出现错误，但输出结果正确的情况下可以采取灰盒测试方法。</p>
+<h2 id="从不同测试方向分类"><a href="#从不同测试方向分类" class="headerlink" title="从不同测试方向分类"></a>从不同测试方向分类</h2><h3 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h3><p>性能测试主要检查系统或者 app 是否满足需要的性能。</p>
+<p>常见的 app 性能指标：cpu、内存、流量、电量、启动速度和网络速度。</p>
+<h3 id="安全性测试"><a href="#安全性测试" class="headerlink" title="安全性测试"></a>安全性测试</h3><p>测试软件使用过程中是否会出现安全问题。例如 SQL 注入攻击，银行转账时的交易是否安全。</p>
+<h3 id="兼容性测试"><a href="#兼容性测试" class="headerlink" title="兼容性测试"></a>兼容性测试</h3><p>检查软件或系统之间能否正确的进行交互和共享信息。有四种兼容性：</p>
+<ul>
+<li>向前兼容和向后兼容；</li>
+<li>不同版本之间的兼容；</li>
+<li>不同标准规范之间的兼容；</li>
+<li>数据能否共享兼容；</li>
+</ul>
+<h3 id="界面测试"><a href="#界面测试" class="headerlink" title="界面测试"></a>界面测试</h3><p>又称 UI 测试，测试用户界面的功能模块的布局是否合理、整体风格是否一致、各个控件的放置位置是否符合客户使用习惯，此外还要测试界面操作便捷性、导航简单易懂性，页面元素的可用性，界面中文字是否正确，命名是否统一，页面是否美观，文字、图片组合是否完美等。</p>
+<h3 id="压力测试"><a href="#压力测试" class="headerlink" title="压力测试"></a>压力测试</h3><p>压力测试主要用于验证软件在超过负载设计的情况下是否仍然能够返回正确的结果而不出现崩溃，也就是找到应用的瓶颈。测试环境需要尽可能和生产环境匹配，同时还要关注延迟和吞吐两个指标。</p>
+<h2 id="其他测试方法"><a href="#其他测试方法" class="headerlink" title="其他测试方法"></a>其他测试方法</h2><h3 id="冒烟测试"><a href="#冒烟测试" class="headerlink" title="冒烟测试"></a>冒烟测试</h3><p>冒烟测试的对象是每一个新编译的需要正式测试的软件版本，目的是确认软件基本功能正常，可以进行后续的正式测试工作。冒烟测试的执行者是版本编译人员。</p>
+<h3 id="灰度测试"><a href="#灰度测试" class="headerlink" title="灰度测试"></a>灰度测试</h3><p>灰度测试指的是在产品上线或者正式应用之前，选择特定的人群进行使用，然后逐步扩大试用者数量，从而及时发现和纠正产品中的错误，实现由“灰”到“黑”。</p>
+<h3 id="回归测试"><a href="#回归测试" class="headerlink" title="回归测试"></a>回归测试</h3><p>回归测试指的是对于一个新的版本，重新运行之前的测试用例进行测试。主要发生在：</p>
+<ul>
+<li>开发人员对于代码进行了一定改动，需要回归确保现有的功能没有被破坏。</li>
+<li>Bug Fix 之后，确保新的代码修复了 bug，并且之前的功能没有被破坏。</li>
+<li>项目后期需要进行一次完整回归测试，确保所有功能的完整。</li>
+</ul>
+<p>回归测试在整个软件测试过程中占有很大的工作量比重，软件开发的各个阶段都会进行多次回归测试，它的成本随着系统变大而变大，所以需要选择正确的回归测试策略（如自动化）来提升回归测试的效率和有效性。</p>
+<h1 id="测试模型"><a href="#测试模型" class="headerlink" title="测试模型"></a>测试模型</h1><p>本节内容摘自<a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/uncleyong/p/6956428.html" >测试基础【第二篇】软件测试模型 - 全栈测试笔记 - 博客园 (cnblogs.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>常见的软件测试模型有 V 模型、W 模型、X 模型、H 模型和敏捷测试 AT 模型。这类知识属于了解一下即可。</p>
+<h3 id="V模型"><a href="#V模型" class="headerlink" title="V模型"></a>V模型</h3><p>在软件测试方面，V模型是最广为人知的模型，尽管很多富有实际经验的测试人员还是不太熟悉V模型，或者其它的模型。V模型已存在了很长时间，和瀑布开发模型有着一些共同的特性，由此也和瀑布模型一样地受到了批评和质疑。V模型中的过程从左到右，描述了基本的开发过程和测试行为。<strong>V模型的价值在于它非常明确地标明了测试过程中存在的不同级别，并且清楚地描述了这些测试阶段和开发过程期间各阶段的对应关系。</strong><br>局限性：把测试作为编码之后的最后一个活动，需求分析等前期产生的错误直到后期的验收测试才能发现。测试工作在编码完成后才开始进行，不符合软件测试的“3早”原则。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://images2017.cnblogs.com/blog/1024732/201712/1024732-20171207162122409-1562020224.png"
+                      alt="img"
+                ></p>
+<h3 id="W模型"><a href="#W模型" class="headerlink" title="W模型"></a>W模型</h3><p>V模型的局限性在于没有明确地说明早期的测试，无法体现“尽早地和不断地进行软件测试” 的原则。在V模型中增加软件各开发阶段应同步进行的测试，演化为W 模型（如下图）。在模型中不难看出，开发是“V”，测试是与此并行的“V”。<br>W模型由Evolutif公司提出，相对于V模型，W模型更科学。W模型是V模型的发展，强调的是测试伴随着整个软件开发周期，而且测试的对象不仅仅是程序，需求、功能和设计同样要测试。测试与开发是同步进行的，从而有利于尽早地发现问题。比如在进行需求分析，SRS评审，SRS基线化后，系统测试计划，方案，用例也设计完毕，接着是概要设计与集成测试设计，详细设计与单元测试设计，直到编码完成后，进行代码审查，继续执行UT，IT，ST（单元测试执行、集成测试执行、系统测试执行）。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://images2017.cnblogs.com/blog/1024732/201712/1024732-20171207162237988-1328992266.png"
+                      alt="img"
+                ></p>
+<p>W模型也有局限性，W模型和V模型都把软件的开发视为需求、设计、编码等一系列串行的活动，无法支持迭代、自发性以及变更调整。</p>
+<h3 id="X模型"><a href="#X模型" class="headerlink" title="X模型"></a>X模型</h3><p>　　X模型也是对V模型的改进，X模型提出针对单独的程序片段进行相互分离的编码和测试，此后通过频繁的交接，通过集成最终合成为可执行的程序。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://images2017.cnblogs.com/blog/1024732/201712/1024732-20171207162317581-271403902.png"
+                      alt="img"
+                ></p>
+<p>X模型的左边描述的是针对单独程序片段所进行的相互分离的编码和测试，此后将进行频繁的交接，通过集成最终成为可执行的程序，然后再对这些可执行程序进行测试。己通过集成测试的成品可以进行封装并提交给用户，也可以作为更大规模和范围内集成的一部分。多根并行的曲线表示变更可以在各个部分发生。由图中可见，X模型还定位了探索性测试，这是不进行事先计划的特殊类型的测试，这一方式往往能帮助有经验的测试人员在测试计划之外发现更多的软件错误。但这样可能对测试造成人力、物力和财力的浪费，对测试员的熟练程度要求比较高。</p>
+<h3 id="H模型"><a href="#H模型" class="headerlink" title="H模型"></a>H模型</h3><p>　　H模型中，软件测试过程活动完全独立，贯穿于整个产品的周期，与其他流程并发地进行，某个测试点准备就绪时，就可以从测试准备阶段进行到测试执行阶段。软件测试可以尽早的进行，并且可以根据被测物的不同而分层次进行。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://images2017.cnblogs.com/blog/1024732/201712/1024732-20171207162357519-789615123.png"
+                      alt="img"
+                ></p>
+<p>这个示意图演示了在整个生产周期中某个层次上的一次测试“微循环”。图中标注的其它流程可以是任意的开发流程，例如设计流程或者编码流程。也就是说，只要测试条件成熟了，测试准备活动完成了，测试执行活动就可以进行了。</p>
+<p>　　H模型揭示了一个原理：软件测试是一个独立的流程，贯穿产品整个生命周期，与其他流程并发地进行。H模型指出软件测试要尽早准备，尽早执行。不同的测试活动可以是按照某个次序先后进行的，但也可能是反复的，只要某个测试达到准备就绪点，测试执行活动就可以开展。</p>
+<h3 id="测试模型结语"><a href="#测试模型结语" class="headerlink" title="测试模型结语"></a>测试模型结语</h3><p>在实际工作中应灵活地运用各种模型的优点，<br>V模型： 强调了在整个软件项目开发中需要经历的若干个测试级别，并与每一个开发级别对应；忽略了测试的对象不应该仅仅包括程序，没有明确指出对需求、设计的测试；<br>W模型： 补充了V模型中忽略的内容，强调了测试计划等工作的先行和对系统需求和系统设计的测试；与V模型相同，没有对软件测试的流程进行说明；<br>H模型： 强调测试是独立的，只要测试准备完成，就可以执行测试。</p>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> 测试基础</li>
+        <li><strong>作者:</strong> Huang Zhiwei</li>
+        <li><strong>创建于:</strong> 2023-05-03 16:05:17</li>
+        
+            <li>
+                <strong>更新于:</strong> 2023-05-03 18:45:55
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://huangzhw0221.github.io/2023/05/03/测试基础/
+        </li>
+        <li>
+            <strong>版权声明:</strong> 本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a> 进行许可。
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/%E6%B5%8B%E8%AF%95/">#测试</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/05/03/Notion%E5%92%8C%E5%9B%BE%E5%BA%8A/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Notion和图床</span>
+                                    <span class="post-nav-item">上一篇</span>
+                                </span>
+                            </a>
+                        </div>
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/04/26/java01/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Spring框架相关问题</span>
+                                    <span class="post-nav-item">下一篇</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+ 
+    <div id="waline"></div>
+    <script type="module"  data-pjax>
+        import { init } from 'https://evan.beee.top/js/waline.mjs';
+
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'https://example.example.com',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
+        }
+
+        if ('true') {
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadWaline);
+        }
+        
+    </script>
+
+
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">测试基础</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%A6%82%E5%BF%B5"><span class="nav-text">测试概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95"><span class="nav-text">测试方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E5%88%86%E7%B1%BB"><span class="nav-text">从测试流程分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="nav-text">单元测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E6%88%90%E6%B5%8B%E8%AF%95"><span class="nav-text">集成测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%B5%8B%E8%AF%95"><span class="nav-text">系统测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AA%8C%E6%94%B6%E6%B5%8B%E8%AF%95"><span class="nav-text">验收测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E7%8A%B6%E6%80%81%E5%88%86%E7%B1%BB"><span class="nav-text">从程序执行状态分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E6%B5%8B%E8%AF%95"><span class="nav-text">静态测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E6%B5%8B%E8%AF%95"><span class="nav-text">动态测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E7%A8%8B%E5%BA%8F%E5%86%85%E9%83%A8%E6%98%AF%E5%90%A6%E5%8F%AF%E8%A7%81%E5%88%86%E7%B1%BB"><span class="nav-text">从程序内部是否可见分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95"><span class="nav-text">黑盒测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%99%BD%E7%9B%92%E6%B5%8B%E8%AF%95"><span class="nav-text">白盒测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%81%B0%E7%9B%92%E6%B5%8B%E8%AF%95"><span class="nav-text">灰盒测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E4%B8%8D%E5%90%8C%E6%B5%8B%E8%AF%95%E6%96%B9%E5%90%91%E5%88%86%E7%B1%BB"><span class="nav-text">从不同测试方向分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="nav-text">性能测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="nav-text">安全性测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%BC%E5%AE%B9%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="nav-text">兼容性测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%95%8C%E9%9D%A2%E6%B5%8B%E8%AF%95"><span class="nav-text">界面测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95"><span class="nav-text">压力测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95"><span class="nav-text">其他测试方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%92%E7%83%9F%E6%B5%8B%E8%AF%95"><span class="nav-text">冒烟测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%81%B0%E5%BA%A6%E6%B5%8B%E8%AF%95"><span class="nav-text">灰度测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9E%E5%BD%92%E6%B5%8B%E8%AF%95"><span class="nav-text">回归测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%A8%A1%E5%9E%8B"><span class="nav-text">测试模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#V%E6%A8%A1%E5%9E%8B"><span class="nav-text">V模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#W%E6%A8%A1%E5%9E%8B"><span class="nav-text">W模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#X%E6%A8%A1%E5%9E%8B"><span class="nav-text">X模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#H%E6%A8%A1%E5%9E%8B"><span class="nav-text">H模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%A8%A1%E5%9E%8B%E7%BB%93%E8%AF%AD"><span class="nav-text">测试模型结语</span></a></li></ol></li></ol></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Huang Zhiwei</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a> 驱动</span>
+                <br>
+            <span class="theme-version-container">主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.1.2</a>
+        </div>
+        
+        
+        
+            <div id="start_div" style="display:none">
+                2022/8/17 11:45:14
+            </div>
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/navbarShrink.js"></script>
+
+<script src="/js/tools/scrollTopBottom.js"></script>
+
+<script src="/js/tools/lightDarkSwitch.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/layouts/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/tocToggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax',
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>
