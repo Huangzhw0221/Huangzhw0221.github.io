@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/image-20230426113013838.png">
 <meta property="article:published_time" content="2023-04-25T13:38:13.000Z">
-<meta property="article:modified_time" content="2023-04-26T05:26:34.499Z">
+<meta property="article:modified_time" content="2023-04-26T12:37:00.271Z">
 <meta property="article:author" content="Huang Zhiwei">
 <meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
@@ -226,8 +226,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-04-26 13:26:34</span>
-            <span class="mobile">2023-04-26 13:26</span>
+            <span class="desktop">2023-04-26 20:37</span>
+            <span class="mobile">2023-04-26 20:37</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -356,6 +356,16 @@
 <li><code>chmod a+r,ug+w,o-w a.conf b.xml</code>：设置文件 a.conf 与 b.xml 权限为拥有者与所属的群组可读写，其它组可读不可写。</li>
 <li><code>chmod -R a+rw *</code>：设置当前目录下的所有档案与子目录皆设为任何人可读写。</li>
 </ul>
+<p>主要数字和权限对应关系表</p>
+<ul>
+<li><code>-rw------- (600)</code>：只有拥有者有读写权限。</li>
+<li><code>-rw-r--r-- (644)</code>：只有拥有者有读写权限；而属组用户和其他用户只有读权限。</li>
+<li><code>-rwx------ (700)</code>：只有拥有者有读、写、执行权限。</li>
+<li><code>-rwxr-xr-x (755)</code>：拥有者有读、写、执行权限，属组用户和其他用户只有读、执行权限。</li>
+<li><code>-rwx--x--x (711)</code>：拥有者有读、写、执行权限，属组用户和其他用户只有执行权限。</li>
+<li><code>-rw-rw-rw- (666)</code>：所有用户都有文件读、写权限。</li>
+<li><code>-rwxrwxrwx (777)</code>：所有用户都有读、写、执行权限。</li>
+</ul>
 <h4 id="df"><a href="#df" class="headerlink" title="df"></a>df</h4><p>通过文件系统来快速获取空间大小的信息，当我们删除一个文件的时候，这个文件不是马上就在文件系统当中消失了，而是暂时消失了，当所有程序都不用时，才会根据 OS 的规则释放掉已经删除的文件， <code>df</code>记录的是通过文件系统获取到的文件的大小。</p>
 <p><code>df</code>和<code>du</code>不同的地方是计算大小时会加上还没有释放的已删除文件，更加精确。</p>
 <ul>
@@ -427,7 +437,7 @@
         <li><strong>创建于:</strong> 2023-04-25 21:38:13</li>
         
             <li>
-                <strong>更新于:</strong> 2023-04-26 13:26:34
+                <strong>更新于:</strong> 2023-04-26 20:37:00
             </li>
         
         <li>
@@ -457,11 +467,26 @@
             
                 <div class="article-nav">
                     
+                        <div class="article-prev">
+                            <a class="prev"
+                            rel="prev"
+                            href="/2023/04/26/java01/"
+                            >
+                                <span class="left arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">Spring框架相关问题</span>
+                                    <span class="post-nav-item">上一篇</span>
+                                </span>
+                            </a>
+                        </div>
+                    
                     
                         <div class="article-next">
                             <a class="next"
                             rel="next"
-                            href="/2023/04/25/%E6%96%87%E7%AB%A0%E5%90%8D/"
+                            href="/2023/04/25/bfs_dfs/"
                             >
                                 <span class="title flex-center">
                                     <span class="post-nav-title-item">算法：dfs和bfs</span>

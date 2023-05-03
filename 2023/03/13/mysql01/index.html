@@ -25,17 +25,17 @@
 <meta property="og:site_name" content="Huang&#39;s Matrix">
 <meta property="og:description" content="在面试的时候碰到了用索引优化数据库的问题，完全懵逼，所以特意来看一下这段视频，并做了这篇笔记。 本篇笔记是参考MySQL索引失效原理_哔哩哔哩_bilibili 做的。 什么是mvcc？Multi-Version Concurrency Control，主要是为了提高数据库的并发性能，避免同一个数据在不同事务之间的竞争，让数据库不用在读写时加锁，MVCC主要用于处理读请求，这个读指的是快照读也就是">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312154820857.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312150744864.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312153731484.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312162058555.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312162446216.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Huangzhw0221/BlogImages/main/ImgForWindows/image-20230312154820857.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Huangzhw0221/BlogImages/main/ImgForWindows/image-20230312121336352.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Huangzhw0221/BlogImages/main/ImgForWindows/image-20230312153731484.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Huangzhw0221/BlogImages/main/ImgForWindows/image-20230312162058555.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Huangzhw0221/BlogImages/main/ImgForWindows/image-20230312162446216.png">
 <meta property="article:published_time" content="2023-03-13T06:09:33.000Z">
-<meta property="article:modified_time" content="2023-03-13T06:11:11.327Z">
+<meta property="article:modified_time" content="2023-05-03T07:46:33.603Z">
 <meta property="article:author" content="Huang Zhiwei">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312154820857.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Huangzhw0221/BlogImages/main/ImgForWindows/image-20230312154820857.png">
     
     <!--- Icon Part-->
     <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
@@ -230,8 +230,8 @@
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-03-13 14:11:11</span>
-            <span class="mobile">2023-03-13 14:11</span>
+            <span class="desktop">2023-05-03 15:46:33</span>
+            <span class="mobile">2023-05-03 15:46</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -280,7 +280,7 @@
 <h4 id="事务隔离级别和问题"><a href="#事务隔离级别和问题" class="headerlink" title="事务隔离级别和问题"></a>事务隔离级别和问题</h4><p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312154820857.png"
+                     data-src="https://raw.githubusercontent.com/Huangzhw0221/BlogImages/main/ImgForWindows/image-20230312154820857.png"
                       alt="image-20230312154820857"
                 ></p>
 <p>四种隔离级别对应解决三种问题：</p>
@@ -292,8 +292,8 @@
 <h4 id="undolog日志和版本链"><a href="#undolog日志和版本链" class="headerlink" title="undolog日志和版本链"></a>undolog日志和版本链</h4><p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312150744864.png"
-                      alt="image-20230312150744864"
+                     data-src="https://raw.githubusercontent.com/Huangzhw0221/BlogImages/main/ImgForWindows/image-20230312121336352.png"
+                     
                 ></p>
 <p>如上图，对于一条数据做多次修改，将张三改成了李四、王五、赵六，它们的id没变表示是在原来的数据上修改的，但是他们的事务id和回滚指针会在修改的过程中改变。而undolog就保存历史版本的信息，版本链则是由回滚指针和undolog链接起来得到的。</p>
 <h4 id="ReadView"><a href="#ReadView" class="headerlink" title="ReadView"></a>ReadView</h4><p>ReadView其实就是一个保存事务ID的list列表。记录的是本事务执行时，MySQL还有哪些事务在执行，且还没有提交。在版本链中有很多条记录，readview就是通过一些规则让我们知道该选取那个记录。</p>
@@ -317,7 +317,7 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312153731484.png"
+                     data-src="https://raw.githubusercontent.com/Huangzhw0221/BlogImages/main/ImgForWindows/image-20230312153731484.png"
                       alt="image-20230312153731484"
                 ></p>
 <p>其中，张三是最早的版本，后续有一个事务修改了两次这个数据的值但是未提交，那么它们的事务id就改变了，显然越新的越大，注意这里王五的trx_id不是20，我们修改为60。然后根据判据：</p>
@@ -382,7 +382,7 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312162058555.png"
+                     data-src="https://raw.githubusercontent.com/Huangzhw0221/BlogImages/main/ImgForWindows/image-20230312162058555.png"
                       alt="image-20230312162058555"
                 ></p>
 <p>创建数据库的代码如下：</p>
@@ -396,7 +396,7 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.jsdelivr.net/gh/Huangzhw0221/BlogImages/ImgForWindows/image-20230312162446216.png"
+                     data-src="https://raw.githubusercontent.com/Huangzhw0221/BlogImages/main/ImgForWindows/image-20230312162446216.png"
                       alt="image-20230312162446216"
                 ></p>
 <p>我们的优化思路是，除了主键id外，可以将ip、warnstyle、warnlog构成索引，这是因为只有这三个可以唯一确定一条记录，报警时间也有很多重复的。</p>
@@ -413,7 +413,7 @@
         <li><strong>创建于:</strong> 2023-03-13 14:09:33</li>
         
             <li>
-                <strong>更新于:</strong> 2023-03-13 14:11:11
+                <strong>更新于:</strong> 2023-05-03 15:46:33
             </li>
         
         <li>
