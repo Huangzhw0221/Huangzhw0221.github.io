@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Huang Zhiwei">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://evan.beee.top" crossorigin>
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://huangzhw0221.github.io/2023/06/09/rabbitmq/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="RabbitMq消息队列本节参考自：超详细的RabbitMQ入门，看这篇就够了！-阿里云开发者社区 (aliyun.com)   👉 “消息队列(Message Queue)”的作用是在消息的传输过程中保存消息的容器，用于解耦和异步处理。   在以下业务场景下可能需要使用消息队列：  任务异步处理：将任务放入消息队列，由消费者异步处理任务，提高系统吞吐量和处理速度。 流量削峰：将请求放入消息队列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rabbitmq">
+<meta property="og:url" content="https://huangzhw0221.github.io/2023/06/09/rabbitmq/index.html">
+<meta property="og:site_name" content="Huang&#39;s Matrix">
+<meta property="og:description" content="RabbitMq消息队列本节参考自：超详细的RabbitMQ入门，看这篇就够了！-阿里云开发者社区 (aliyun.com)   👉 “消息队列(Message Queue)”的作用是在消息的传输过程中保存消息的容器，用于解耦和异步处理。   在以下业务场景下可能需要使用消息队列：  任务异步处理：将任务放入消息队列，由消费者异步处理任务，提高系统吞吐量和处理速度。 流量削峰：将请求放入消息队列">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/20230623100112.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/20230623100310.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/20230623100426.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/Untitled.png">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-15033c8d6081f2b600802945620807a2_720w.webp">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/20230623100749.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/20230623100900.png">
+<meta property="article:published_time" content="2023-06-09T01:53:23.000Z">
+<meta property="article:modified_time" content="2023-06-23T02:10:24.729Z">
+<meta property="article:author" content="Huang Zhiwei">
+<meta property="article:tag" content="中间件">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/20230623100112.png">
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-favicon.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/redefine-favicon.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            rabbitmq -
+        
+        Huang&#39;s Matrix
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/assets/fonts.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"huangzhw0221.github.io","root":"/","language":"zh-CN"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true},"home_banner":{"enable":true,"image":{"light":"https://images.pexels.com/photos/691668/pexels-photo-691668.jpeg","dark":"https://images.pexels.com/photos/461956/pexels-photo-461956.jpeg"},"title":"白云怡意 清泉洗心","subtitle":{"text":[],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.1.2","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"}},"search":{"enable":false,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}}};
+    Global.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="main-content-container">
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Huang&#39;s Matrix
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        首页
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                首页
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+            
+                <div class="article-title">
+                    <h1 class="article-title-regular">rabbitmq</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/redefine-avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Huang Zhiwei</span>
+                            
+                                <span class="author-label"></span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-06-09 09:53:23</span>
+        <span class="mobile">2023-06-09 09:53</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-06-23 10:10:24</span>
+            <span class="mobile">2023-06-23 10:10</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <h1 id="RabbitMq消息队列"><a href="#RabbitMq消息队列" class="headerlink" title="RabbitMq消息队列"></a>RabbitMq消息队列</h1><p>本节参考自：<a class="link"   target="_blank" rel="noopener" href="https://developer.aliyun.com/article/769883" >超详细的RabbitMQ入门，看这篇就够了！-阿里云开发者社区 (aliyun.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<aside>
+👉 “消息队列(Message Queue)”的作用是在消息的传输过程中保存消息的容器，用于解耦和异步处理。
+
+
+<p>在以下业务场景下可能需要使用消息队列：</p>
+<ul>
+<li>任务异步处理：将任务放入消息队列，由消费者异步处理任务，提高系统吞吐量和处理速度。</li>
+<li>流量削峰：将请求放入消息队列，由消费者异步处理请求，避免高并发情况下系统宕机。</li>
+<li>应用解耦：通过消息队列进行应用间通信，使得应用间解耦，提高系统的可维护性和可扩展性。</li>
+<li>日志处理：将日志放入消息队列，由消费者异步处理日志，避免日志处理阻塞主线程。</li>
+<li>消息广播：将消息放入消息队列，由多个消费者消费消息，实现消息广播的功能。</aside></li>
+</ul>
+<p><strong>“消息队列(Message Queue)”是在消息的传输过程中保存消息的容器</strong>。在消息队列中，通常有生产者和消费者两个角色。生产者只负责发送数据到消息队列，谁从消息队列中取出数据处理，他不管。消费者只负责从消息队列中取出数据处理，他不管这是谁发送的数据。</p>
+<h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2><p><strong>异步处理</strong>：一个客户端请求发送进来，系统A会调用系统B、C、D三个系统，同步请求的话，响应时间就是系统A、B、C、D的总和，也就是800ms。<strong>如果使用MQ，系统A发送数据到MQ，然后就可以返回响应给客户端，不需要再等待系统B、C、D的响应，可以大大地提高性能</strong>。对于一些非必要的业务，比如发送短信，发送邮件等等，就可以采用MQ。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/20230623100112.png"
+                      alt="异步处理"
+                ></p>
+<p><strong>解耦：</strong>如图所示。假设有系统B、C、D都需要系统A的数据，于是系统A调用三个方法发送数据到B、C、D。这时，系统D不需要了，那就需要在系统A把相关的代码删掉。假设这时有个新的系统E需要数据，这时系统A又要增加调用系统E的代码。为了降低这种强耦合，就可以使用MQ，<strong>系统A只需要把数据发送到MQ，其他系统如果需要数据，则从MQ中获取即可</strong>。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/20230623100310.png"
+                      alt="解耦"
+                ></p>
+<p><strong>削峰</strong>：这是MQ一个很重要的应用。假设系统A在某一段时间请求数暴增，有5000个请求发送过来，系统A这时就会发送5000条SQL进入MySQL进行执行，MySQL对于如此庞大的请求当然处理不过来，MySQL就会崩溃，导致系统瘫痪。<strong>如果使用MQ，系统A不再是直接发送SQL到数据库，而是把数据发送到MQ，MQ短时间积压数据是可以接受的，然后由消费者每次拉取2000条进行处理，防止在请求峰值时期大量的请求直接发送到MySQL导致系统崩溃</strong>。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/20230623100426.png"
+                      alt="数据库削峰"
+                ></p>
+<h2 id="RabbitMQ的特点"><a href="#RabbitMQ的特点" class="headerlink" title="RabbitMQ的特点"></a>RabbitMQ的特点</h2><ul>
+<li>可靠性。支持持久化，传输确认，发布确认等保证了MQ的可靠性。</li>
+<li>灵活的分发消息策略。这应该是RabbitMQ的一大特点。在消息进入MQ前由Exchange(交换机)进行路由消息。分发消息策略有：简单模式、工作队列模式、发布订阅模式、路由模式、通配符模式。</li>
+<li>支持集群。多台RabbitMQ服务器可以组成一个集群，形成一个逻辑Broker。</li>
+<li>多种协议。RabbitMQ支持多种消息队列协议，比如 STOMP、MQTT 等等。</li>
+<li>支持多种语言客户端。RabbitMQ几乎支持所有常用编程语言，包括 Java、.NET、Ruby 等等。</li>
+<li>可视化管理界面。RabbitMQ提供了一个易用的用户界面，使得用户可以监控和管理消息 Broker。</li>
+<li>插件机制。RabbitMQ提供了许多插件，可以通过插件进行扩展，也可以编写自己的插件。</li>
+</ul>
+<h1 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h1><h2 id="阿里云实验室RocketMQ"><a href="#阿里云实验室RocketMQ" class="headerlink" title="阿里云实验室RocketMQ"></a>阿里云实验室RocketMQ</h2><div class="highlight-container" data-rel="Jsx"><figure class="iseeu highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 执行如下命令，切换目录至rocketmq-<span class="number">4.9</span><span class="number">.3</span>/bin下。</span><br><span class="line">cd /root/rocketmq-<span class="number">4.9</span><span class="number">.3</span>/bin</span><br><span class="line">其目录下已有如下文件：</span><br><span class="line">logs  rocketmq-<span class="number">4.9</span><span class="number">.3</span>  rocketmq-all-<span class="number">4.9</span><span class="number">.3</span>-bin-release.<span class="property">zip</span>  rocketmq-handson-apply  spring-mq-bus-demo</span><br><span class="line"><span class="number">2.</span> 启动服务器，和查看日志</span><br><span class="line">nohup sh mqnamesrv &amp;</span><br><span class="line">tail -f ~<span class="regexp">/logs/</span>rocketmqlogs/namesrv.<span class="property">log</span></span><br><span class="line">看到<span class="title class_">The</span> <span class="title class_">Name</span> <span class="title class_">Server</span> boot success. serializeType=<span class="title class_">JSON</span> 表示启动成功</span><br><span class="line"><span class="number">3.</span> 启动端口映射</span><br><span class="line">nohup sh mqbroker -n <span class="attr">localhost</span>:<span class="number">9876</span> &amp;</span><br><span class="line">tail -f ~<span class="regexp">/logs/</span>rocketmqlogs/broker.<span class="property">log</span></span><br><span class="line"><span class="number">4.</span> 执行如下命令，创建topic。</span><br><span class="line">cd /root/rocketmq-<span class="number">4.9</span><span class="number">.3</span>/bin</span><br><span class="line">./mqadmin updateTopic -n <span class="attr">localhost</span>:<span class="number">9876</span> -b <span class="attr">localhost</span>:<span class="number">10911</span> -t sendDataType</span><br><span class="line">./mqadmin updateTopic -n <span class="attr">localhost</span>:<span class="number">9876</span> -b <span class="attr">localhost</span>:<span class="number">10911</span> -t sendOperationType</span><br><span class="line">./mqadmin updateTopic -n <span class="attr">localhost</span>:<span class="number">9876</span> -b <span class="attr">localhost</span>:<span class="number">10911</span> -t syncSendOrderly</span><br><span class="line">./mqadmin updateTopic -n <span class="attr">localhost</span>:<span class="number">9876</span> -b <span class="attr">localhost</span>:<span class="number">10911</span> -t sendAndReceive</span><br><span class="line">./mqadmin updateTopic -n <span class="attr">localhost</span>:<span class="number">9876</span> -b <span class="attr">localhost</span>:<span class="number">10911</span> -t broadcastConsumer</span><br><span class="line">./mqadmin updateTopic -n <span class="attr">localhost</span>:<span class="number">9876</span> -b <span class="attr">localhost</span>:<span class="number">10911</span> -t transactionMessage</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Jsx"><figure class="iseeu highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 启动java</span><br><span class="line">cd /root/rocketmq-handson-apply</span><br><span class="line">mvn install -<span class="title class_">Dmaven</span>.<span class="property">test</span>.<span class="property">skip</span></span><br><span class="line"><span class="keyword">export</span> local=$RANDOM</span><br><span class="line">java -jar  rocketmq-spring/target/rocketmq-spring-<span class="number">1.0</span><span class="number">.0</span>.<span class="property">jar</span></span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Jsx"><figure class="iseeu highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">发送各种请求，如发送对象、消息、集合，同步发送、异步发送、rpc发送、事务消息：</span><br><span class="line">wget -q -O- <span class="string">&quot;http://127.0.0.1:28082/messageSend/sendObject?id=1&amp;name=xiaoming&amp;action=go2&amp;ags=3&quot;</span></span><br><span class="line">wget -q -O- <span class="string">&quot;http://127.0.0.1:28082/messageSend/sendMessage?id=2&amp;name=xiaoming&amp;action=des&amp;ags=3&quot;</span></span><br><span class="line">wget -q -O- <span class="string">&quot;http://127.0.0.1:28082/messageSend/sendCollection?id=2&amp;name=xiaoming&amp;action=des&amp;ags=3&quot;</span></span><br><span class="line">wget -q -O- <span class="string">&quot;http://127.0.0.1:28082/messageSend/syncSend?id=2&amp;name=xiaoming&amp;action=des&amp;ags=3&quot;</span></span><br><span class="line">wget -q -O- <span class="string">&quot;http://127.0.0.1:28082/messageSend/asyncSend?id=2&amp;name=xiaoming&amp;action=des&amp;ags=3&quot;</span></span><br><span class="line">wget -q -O- <span class="string">&quot;http://127.0.0.1:28082/messageSend/sendAndReceive?id=2&amp;name=xiaoming&amp;action=des&amp;ags=3&quot;</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="windows11安装"><a href="#windows11安装" class="headerlink" title="windows11安装"></a>windows11安装</h2><p>使用docker拉取镜像，一开始使用了latest版本，启动management插件也不行，后来换成了指定的版本，自带management插件，springboot是不再报错了，但是有些页面无法访问。</p>
+<div class="highlight-container" data-rel="Jsx"><figure class="iseeu highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker pull <span class="attr">rabbitmq</span>:<span class="number">3.9</span><span class="number">.29</span>-management</span><br><span class="line"><span class="comment">// 指定启动的端口和用户名密码</span></span><br><span class="line">docker run -dit --name rabbitmq3<span class="number">.9</span><span class="number">.29</span> -e <span class="variable constant_">RABBITMQ_DEFAULT_USER</span>=guest -e <span class="variable constant_">RABBITMQ_DEFAULT_PASS</span>=guest -p <span class="number">15672</span>:<span class="number">15672</span> -p <span class="number">5672</span>:<span class="number">5672</span> <span class="attr">rabbitmq</span>:<span class="number">3.9</span><span class="number">.29</span>-management</span><br></pre></td></tr></table></figure></div>
+
+<p><code>rabbitmq:3.9.29-management</code>版本在进入Admin页面时报错，此版本出现的问题如下，大意是EJS出问题了：</p>
+<div class="highlight-container" data-rel="Jsx"><figure class="iseeu highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">SyntaxError</span>: <span class="title class_">Unexpected</span> token <span class="string">&#x27;catch&#x27;</span> <span class="title class_">SyntaxError</span>: <span class="title class_">Unexpected</span> token <span class="string">&#x27;catch&#x27;</span> at <span class="variable constant_">EJS</span>.<span class="property">Compiler</span>.<span class="property">compile</span> (<span class="attr">http</span>:<span class="comment">//localhost:15672/js/ejs-1.0.min.js:1:6659) at new EJS (http://localhost:15672/js/ejs-1.0.min.js:1:1625) at format (http://localhost:15672/js/main.js:1164:20) at http://localhost:15672/js/main.js:486:24 at with_reqs (http://localhost:15672/js/main.js:1147:9) at http://localhost:15672/js/main.js:1143:17 at req.onreadystatechange (http://localhost:15672/js/main.js:1238:17)</span></span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/Untitled.png"
+                      alt="安装异常"
+                ></p>
+<p>后换成<code>rabbitmq:management</code> 按照<a class="link"   target="_blank" rel="noopener" href="https://juejin.cn/post/7205473726539530297" >Windows版Docker安装RabbitMq - 掘金 (juejin.cn) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>一步步黏贴，该版本可以访问admin页面，但是无法访问队列queue页面。可以自行选择，admin页面其实只管理用户，这个用户管理可以进入docker容器来配置。现将常用指令贴出：</p>
+<div class="highlight-container" data-rel="Jsx"><figure class="iseeu highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 进入容器</span></span><br><span class="line">docker exec -it a6fd7b077c5f /bin/bash</span><br><span class="line"><span class="comment">// 查看当前用户列表</span></span><br><span class="line">rabbitmqctl list_users</span><br><span class="line"><span class="comment">// 查询结果</span></span><br><span class="line">user    tags</span><br><span class="line">admin   [administrator]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加用户指令和配置virtual host指令</span></span><br><span class="line">rabbitmqctl  add_user  test   test</span><br><span class="line">rabbitmqctl  set_user_tags  test  administrator</span><br><span class="line">rabbitmqctl  add_vhost  /test</span><br><span class="line">rabbitmqctl  set_permissions  -p  /test  test <span class="string">&#x27;.*&#x27;</span> <span class="string">&#x27;.*&#x27;</span> <span class="string">&#x27;.*&#x27;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>在配置过程中，一开始以为端口号是启动时用到的15672，结果连接许久无法访问，有如下报错，都是未连接的错误，后来查询后发现配置的端口需要是5672：</p>
+<div class="highlight-container" data-rel="Jsx"><figure class="iseeu highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Failed</span> to check/redeclare auto-<span class="keyword">delete</span> <span class="title function_">queue</span>(s).</span><br><span class="line">org.<span class="property">springframework</span>.<span class="property">amqp</span>.<span class="property">AmqpIOException</span>: java.<span class="property">io</span>.<span class="property">IOException</span></span><br><span class="line">java.<span class="property">net</span>.<span class="property">SocketException</span>: <span class="title class_">Socket</span> <span class="title class_">Closed</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="amqp协议"><a href="#amqp协议" class="headerlink" title="amqp协议"></a>amqp协议</h2><p>AMQP所覆盖的内容包含了<strong>网络协议</strong>以及<strong>服务端服务</strong></p>
+<p>AMQP的全称为：Advanced Message Queuing Protocol（高级消息队列协议），发布者（Publisher）发布消息（Message），经由交换机（Exchange）。交换机根据路由规则将收到的消息分发给与该交换机绑定的队列（Queue）。最后 AMQP 代理会将消息投递给订阅了此队列的消费者，或者消费者按照需求自行获取。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-15033c8d6081f2b600802945620807a2_720w.webp" alt="https://pic3.zhimg.com/80/v2-15033c8d6081f2b600802945620807a2_720w.webp"></p>
+<ul>
+<li><strong>一套被称作”高级消息队列协议模型(AMQ Model)“的消息能力定义</strong>。该模型涵盖了Broker服务中用于路由和存储消息的组件，以及把这些组件连在一起的规则。</li>
+<li><strong>一个网络层协议AMQP</strong>。能够让客户端程序与实现了AMQ Model的服务端进行通信。</li>
+</ul>
+<h3 id="深入理解"><a href="#深入理解" class="headerlink" title="深入理解"></a><strong>深入理解</strong></h3><p>1、发布者、交换机、队列、消费者都可以有多个。同时因为 AMQP 是一个网络协议，所以这个过程中的发布者，消费者，消息代理 可以分别存在于不同的设备上。</p>
+<p>2、发布者发布消息时可以给消息指定各种消息属性（Message Meta-data）。有些属性有可能会被消息代理（Brokers）使用，然而其他的属性则是完全不透明的，它们只能被接收消息的应用所使用。</p>
+<p>3、从安全角度考虑，网络是不可靠的，又或是消费者在处理消息的过程中意外挂掉，这样没有处理成功的消息就会丢失。基于此原因，AMQP 模块包含了一个消息确认（Message Acknowledgements）机制：当一个消息从队列中投递给消费者后，不会立即从队列中删除，直到它收到来自消费者的确认回执（Acknowledgement）后，才完全从队列中删除。</p>
+<p>4、在某些情况下，例如当一个消息无法被成功路由时（无法从交换机分发到队列），消息或许会被返回给发布者并被丢弃。或者，如果消息代理执行了延期操作，消息会被放入一个所谓的死信队列中。此时，消息发布者可以选择某些参数来处理这些特殊情况。</p>
+<h1 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h1><ul>
+<li>Broker：消息队列服务进程。此进程包括两个部分：Exchange和Queue。</li>
+<li>Exchange：消息队列交换机。<strong>按一定的规则将消息路由转发到某个队列</strong>。</li>
+<li>Queue：消息队列，存储消息的队列。</li>
+<li>Producer：消息生产者。生产方客户端将消息同交换机路由发送到队列中。</li>
+<li>Consumer：消息消费者。消费队列中存储的消息。</li>
+</ul>
+<p>Exchange交换机类型有四种，根据不同的类型工作的方式也有所不同。在HelloWord例子中，我们就使用了比较简单的<strong>Direct Exchange</strong>，翻译就是直连交换机。其余三种分别是：<strong>Fanout exchange、Topic exchange、Headers exchange</strong>。</p>
+<ul>
+<li><p>Direct Exchange，要求该消息与一个特定的路由键完全匹配；</p>
+</li>
+<li><p>Fanout exchange，这种类型的交换机需要将队列绑定到交换机上。一个发送到交换机的消息都会被转发到与该交换机绑定的所有队列上。很像子网广播，每台子网内的主机都获得了一份复制的消息。简单点说就是发布订阅。</p>
+</li>
+<li><p>Topic Exchange，主题交换机，如果从用法上面翻译可能叫通配符交换机会更加贴切。这种交换机是使用通配符去匹配，路由到对应的队列。通配符有两种：”<em>“ 、 “#”。需要注意的是通配符前面必须要加上”.”符号。</em><em><code>*</code></em>* 符号：有且只匹配一个词，**<code>#</code>** 符号：匹配一个或多个词。</p>
+</li>
+<li><p>Headers Exchange，这种交换机用的相对没这么多。它跟上面三种有点区别，它的路由不是用routingKey进行路由匹配，而是在匹配请求头中所带的键值进行路由。创建队列需要设置绑定的头部信息，有两种模式：<strong>全部匹配和部分匹配</strong>。如上图所示，交换机会根据生产者发送过来的头部信息携带的键值去匹配队列绑定的键值，路由到对应的队列。</p>
+<p> <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/20230623100749.png"
+                     
+                ></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/20230623100900.png"
+                     
+                ></p>
+</li>
+</ul>
+<h1 id="启动和实验"><a href="#启动和实验" class="headerlink" title="启动和实验"></a>启动和实验</h1><p>本节记录实验过程中遇到的一些小坑</p>
+<p>创建一个公共的pom配置，即<code>RabbitMqDemo</code> ，该pom使用spring版本为2.7.12，添加amqp依赖</p>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-amqp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">&lt;-- 子模块--&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">modules</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>Common<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>Consumer<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>Core<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">modules</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>然后创建三个子模块：<code>Common Consumer Core</code> 三个子模块引用父模块的依赖和common的配置：</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;parent&gt;</span><br><span class="line">	&lt;artifactId&gt;RabbitMqDemo&lt;/artifactId&gt;</span><br><span class="line">	&lt;groupId&gt;com.rabbitmq&lt;/groupId&gt;</span><br><span class="line">	&lt;version&gt;<span class="number">0.0</span><span class="number">.1</span>-SNAPSHOT&lt;/version&gt;</span><br><span class="line">&lt;/parent&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;com.common&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;Common&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;<span class="number">0.0</span><span class="number">.1</span>-SNAPSHOT&lt;/version&gt;</span><br><span class="line">	&lt;scope&gt;compile&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="common模块"><a href="#common模块" class="headerlink" title="common模块"></a>common模块</h2><p>Common负责配置文件，<code>RabbitMQConfig</code>是mq的名称配置，<code>DirectRabbitConfig</code> 是连接配置。</p>
+<p><code>RabbitMQConfig</code> 包含队列主题名称、四种Exchange交换机的名称和配置：</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * RabbitMQ的队列主题名称</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">RABBITMQ_DEMO_TOPIC</span> <span class="operator">=</span> <span class="string">&quot;rabbitmq.demo.topic&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * RabbitMQ的DIRECT交换机名称</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">RABBITMQ_DEMO_DIRECT_EXCHANGE</span> <span class="operator">=</span> <span class="string">&quot;rabbipwetmq.demo.direct.exchange&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * RabbitMQ的DIRECT交换机和队列绑定的匹配键 DirectRouting</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">RABBITMQ_DEMO_DIRECT_ROUTING</span> <span class="operator">=</span> <span class="string">&quot;rabbitmq.demo.direct.routing&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * RabbitMQ的FANOUT_EXCHANG交换机类型的队列 A 的名称</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">FANOUT_EXCHANGE_QUEUE_TOPIC_A</span> <span class="operator">=</span> <span class="string">&quot;fanout.A&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * RabbitMQ的FANOUT_EXCHANG交换机类型的队列 B 的名称</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">FANOUT_EXCHANGE_QUEUE_TOPIC_B</span> <span class="operator">=</span> <span class="string">&quot;fanout.B&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * RabbitMQ的FANOUT_EXCHANG交换机类型的名称</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">FANOUT_EXCHANGE_DEMO_NAME</span> <span class="operator">=</span> <span class="string">&quot;fanout.exchange.demo.name&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * RabbitMQ的TOPIC_EXCHANGE交换机名称</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">TOPIC_EXCHANGE_DEMO_NAME</span> <span class="operator">=</span> <span class="string">&quot;topic.exchange.demo.name&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * RabbitMQ的TOPIC_EXCHANGE交换机的队列A的名称</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">TOPIC_EXCHANGE_QUEUE_A</span> <span class="operator">=</span> <span class="string">&quot;topic.queue.a&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * RabbitMQ的TOPIC_EXCHANGE交换机的队列B的名称</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">TOPIC_EXCHANGE_QUEUE_B</span> <span class="operator">=</span> <span class="string">&quot;topic.queue.b&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * RabbitMQ的TOPIC_EXCHANGE交换机的队列C的名称</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">TOPIC_EXCHANGE_QUEUE_C</span> <span class="operator">=</span> <span class="string">&quot;topic.queue.c&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * HEADERS_EXCHANGE交换机名称</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">HEADERS_EXCHANGE_DEMO_NAME</span> <span class="operator">=</span> <span class="string">&quot;headers.exchange.demo.name&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * RabbitMQ的HEADERS_EXCHANGE交换机的队列A的名称</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">HEADERS_EXCHANGE_QUEUE_A</span> <span class="operator">=</span> <span class="string">&quot;headers.queue.a&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * RabbitMQ的HEADERS_EXCHANGE交换机的队列B的名称</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">HEADERS_EXCHANGE_QUEUE_B</span> <span class="operator">=</span> <span class="string">&quot;headers.queue.b&quot;</span>;</span><br></pre></td></tr></table></figure></div>
+
+<p><code>DirectRabbitConfig</code> 配置连接、消息队列、队列和交换机的绑定：</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DirectRabbitConfig</span> <span class="keyword">implements</span> <span class="title class_">BeanPostProcessor</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    @Resource</span></span><br><span class="line"><span class="comment">//    private RabbitAdmin rabbitAdmin;</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RabbitAdmin <span class="title function_">rabbitAdmin</span><span class="params">(ConnectionFactory connectionFactory)</span> &#123;</span><br><span class="line">        <span class="type">RabbitAdmin</span> <span class="variable">rabbitAdmin</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RabbitAdmin</span>(connectionFactory);</span><br><span class="line">        <span class="comment">// 只有设置为 true，spring 才会加载 RabbitAdmin 这个类</span></span><br><span class="line">        rabbitAdmin.setAutoStartup(<span class="literal">true</span>);</span><br><span class="line">        <span class="keyword">return</span> rabbitAdmin;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">rabbitmqDemoDirectQueue</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//第一个参数：队列主题名称 第二个参数：是否持久化</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(RabbitMQConfig.RABBITMQ_DEMO_TOPIC, <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> DirectExchange <span class="title function_">rabbitmqDemoDirectExchange</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//Direct交换机</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">DirectExchange</span>(RabbitMQConfig.RABBITMQ_DEMO_DIRECT_EXCHANGE, <span class="literal">true</span>, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">fanoutExchangeQueueA</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//队列A</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(RabbitMQConfig.FANOUT_EXCHANGE_QUEUE_TOPIC_A, <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">fanoutExchangeQueueB</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//队列B</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(RabbitMQConfig.FANOUT_EXCHANGE_QUEUE_TOPIC_B, <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> FanoutExchange <span class="title function_">rabbitmqDemoFanoutExchange</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//创建FanoutExchange类型交换机</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">FanoutExchange</span>(RabbitMQConfig.FANOUT_EXCHANGE_DEMO_NAME, <span class="literal">true</span>, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Binding <span class="title function_">bindFanoutA</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//队列A绑定到FanoutExchange交换机</span></span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(fanoutExchangeQueueA()).to(rabbitmqDemoFanoutExchange());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Binding <span class="title function_">bindFanoutB</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//队列B绑定到FanoutExchange交换机</span></span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(fanoutExchangeQueueB()).to(rabbitmqDemoFanoutExchange());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Binding <span class="title function_">bindDirect</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//链式写法，绑定交换机和队列，并设置匹配键</span></span><br><span class="line">        <span class="keyword">return</span> BindingBuilder</span><br><span class="line">                <span class="comment">//绑定队列</span></span><br><span class="line">                .bind(rabbitmqDemoDirectQueue())</span><br><span class="line">                <span class="comment">//到交换机</span></span><br><span class="line">                .to(rabbitmqDemoDirectExchange())</span><br><span class="line">                <span class="comment">//并设置匹配键</span></span><br><span class="line">                .with(RabbitMQConfig.RABBITMQ_DEMO_DIRECT_ROUTING);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> TopicExchange <span class="title function_">rabbitmqDemoTopicExchange</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//配置TopicExchange交换机</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">TopicExchange</span>(RabbitMQConfig.TOPIC_EXCHANGE_DEMO_NAME, <span class="literal">true</span>, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">topicExchangeQueueA</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//创建队列1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(RabbitMQConfig.TOPIC_EXCHANGE_QUEUE_A, <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">topicExchangeQueueB</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//创建队列2</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(RabbitMQConfig.TOPIC_EXCHANGE_QUEUE_B, <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">topicExchangeQueueC</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//创建队列3</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(RabbitMQConfig.TOPIC_EXCHANGE_QUEUE_C, <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Binding <span class="title function_">bindTopicA</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//队列A绑定到FanoutExchange交换机</span></span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(topicExchangeQueueB())</span><br><span class="line">                .to(rabbitmqDemoTopicExchange())</span><br><span class="line">                .with(<span class="string">&quot;a.*&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Binding <span class="title function_">bindTopicB</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//队列A绑定到FanoutExchange交换机</span></span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(topicExchangeQueueC())</span><br><span class="line">                .to(rabbitmqDemoTopicExchange())</span><br><span class="line">                .with(<span class="string">&quot;a.*&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Binding <span class="title function_">bindTopicC</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">//队列A绑定到FanoutExchange交换机</span></span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(topicExchangeQueueA())</span><br><span class="line">                .to(rabbitmqDemoTopicExchange())</span><br><span class="line">                .with(<span class="string">&quot;rabbit.#&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">headersQueueA</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(RabbitMQConfig.HEADERS_EXCHANGE_QUEUE_A, <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">headersQueueB</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(RabbitMQConfig.HEADERS_EXCHANGE_QUEUE_B, <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> HeadersExchange <span class="title function_">rabbitmqDemoHeadersExchange</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">HeadersExchange</span>(RabbitMQConfig.HEADERS_EXCHANGE_DEMO_NAME, <span class="literal">true</span>, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Binding <span class="title function_">bindHeadersA</span><span class="params">()</span> &#123;</span><br><span class="line">        Map&lt;String, Object&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">&quot;key_one&quot;</span>, <span class="string">&quot;java&quot;</span>);</span><br><span class="line">        map.put(<span class="string">&quot;key_two&quot;</span>, <span class="string">&quot;rabbit&quot;</span>);</span><br><span class="line">        <span class="comment">//全匹配</span></span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(headersQueueA())</span><br><span class="line">                .to(rabbitmqDemoHeadersExchange())</span><br><span class="line">                .whereAll(map).match();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Binding <span class="title function_">bindHeadersB</span><span class="params">()</span> &#123;</span><br><span class="line">        Map&lt;String, Object&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">&quot;headers_A&quot;</span>, <span class="string">&quot;coke&quot;</span>);</span><br><span class="line">        map.put(<span class="string">&quot;headers_B&quot;</span>, <span class="string">&quot;sky&quot;</span>);</span><br><span class="line">        <span class="comment">//部分匹配</span></span><br><span class="line">        <span class="keyword">return</span> BindingBuilder.bind(headersQueueB())</span><br><span class="line">                .to(rabbitmqDemoHeadersExchange())</span><br><span class="line">                .whereAny(map).match();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//    @Override</span></span><br><span class="line"><span class="comment">//    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException &#123;</span></span><br><span class="line"><span class="comment">//        rabbitAdmin.declareExchange(rabbitmqDemoDirectExchange());</span></span><br><span class="line"><span class="comment">//        rabbitAdmin.declareQueue(rabbitmqDemoDirectQueue());</span></span><br><span class="line"><span class="comment">//        return null;</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>和教程中的不同，在操作时报错出现循环依赖的问题，不使用<code>rabbitAdmin</code> 也没事。</p>
+<h2 id="Core模块"><a href="#Core模块" class="headerlink" title="Core模块"></a>Core模块</h2><p>Core模块向消息队列写入，用若干个不同的controller控制向不同的queue写入。包含controller、service（impl），下面从Impl来看四种交换机方式。</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String <span class="title function_">sendMsg</span><span class="params">(String msg)</span> <span class="keyword">throws</span> Exception;</span><br><span class="line">String <span class="title function_">sendMsgByFanoutExchange</span><span class="params">(String msg)</span> <span class="keyword">throws</span> Exception;</span><br><span class="line">String <span class="title function_">sendMsgByTopicExchange</span><span class="params">(String msg, String routingKey)</span> <span class="keyword">throws</span> Exception;</span><br><span class="line">String <span class="title function_">sendMsgByHeadersExchange</span><span class="params">(String msg, Map&lt;String, Object&gt; map)</span> <span class="keyword">throws</span> Exception;</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//直连</span></span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">sendMsg</span><span class="params">(String msg)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">msgId</span> <span class="operator">=</span> UUID.randomUUID().toString().replace(<span class="string">&quot;-&quot;</span>, <span class="string">&quot;&quot;</span>).substring(<span class="number">0</span>, <span class="number">32</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">sendTime</span> <span class="operator">=</span> sdf.format(<span class="keyword">new</span> <span class="title class_">Date</span>());</span><br><span class="line">            Map&lt;String, Object&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">            map.put(<span class="string">&quot;msgId&quot;</span>, msgId);</span><br><span class="line">            map.put(<span class="string">&quot;sendTime&quot;</span>, sendTime);</span><br><span class="line">            map.put(<span class="string">&quot;msg&quot;</span>, msg);</span><br><span class="line">            rabbitTemplate.convertAndSend(RabbitMQConfig.RABBITMQ_DEMO_DIRECT_EXCHANGE, RabbitMQConfig.RABBITMQ_DEMO_DIRECT_ROUTING, map);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;ok&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;error&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Fanout发布，给到fanout交换机，交换机发布到与之绑定的fanoutqueueA和fanoutqueueB上</span></span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">sendMsgByFanoutExchange</span><span class="params">(String msg)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        Map&lt;String, Object&gt; message = getMessage(msg);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            rabbitTemplate.convertAndSend(RabbitMQConfig.FANOUT_EXCHANGE_DEMO_NAME, <span class="string">&quot;&quot;</span>, message);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;ok&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;error&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//topic发布，参考config中的队列和交换机配置，看到A队列和B队列都是绑定到&quot;a.*&quot;的，C队列绑定到&quot;rabbit.#&quot;</span></span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">sendMsgByTopicExchange</span><span class="params">(String msg, String routingKey)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        Map&lt;String, Object&gt; message = getMessage(msg);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//发送消息</span></span><br><span class="line">            rabbitTemplate.convertAndSend(RabbitMQConfig.TOPIC_EXCHANGE_DEMO_NAME, routingKey, message);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;ok&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;error&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//headers发布，参考config中的队列和交换机配置，.whereAll(map).match()和whereAny(map).match()的绑定区别</span></span><br><span class="line">		<span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">sendMsgByHeadersExchange</span><span class="params">(String msg, Map&lt;String, Object&gt; map)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">MessageProperties</span> <span class="variable">messageProperties</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MessageProperties</span>();</span><br><span class="line">            <span class="comment">//消息持久化</span></span><br><span class="line">            messageProperties.setDeliveryMode(MessageDeliveryMode.PERSISTENT);</span><br><span class="line">            messageProperties.setContentType(<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">            <span class="comment">//添加消息</span></span><br><span class="line">            messageProperties.getHeaders().putAll(map);</span><br><span class="line">            <span class="type">Message</span> <span class="variable">message</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Message</span>(msg.getBytes(), messageProperties);</span><br><span class="line">            rabbitTemplate.convertAndSend(RabbitMQConfig.HEADERS_EXCHANGE_DEMO_NAME, <span class="literal">null</span>, message);</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;ok&quot;</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;error&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="Consumer模块"><a href="#Consumer模块" class="headerlink" title="Consumer模块"></a>Consumer模块</h2><p>消费者模块用来获取对应监听队列的消息，主要有以下两个注意点：</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span><span class="meta">@RabbitListener</span>注解声明监听的队列</span><br><span class="line"><span class="number">2.</span><span class="meta">@RabbitListener(queuesToDeclare  = @Queue(RabbitMQConfig.RABBITMQ_DEMO_TOPIC))</span></span><br><span class="line">	其中queuesToDeclare  表示如果没有这个队列则创建一个队列，防止报错；</span><br></pre></td></tr></table></figure></div>
+
+<p>启动后可以看到各条线路的监听消息：</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">队列A收到消息：&#123;msg=广播发布,UUID, msgId=1fe4602e0c054b878f9d21f8fbf25840, sendTime=<span class="number">2023</span>-<span class="number">06</span>-09 <span class="number">13</span>:09:<span class="number">39</span>&#125;</span><br><span class="line">队列B收到消息：&#123;msg=广播发布,UUID, msgId=1fe4602e0c054b878f9d21f8fbf25840, sendTime=<span class="number">2023</span>-<span class="number">06</span>-09 <span class="number">13</span>:09:<span class="number">39</span>&#125;</span><br><span class="line">队列[headers.queue.a]收到消息：UUID</span><br><span class="line">队列[headers.queue.b]收到消息：UUID</span><br><span class="line">消费者RabbitMQDemo从消息队列中消费信息： &#123;msg=直连写入,UUID, msgId=b58befd9034c495290540640abd8c0a4, sendTime=<span class="number">2023</span>-<span class="number">06</span>-09 <span class="number">13</span>:<span class="number">04</span>:<span class="number">03</span>&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h1 id="死信队列"><a href="#死信队列" class="headerlink" title="死信队列"></a>死信队列</h1><p>本节参考自<a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/366053936" >RabbitMQ - 死信队列(Dead-Letter-Exchange ) - 知乎 (zhihu.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>DLX，全称为Dead-Letter-Exchange , 可以称之为死信交换机，也有人称之为死信邮箱。当消息在一个队列中变成死信(dead message)之后，它能被重新发送到另一个交换机中，这个交换机就是DLX ，绑定DLX的队列就称之为死信队列。</p>
+<p><strong>消息变成死信，可能是由于以下的原因：</strong></p>
+<ul>
+<li>消息被拒绝</li>
+<li>消息过期</li>
+<li>队列达到最大长度</li>
+</ul>
+<p>DLX也是一个正常的交换机，和一般的交换机没有区别，它能在任何的队列上被指定，实际上就是设置某一个队列的属性。当这个队列中存在死信时，Rabbitmq就会自动地将这个消息重新发布到设置的DLX上去，进而被路由到另一个队列，即死信队列。</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置死信队列</span></span><br><span class="line">		<span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Queue <span class="title function_">ttlDirectQueue</span><span class="params">()</span>&#123;</span><br><span class="line">        HashMap&lt;String,Object&gt; args = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">//消息过期时间</span></span><br><span class="line">        args.put(<span class="string">&quot;x-message-ttl&quot;</span>,<span class="number">5000</span>);</span><br><span class="line">        <span class="comment">//消息队列最大长度、</span></span><br><span class="line">        args.put(<span class="string">&quot;x-max-length&quot;</span>,<span class="number">8</span>);</span><br><span class="line">        <span class="comment">//绑定交换机</span></span><br><span class="line">        args.put(<span class="string">&quot;x-dead-letter-exchange&quot;</span>,<span class="string">&quot;dead_direct_exchange&quot;</span>);</span><br><span class="line">        <span class="comment">//死信队列路由</span></span><br><span class="line">        args.put(<span class="string">&quot;x-dead-letter-routing-key&quot;</span>,<span class="string">&quot;dead&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Queue</span>(<span class="string">&quot;ttl.direct.queue&quot;</span>,<span class="literal">true</span>,<span class="literal">false</span>,<span class="literal">false</span>,args);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> rabbitmq</li>
+        <li><strong>作者:</strong> Huang Zhiwei</li>
+        <li><strong>创建于:</strong> 2023-06-09 09:53:23</li>
+        
+            <li>
+                <strong>更新于:</strong> 2023-06-23 10:10:24
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://huangzhw0221.github.io/2023/06/09/rabbitmq/
+        </li>
+        <li>
+            <strong>版权声明:</strong> 本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a> 进行许可。
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/">#中间件</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/05/03/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%EF%BC%9AMAE/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">论文阅读：MAE</span>
+                                    <span class="post-nav-item">下一篇</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+ 
+    <div id="waline"></div>
+    <script type="module"  data-pjax>
+        import { init } from 'https://evan.beee.top/js/waline.mjs';
+
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'https://example.example.com',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
+        }
+
+        if ('true') {
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadWaline);
+        }
+        
+    </script>
+
+
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">rabbitmq</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RabbitMq%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="nav-text">RabbitMq消息队列</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="nav-text">主要功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RabbitMQ%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-text">RabbitMQ的特点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%A5%E9%97%A8"><span class="nav-text">入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%BF%E9%87%8C%E4%BA%91%E5%AE%9E%E9%AA%8C%E5%AE%A4RocketMQ"><span class="nav-text">阿里云实验室RocketMQ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#windows11%E5%AE%89%E8%A3%85"><span class="nav-text">windows11安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#amqp%E5%8D%8F%E8%AE%AE"><span class="nav-text">amqp协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3"><span class="nav-text">深入理解</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%84%E6%88%90"><span class="nav-text">组成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%92%8C%E5%AE%9E%E9%AA%8C"><span class="nav-text">启动和实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#common%E6%A8%A1%E5%9D%97"><span class="nav-text">common模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Core%E6%A8%A1%E5%9D%97"><span class="nav-text">Core模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Consumer%E6%A8%A1%E5%9D%97"><span class="nav-text">Consumer模块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%BB%E4%BF%A1%E9%98%9F%E5%88%97"><span class="nav-text">死信队列</span></a></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Huang Zhiwei</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a> 驱动</span>
+                <br>
+            <span class="theme-version-container">主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.1.2</a>
+        </div>
+        
+        
+        
+            <div id="start_div" style="display:none">
+                2022/8/17 11:45:14
+            </div>
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/navbarShrink.js"></script>
+
+<script src="/js/tools/scrollTopBottom.js"></script>
+
+<script src="/js/tools/lightDarkSwitch.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/layouts/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/tocToggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax',
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>
