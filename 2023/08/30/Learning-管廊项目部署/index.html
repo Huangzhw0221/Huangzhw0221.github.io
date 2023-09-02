@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="Huang Zhiwei">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://evan.beee.top" crossorigin>
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="https://huangzhw0221.github.io/2023/08/30/learning-管廊项目部署/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta name="description" content="管廊项目部署创建者: Zhiwei Huang创建时间: August 30, 2023 11:06 AM 本文档记录管廊项目如何完整部署的流程，是交付给管廊公司私有化部署的教程，也是为后续维保做准备。 项目部署包括Linux下的前期准备、Mysql原生安装、Redis安装、Nginx配置、前端项目配置、后端项目配置、算法项目配置 前期准备 安装Linux Ubuntu18.04或者Ubuntu2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Learning-管廊项目部署">
+<meta property="og:url" content="https://huangzhw0221.github.io/2023/08/30/Learning-%E7%AE%A1%E5%BB%8A%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/index.html">
+<meta property="og:site_name" content="Huang&#39;s Matrix">
+<meta property="og:description" content="管廊项目部署创建者: Zhiwei Huang创建时间: August 30, 2023 11:06 AM 本文档记录管廊项目如何完整部署的流程，是交付给管廊公司私有化部署的教程，也是为后续维保做准备。 项目部署包括Linux下的前期准备、Mysql原生安装、Redis安装、Nginx配置、前端项目配置、后端项目配置、算法项目配置 前期准备 安装Linux Ubuntu18.04或者Ubuntu2">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830114106.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830113550.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830115017.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830121114.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830121407.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830122557.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830130555.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830131857.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830133153.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830133400.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830134117.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830134306.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830134419.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830134514.png">
+<meta property="article:published_time" content="2023-08-30T15:28:00.000Z">
+<meta property="article:modified_time" content="2023-09-02T15:41:10.771Z">
+<meta property="article:author" content="Huang Zhiwei">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830114106.png">
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/redefine-favicon.svg">
+    <meta name="theme-color" content="#A31F34">
+    <link rel="shortcut icon" href="/images/redefine-favicon.svg">
+    <!--- Page Info-->
+    
+    <title>
+        
+            Learning-管廊项目部署 -
+        
+        Huang&#39;s Matrix
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/assets/fonts.css">
+
+    <!--- Font Part-->
+    
+    
+    
+    
+
+    <!--- Inject Part-->
+    
+    <script id="hexo-configurations">
+    let Global = window.Global || {};
+    Global.hexo_config = {"hostname":"huangzhw0221.github.io","root":"/","language":"zh-CN"};
+    Global.theme_config = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[""]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":true,"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#A31F34","secondary":null},"global":{"fonts":{"chinese":{"enable":false,"family":null,"url":null},"english":{"enable":false,"family":null,"url":null}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":false},"scroll_progress":{"bar":false,"percentage":true},"busuanzi_counter":{"enable":true,"site_pv":true,"site_uv":true,"post_pv":true},"pjax":true,"open_graph":true},"home_banner":{"enable":true,"image":{"light":"https://images.pexels.com/photos/691668/pexels-photo-691668.jpeg","dark":"https://images.pexels.com/photos/461956/pexels-photo-461956.jpeg"},"title":"白云怡意 清泉洗心","subtitle":{"text":[],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":500,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#fff","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":false,"family":null,"url":null},"social_links":{"enable":false,"links":{"github":null,"instagram":null,"zhihu":null,"twitter":null,"email":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.1.2","navbar":{"auto_hide":false,"color":{"left":"#f78736","right":"#367df7","transparency":35},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"}},"search":{"enable":false,"preload":true}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":null,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}}};
+    Global.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="main-content-container">
+
+        <div class="main-content-header">
+            <header class="navbar-container">
+    
+    <div class="navbar-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                
+                Huang&#39;s Matrix
+                
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="" 
+                                    href="/"  >
+                                    
+                                        
+                                            <i class="fa-regular fa-house"></i>
+                                        
+                                        首页
+                                    
+                                </a>
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="navbar-drawer">
+        <ul class="drawer-navbar-list">
+            
+                
+                    <li class="drawer-navbar-item flex-center">
+                        <a class="" 
+                        href="/"  >
+                             
+                                
+                                    <i class="fa-regular fa-house"></i>
+                                
+                                首页
+                            
+                        </a>
+                    </li>
+                    <!-- Submenu -->
+                    
+            
+
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="post-page-container">
+        <div class="article-content-container">
+
+            
+            
+                <div class="article-title">
+                    <h1 class="article-title-regular">Learning-管廊项目部署</h1>
+                </div>
+            
+                
+            
+
+            
+                <div class="article-header">
+                    <div class="avatar">
+                        <img src="/images/redefine-avatar.svg">
+                    </div>
+                    <div class="info">
+                        <div class="author">
+                            <span class="name">Huang Zhiwei</span>
+                            
+                                <span class="author-label"></span>
+                            
+                        </div>
+                        <div class="meta-info">
+                            <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fa-regular fa-pen-fancy"></i>&nbsp;
+        <span class="desktop">2023-08-30 23:28</span>
+        <span class="mobile">2023-08-30 23:28</span>
+        <span class="hover-info">创建</span>
+    </span>
+    
+        <span class="article-date article-meta-item">
+            <i class="fa-regular fa-wrench"></i>&nbsp;
+            <span class="desktop">2023-09-02 23:41:10</span>
+            <span class="mobile">2023-09-02 23:41</span>
+            <span class="hover-info">更新</span>
+        </span>
+    
+
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fa-regular fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/linux/">linux</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fa-regular fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                        </div>
+                    </div>
+                </div>
+            
+
+            <div class="article-content markdown-body">
+                <h1 id="管廊项目部署"><a href="#管廊项目部署" class="headerlink" title="管廊项目部署"></a>管廊项目部署</h1><p>创建者: Zhiwei Huang<br>创建时间: August 30, 2023 11:06 AM</p>
+<p>本文档记录管廊项目如何完整部署的流程，是交付给管廊公司私有化部署的教程，也是为后续维保做准备。</p>
+<p>项目部署包括Linux下的前期准备、Mysql原生安装、Redis安装、Nginx配置、前端项目配置、后端项目配置、算法项目配置</p>
+<h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><ul>
+<li>安装Linux Ubuntu18.04或者Ubuntu20.04</li>
+<li>安装显卡驱动，包括Cuda、cudnn等</li>
+<li>下载Jetbrain 全家桶，为了风格统一和代码审查的方便，请下载Pycharm Professional、Intelli Idea（注意Idea不可以是Community版）、Webstorm、DataGrip，可以使用正版或使用任意方法破解。下面是这些软件的下载链接：</li>
+</ul>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//www.jetbrains.com/zh-cn/idea/ //idea</span></span><br><span class="line">https:<span class="comment">//www.jetbrains.com/zh-cn/pycharm/ //pycharm</span></span><br><span class="line">https:<span class="comment">//www.jetbrains.com/zh-cn/webstorm/ //webstorm</span></span><br><span class="line">https:<span class="comment">//www.jetbrains.com/zh-cn/datagrip/ //datagrip</span></span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>软解解压和破解，破解就请自行想办法了，完成后”下载“路径应当形如：</li>
+</ul>
+<p><img src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830114106.png" alt="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830114106.png"></p>
+<h2 id="Mysql原生安装"><a href="#Mysql原生安装" class="headerlink" title="Mysql原生安装"></a>Mysql原生安装</h2><p>项目使用Linux下的Mysql原生安装，本次未使用Docker安装，是因为担心Docker容器允许过程中万一被终止会导致项目运行错误，原生安装可以将服务注册为service使服务更稳定。本节内容参考：<a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_49523761/article/details/121424649" >Linux 下 MySQL 8.0版本的安装配置部署 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，如有在本节看不懂的内容可以查阅该链接对照一下。</p>
+<ul>
+<li>前往Mysql下载页，下载一个8.0开头的版本。本次服务器部署的版本是8.0.33，链接如下：<a class="link"   target="_blank" rel="noopener" href="https://downloads.mysql.com/archives/community/" >https://downloads.mysql.com/archives/community/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></li>
+</ul>
+<p><img src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830113550.png" alt="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830113550.png"></p>
+<ul>
+<li>在”下载“中解压，Ubuntu界面下就是”提取到此处“，然后将文件移动到”&#x2F;usr&#x2F;local“目录下，并重命名，指令如下：</li>
+</ul>
+<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/ubuntu/Downloads</span><br><span class="line">sudo <span class="built_in">mv</span> mysql<span class="literal">-8</span>.<span class="number">0.33</span><span class="literal">-linux-glibc2</span>.<span class="number">28</span><span class="literal">-x86_64</span> /usr/local</span><br><span class="line">// 然后切换到 /usr/local 目录下，将这个文件夹名字缩短一点，缩短成mysql<span class="literal">-8</span>.<span class="number">0.33</span></span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>检查用户组，<code>sudo groups mysql</code> 正常没安装的机器上应当显示<code>groups: mysql: No such user</code></li>
+<li>增加用户组：<code>sudo groupadd mysql</code> 在用户组下增加用户 <code>sudo useradd -r -g mysql mysql</code>，没有报错的情况下用户组下的用户就添加完毕了，这时输入<code>sudo groups mysql</code> ，应当出现<code>mysql : mysql</code>，如图：</li>
+</ul>
+<p><img src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830115017.png" alt="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830115017.png"></p>
+<ul>
+<li>接下来配置数据库用户组权限，分为两部分，一部分是数据库数据路径权限，另一部分是数据库根目录路径权限。</li>
+</ul>
+<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//创建数据目录并赋予权限</span><br><span class="line">sudo mkdir <span class="literal">-p</span> /<span class="keyword">data</span>/mysql</span><br><span class="line">sudo chown mysql:mysql <span class="literal">-R</span> /<span class="keyword">data</span>/mysql</span><br><span class="line">//赋予根目录路径的权限</span><br><span class="line">sudo chown <span class="literal">-R</span> mysql:mysql /usr/local/mysql<span class="literal">-8</span>.<span class="number">0.33</span>/</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>修改配置文件 my.cnf，该文件位置在 <code>/etc/my.cnf</code>，如果没有就需要创建一个，同时考虑到vim比较用，可以赋予权限用文本编辑器打开。</li>
+</ul>
+<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//创建配置文件</span><br><span class="line">sudo touch /etc/my.cnf</span><br><span class="line">//赋予权限</span><br><span class="line">sudo chmod <span class="number">777</span> /etc/my.cnf</span><br><span class="line">//用文本编辑器打开后将一下内容修改后贴进去, 其中最后一个是为了向内网暴露做准备的</span><br><span class="line">[<span class="type">mysqld</span>]</span><br><span class="line">basedir=/usr/local/mysql<span class="literal">-8</span>.<span class="number">0.33</span></span><br><span class="line">datadir=/<span class="keyword">data</span>/mysql</span><br><span class="line">port=<span class="number">3306</span></span><br><span class="line">socket=/tmp/mysql.sock</span><br><span class="line">character_set_server=utf8</span><br><span class="line">lower_case_table_names=<span class="number">1</span></span><br><span class="line">log<span class="literal">-error</span>=/<span class="keyword">data</span>/mysql/mysql.err</span><br><span class="line">pid<span class="operator">-file</span>=/<span class="keyword">data</span>/mysql/mysql.pid</span><br><span class="line">[<span class="type">mysql</span>]</span><br><span class="line">default<span class="literal">-character-set</span> = utf8</span><br><span class="line">bind<span class="literal">-address</span>=<span class="number">0.0</span>.<span class="number">0.0</span></span><br></pre></td></tr></table></figure></div>
+
+<p><img src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830121114.png" alt="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830121114.png"></p>
+<ul>
+<li>初始化Mysql，初始化后会出现一个密码，必须要记住。如果忘记了这个密码可以用<code>cat /data/mysql/mysql.err</code> 查看。</li>
+</ul>
+<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//初始化</span><br><span class="line"><span class="built_in">cd</span> /usr/local/mysql<span class="literal">-8</span>.<span class="number">0.33</span>/bin/</span><br><span class="line">./mysqld <span class="literal">--defaults-file</span>=/etc/my.cnf <span class="literal">--basedir</span>=/usr/local/mysql<span class="literal">-8</span>.<span class="number">0.33</span>/ <span class="literal">--datadir</span>=/<span class="keyword">data</span>/mysql/ <span class="literal">--user</span>=mysql <span class="literal">--initialize</span></span><br></pre></td></tr></table></figure></div>
+
+<aside>
+💡 这里可能出现错误，例如`./bin/mysqld: error while loading shared libraries: libaio.so.1: cannot open shared object file: No such file or directory` 或者`./bin/mysqld: error while loading shared libraries: libnuma.so.1: cannot open shared object file: No such file or directory` ，这是因为`libaio`或者`numactl` 没安装导致的，可以使用`sudo apt update` 更新一下然后再`sudo apt install libaio` 。注意需要先更新一下，否则会出现`无法定位`的错误
+
+
+</aside>
+
+<ul>
+<li>将Mysql的启动注册成系统服务，然后配置环境变量。</li>
+</ul>
+<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//将启动脚本复制到系统启动服务里</span><br><span class="line"><span class="built_in">cd</span> /usr/local/mysql<span class="literal">-8</span>.<span class="number">0.33</span>/support<span class="literal">-files</span></span><br><span class="line">sudo <span class="built_in">cp</span> mysql.server /etc/init.d/mysql</span><br><span class="line">// 为profile 赋予权限</span><br><span class="line">sudo chmod <span class="number">777</span> /etc/profile</span><br><span class="line">// 将下面两行添加到profile里</span><br><span class="line">export MYSQL_HOME=<span class="string">&quot;/usr/local/mysql-8.0.11&quot;</span></span><br><span class="line">export PATH=<span class="string">&quot;<span class="variable">$PATH:</span><span class="variable">$MYSQL_HOME</span>/bin&quot;</span></span><br><span class="line">// 使环境变量生效</span><br><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure></div>
+
+<p><img src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830121407.png" alt="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830121407.png"></p>
+<ul>
+<li>启动服务：<code>service mysql start</code> ，登录Mysql，<code>mysql -u root -p</code> ，输入刚才保存的密码即可，如果不可以。首次登录后会叫你重置一下密码</li>
+</ul>
+<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mysql;</span><br><span class="line">mysql&gt; ALTER USER ‘root’<span class="selector-tag">@</span>‘localhost’ IDENTIFIED WITH mysql_native_password BY ‘你的密码’;</span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>（可选）向内网暴露Mysql服务，允许使用某个用户名及密码从任何主机连接到该 mysql 服务，必须注意该步骤前检验<code>/etc/my.cnf</code> 中<code>bind-address=0.0.0.0</code>：</li>
+</ul>
+<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mysql;</span><br><span class="line">mysql&gt; update user <span class="built_in">set</span> host=’%’ <span class="built_in">where</span> user = ‘root’;</span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>退出后重启服务</li>
+</ul>
+<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; <span class="keyword">exit</span></span><br><span class="line"></span><br><span class="line">service mysql restart</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>从外部，例如windows使用Navicat更方便地查看数据库，例如我们可以将dfb数据直接导入数据库形成具有初始内容的数据表，至此数据库配置结束。</li>
+</ul>
+<p><img src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830122557.png" alt="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830122557.png"></p>
+<h2 id="Redis安装"><a href="#Redis安装" class="headerlink" title="Redis安装"></a>Redis安装</h2><p>Redis安装比Mysql简单多了，Redis没有版本要求，本节内容参考<a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/hunanzp/p/12304622.html" >Linux安装部署Redis(超级详细) - 长沙大鹏 - 博客园 (cnblogs.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<ul>
+<li>将Redis解压一下，有图形界面就提取到此处即可，没有图形界面就命令行解压，<code>tar -zvxf redis-7.2.0.tar.gz</code></li>
+<li>移动redis目录，将redis目录放置到 &#x2F;usr&#x2F;local&#x2F;redis目录，<code>sudo mv /root/redis-7.2.0 /usr/local/redis</code></li>
+<li>make一下，进入&#x2F;usr&#x2F;local&#x2F;redis，<code>cd /usr/local/redis</code> ，然后直接输入<code>make</code>即可；make过程中会有一堆checking和config，等待它结束即可；</li>
+<li>安装,<code>PREFIX</code>关键字的作用是编译的时候用于指定程序存放的路径，如我们现在就是指定了redis必须存放在&#x2F;usr&#x2F;local&#x2F;redis目录。假设不添加该关键字Linux会将可执行文件存放在&#x2F;usr&#x2F;local&#x2F;bin目录，库文件会存放在&#x2F;usr&#x2F;local&#x2F;lib目录。配置文件会存放在&#x2F;usr&#x2F;local&#x2F;etc目录。其他的资源文件会存放在usr&#x2F;local&#x2F;share目录。这里指定号目录也方便后续的卸载，后续直接rm -rf &#x2F;usr&#x2F;local&#x2F;redis 即可删除redis。</li>
+</ul>
+<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make PREFIX=/usr/local/redis install</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>启动redis，<code>./bin/redis-server&amp; ./redis.conf</code> 看到这个小方块就可以了。</li>
+</ul>
+<p><img src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830130555.png" alt="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830130555.png"></p>
+<h2 id="Nginx配置"><a href="#Nginx配置" class="headerlink" title="Nginx配置"></a>Nginx配置</h2><p>Nginx需要集成一下FLV模块，这两个东西已经提供了。进入nginx-http-flv，里面有nginx-1.20.2和nginx-http-flv-module-master。本节内容参考<a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44634704/article/details/125262913" >nginx 搭建http-flv(rtmp)流媒体_nginx可以http访问rtmp_像风一样的男人@的博客-CSDN博客 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，如果在本节有看不懂的可以看这篇博客对照。</p>
+<ul>
+<li>进入nginx-1.20.2，将flv模块添加进去</li>
+</ul>
+<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> xxxx/nginx<span class="literal">-1</span>.<span class="number">20.2</span></span><br><span class="line">./configure <span class="literal">--add-module</span>=flv模块的绝对路径，如/<span class="keyword">data</span>/Deployment/PipeGallery/nginx<span class="literal">-http-flv</span>/nginx<span class="literal">-http-flv-module-master</span></span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>编译和安装，安装完毕后会在<code>/usr/local/</code> 创建一个nginx目录</li>
+</ul>
+<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>添加软链接</li>
+</ul>
+<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln <span class="literal">-s</span> /usr/local/nginx/sbin/nginx /usr/local/bin/</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>启动验证一下，输入<code>nginx</code> 即可</li>
+<li>修改配置，将我们提供的conf文件复制一份到<code>/usr/local/nginx/conf/nginx.conf</code> 如果无法复制就使用命令行：</li>
+</ul>
+<p>如图所示，红色框内的地址都要改动,server_name需要对整个配置文件做替换，替换成当前机器的ip，location则只需要修改第一个 listen 8070的root即可，修改成部署的根目录。</p>
+<p><img src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830131857.png" alt="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830131857.png"></p>
+<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> xxxx/PipeGallery</span><br><span class="line">sudo <span class="built_in">cp</span> nginx.conf /usr/local/nginx/conf/nginx.conf</span><br><span class="line">//赋予权限</span><br><span class="line">sudo chmod <span class="number">777</span> /usr/local/nginx/conf/nginx.conf</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>最后重启nginx，验证一下 <code>nginx -s reload</code></li>
+</ul>
+<h2 id="前端项目配置"><a href="#前端项目配置" class="headerlink" title="前端项目配置"></a>前端项目配置</h2><p>前端项目使用Webstorm打开，打开后即可在右上角看到一个dev和一个绿色三角。</p>
+<ul>
+<li>前端项目需要修改两个地方的配置，一个是.env.development里的三个地址，端口号不用变，只要将它改成当前机器的地址即可；</li>
+</ul>
+<p><img src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830133153.png" alt="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830133153.png"></p>
+<ul>
+<li>另一个是merge-header.vue中的href下的路径，需要改成当前机器的路径</li>
+</ul>
+<p><img src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830133400.png" alt="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830133400.png"></p>
+<ul>
+<li>前端项目的启动可以在webstorm中启动，也可以在前端项目的路径下使用<code>npm run dev</code>启动</li>
+</ul>
+<h2 id="后端项目配置"><a href="#后端项目配置" class="headerlink" title="后端项目配置"></a>后端项目配置</h2><p>后端项目使用Springboot完成，必须使用Idea完整版打开，community版是不可以的。由于idea需要的插件比较多，而一开始都是没有的，而且最新的idea可能自带的插件啥的有冲突，maven镜像配置也比较麻烦，我们只能给出有限个可能问题的解决。</p>
+<ul>
+<li>首先在maven 的runner中把这个勾选上。</li>
+</ul>
+<p><img src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830134117.png" alt="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830134117.png"></p>
+<ul>
+<li>然后修改这些地址，必须非常准确地修改</li>
+</ul>
+<p><img src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830134306.png" alt="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830134306.png"></p>
+<ul>
+<li>然后修改上方数据库的配置</li>
+</ul>
+<p><img src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830134419.png" alt="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830134419.png"></p>
+<ul>
+<li>然后修改basepath</li>
+</ul>
+<p><img src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830134514.png" alt="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/personalInfo/20230830134514.png"></p>
+<ul>
+<li>然后点击运行，如果没有冲突的话项目就正常启动了，如果有冲突，请再联系。</li>
+</ul>
+<h2 id="算法配置"><a href="#算法配置" class="headerlink" title="算法配置"></a>算法配置</h2><ul>
+<li><p>算法配置主要是环境配置和路径配置，环境配置方面，我们提供了一个conda导出的环境包<code>pipe.tar.gz</code>，使用如下指令即可导入环境并激活。</p>
+<div class="highlight-container" data-rel="Powershell"><figure class="iseeu highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在目标计算机的conda环境路径下（也可以不是）创建一个文件夹，将打包好的安装包解压进去</span></span><br><span class="line"><span class="built_in">cd</span> /home/ubuntu/anaconda3/envs/</span><br><span class="line">mkdir <span class="literal">-p</span> my_env</span><br><span class="line">tar <span class="literal">-xzf</span> xxxx/my_env.tar.gz <span class="literal">-C</span> my_env</span><br><span class="line"><span class="comment"># 激活环境</span></span><br><span class="line">source my_env/bin/activate</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p>如果想节省空间使用已有的环境，就需要使用pycharm检验一下环境，也就是有没有飘红。比较重要的几个包是：opencv-python&#x3D;&#x3D;4.5.5，torch&#x3D;&#x3D;1.6。如果环境配置存在问题，可以再和我们联系。</p>
+</li>
+<li><p>我们在后端配置时就建议过，本地验证部署建议使用cvrgb_template0803.py。</p>
+</li>
+</ul>
+
+            </div>
+
+            
+                <div class="post-copyright-info">
+                    <div class="article-copyright-info-container">
+    <ul>
+        <li><strong>标题:</strong> Learning-管廊项目部署</li>
+        <li><strong>作者:</strong> Huang Zhiwei</li>
+        <li><strong>创建于:</strong> 2023-08-30 23:28:00</li>
+        
+            <li>
+                <strong>更新于:</strong> 2023-09-02 23:41:10
+            </li>
+        
+        <li>
+            <strong>链接:</strong> https://huangzhw0221.github.io/2023/08/30/Learning-管廊项目部署/
+        </li>
+        <li>
+            <strong>版权声明:</strong> 本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a> 进行许可。
+        </li>
+    </ul>
+</div>
+
+                </div>
+            
+
+            
+                <ul class="post-tags-box">
+                    
+                        <li class="tag-item">
+                            <a href="/tags/linux/">#linux</a>&nbsp;
+                        </li>
+                    
+                </ul>
+            
+
+            
+
+            
+                <div class="article-nav">
+                    
+                    
+                        <div class="article-next">
+                            <a class="next"
+                            rel="next"
+                            href="/2023/08/30/Leetcode04/"
+                            >
+                                <span class="title flex-center">
+                                    <span class="post-nav-title-item">力扣学习录04--代码随想录：数组、链表</span>
+                                    <span class="post-nav-item">下一篇</span>
+                                </span>
+                                <span class="right arrow-icon flex-center">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </div>
+                    
+                </div>
+            
+
+
+            
+                <div class="comment-container">
+                    <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fa-solid fa-comments"></i>&nbsp;评论
+    </div>
+    
+
+        
+            
+ 
+    <div id="waline"></div>
+    <script type="module"  data-pjax>
+        import { init } from 'https://evan.beee.top/js/waline.mjs';
+
+        function loadWaline() {
+            init({
+                el: '#waline',
+                serverURL: 'https://example.example.com',
+                lang: 'zh-CN',
+                dark: 'body[class~="dark-mode"]',
+                requiredMeta: ['nick','mail'], // cannot customize by theme config, change it yourself
+            });
+        }
+
+        if ('true') {
+            const loadWalineTimeout = setTimeout(() => {
+                loadWaline();
+                clearTimeout(loadWalineTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadWaline);
+        }
+        
+    </script>
+
+
+
+        
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div class="toc-content-container">
+                <div class="post-toc-wrap">
+    <div class="post-toc">
+        <div class="toc-title">此页目录</div>
+        <div class="page-title">Learning-管廊项目部署</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%A1%E5%BB%8A%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2"><span class="nav-text">管廊项目部署</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mysql%E5%8E%9F%E7%94%9F%E5%AE%89%E8%A3%85"><span class="nav-text">Mysql原生安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis%E5%AE%89%E8%A3%85"><span class="nav-text">Redis安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx%E9%85%8D%E7%BD%AE"><span class="nav-text">Nginx配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE"><span class="nav-text">前端项目配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE"><span class="nav-text">后端项目配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E9%85%8D%E7%BD%AE"><span class="nav-text">算法配置</span></a></li></ol></li></ol>
+
+    </div>
+</div>
+            </div>
+        
+    </div>
+</div>
+
+
+                
+
+            </div>
+            
+            
+
+        </div>
+
+        <div class="main-content-footer">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2023&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">Huang Zhiwei</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv" class="busuanzi_container_site_uv">
+                        访问人数&nbsp;<span id="busuanzi_value_site_uv" class="busuanzi_value_site_uv"></span>
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv" class="busuanzi_container_site_pv">
+                        总访问量&nbsp;<span id="busuanzi_value_site_pv" class="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            <span class="powered-by-container">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" href="https://hexo.io">Hexo</a> 驱动</span>
+                <br>
+            <span class="theme-version-container">主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.1.2</a>
+        </div>
+        
+        
+        
+            <div id="start_div" style="display:none">
+                2022/8/17 11:45:14
+            </div>
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+        
+            <script async data-pjax>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="article-tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="right-bottom-tools page-aside-toggle">
+                <i class="fa-regular fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fa-regular fa-comments"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-expand-width flex-center">
+            <i class="fa-regular fa-expand"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex-center">
+                <i class="arrow-up fas fa-arrow-up"></i>
+                <span class="percent"></span>
+            </li>
+        
+        
+    </ul>
+</div>
+
+    </div>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/layouts/navbarShrink.js"></script>
+
+<script src="/js/tools/scrollTopBottom.js"></script>
+
+<script src="/js/tools/lightDarkSwitch.js"></script>
+
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/layouts/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js"></script>
+
+
+
+
+
+
+
+<div class="post-scripts pjax">
+    
+        
+<script src="/js/tools/tocToggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/layouts/toc.js"></script>
+
+<script src="/js/plugins/tabs.js"></script>
+
+    
+</div>
+
+
+    
+<script src="/js/libs/pjax.min.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax',
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            Global.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            Global.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            Global.refresh();
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

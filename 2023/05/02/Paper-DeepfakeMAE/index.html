@@ -13,25 +13,27 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="https://huangzhw0221.github.io/2023/04/26/java-spring框架/"/>
+    <link rel="canonical" href="https://huangzhw0221.github.io/2023/05/02/paper-deepfakemae/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="Spring IoCIoC（Inversion of Control:控制反转） 是一种设计思想，而不是一个具体的技术实现。IoC 的思想就是将原本在程序中手动创建对象的控制权，交由 Spring 框架来管理。 IoC 容器就像是一个工厂一样，当我们需要创建一个对象的时候，只需要配置好配置文件&#x2F;注解即可，完全不用考虑对象是如何被创建出来的。  对象之间的耦合度或者说依赖程度降低； 资源变">
+        <meta name="description" content="DeepfakeMAE来源: ARXIVLink: https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2303.01740 关键词: MAE备注: 人脸Mae对比学习，复现了landmark mask策略状态: Done  DeepfakeMAE从被蒙面的假人脸和真实人脸重建人脸。我们假设Deepfake视频往往缺乏面部部分之间的一致性(或面部部分一致性)，并且DeepfakeMAE对真实人脸的重构优于">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java学习--Spring框架相关问题">
-<meta property="og:url" content="https://huangzhw0221.github.io/2023/04/26/Java-Spring%E6%A1%86%E6%9E%B6/index.html">
+<meta property="og:title" content="Paper-DeepfakeMAE">
+<meta property="og:url" content="https://huangzhw0221.github.io/2023/05/02/Paper-DeepfakeMAE/index.html">
 <meta property="og:site_name" content="Huang&#39;s Matrix">
-<meta property="og:description" content="Spring IoCIoC（Inversion of Control:控制反转） 是一种设计思想，而不是一个具体的技术实现。IoC 的思想就是将原本在程序中手动创建对象的控制权，交由 Spring 框架来管理。 IoC 容器就像是一个工厂一样，当我们需要创建一个对象的时候，只需要配置好配置文件&#x2F;注解即可，完全不用考虑对象是如何被创建出来的。  对象之间的耦合度或者说依赖程度降低； 资源变">
+<meta property="og:description" content="DeepfakeMAE来源: ARXIVLink: https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2303.01740 关键词: MAE备注: 人脸Mae对比学习，复现了landmark mask策略状态: Done  DeepfakeMAE从被蒙面的假人脸和真实人脸重建人脸。我们假设Deepfake视频往往缺乏面部部分之间的一致性(或面部部分一致性)，并且DeepfakeMAE对真实人脸的重构优于">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2019/b5d264565657a5395c2781081a7483e1.jpg">
-<meta property="article:published_time" content="2023-04-26T12:19:04.000Z">
-<meta property="article:modified_time" content="2023-09-02T15:05:46.226Z">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/DeepfakeMae1.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/DeepfakeMae2.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/DeepfakeMae3.png">
+<meta property="article:published_time" content="2023-05-02T05:21:38.000Z">
+<meta property="article:modified_time" content="2023-09-02T15:42:09.225Z">
 <meta property="article:author" content="Huang Zhiwei">
-<meta property="article:tag" content="java">
+<meta property="article:tag" content="论文阅读">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://images.xiaozhuanlan.com/photo/2019/b5d264565657a5395c2781081a7483e1.jpg">
+<meta name="twitter:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/DeepfakeMae1.png">
     
     <!--- Icon Part-->
     <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
@@ -42,7 +44,7 @@
     
     <title>
         
-            Java学习--Spring框架相关问题 -
+            Paper-DeepfakeMAE -
         
         Huang&#39;s Matrix
     </title>
@@ -197,7 +199,7 @@
             
             
                 <div class="article-title">
-                    <h1 class="article-title-regular">Java学习--Spring框架相关问题</h1>
+                    <h1 class="article-title-regular">Paper-DeepfakeMAE</h1>
                 </div>
             
                 
@@ -219,15 +221,15 @@
                             <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2023-04-26 20:19:04</span>
-        <span class="mobile">2023-04-26 20:19</span>
+        <span class="desktop">2023-05-02 13:21:38</span>
+        <span class="mobile">2023-05-02 13:21</span>
         <span class="hover-info">创建</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-09-02 23:05:46</span>
-            <span class="mobile">2023-09-02 23:05</span>
+            <span class="desktop">2023-09-02 23:42:09</span>
+            <span class="mobile">2023-09-02 23:42</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -239,7 +241,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/java/">java</a>&nbsp;
+                        <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>&nbsp;
                     </li>
                 
             </ul>
@@ -262,54 +264,35 @@
             
 
             <div class="article-content markdown-body">
-                <h2 id="Spring-IoC"><a href="#Spring-IoC" class="headerlink" title="Spring IoC"></a>Spring IoC</h2><p><strong>IoC（Inversion of Control:控制反转）</strong> 是一种设计思想，而不是一个具体的技术实现。IoC 的思想就是将原本在程序中手动创建对象的控制权，交由 Spring 框架来管理。 IoC 容器就像是一个工厂一样，当我们需要创建一个对象的时候，只需要配置好配置文件&#x2F;注解即可，完全不用考虑对象是如何被创建出来的。</p>
-<ol>
-<li>对象之间的耦合度或者说依赖程度降低；</li>
-<li>资源变的容易管理；比如你用 Spring 容器提供的话很容易就可以实现一个单例。</li>
-</ol>
-<h4 id="Spring-IOC-的工作流程"><a href="#Spring-IOC-的工作流程" class="headerlink" title="Spring IOC 的工作流程"></a>Spring IOC 的工作流程</h4><p>大致可以分为两个阶段：</p>
-<p>第一个阶段，就是 IOC 容器的初始化，这个阶段主要是根据程序中定义的 XML 或者注解等 Bean 的声明方式，通过解析和加载后生成 BeanDefinition，然后把 BeanDefinition 注册到 IOC 容器。通过注解或者 xml 声明的 bean 都会解析得到一个 BeanDefinition 实体，实体中包含这个 bean 中定义的基本属性。最后把这个 BeanDefinition 保存到一个 Map 集合里面，从而完成了 IOC 的初始化。IoC 容器的作用就是对这些注册的 Bean 的定义信息进行处理和维护。</p>
-<p>第二个阶段，完成 Bean 初始化及依赖注入，可以分两种情况，通过反射对没有设置 lazy-init 属性的单例 bean 进行初始化，完成 Bean 的依赖注入。针对设置 layy-init 属性以及非单例 bean 的实例化，是在每次获取 bean对象的时候，调用 bean 的初始化方法来完成实例化的，并且 Spring IOC 容器不会去管理这些 Bean。</p>
-<p>第三个阶段，Bean 的使用，会通过@Autowired或者BeanFactory.getBean()从IOC容器中获取指定的 bean 实例。</p>
-<h2 id="Spring-Aop"><a href="#Spring-Aop" class="headerlink" title="Spring Aop"></a>Spring Aop</h2><h2 id="Bean"><a href="#Bean" class="headerlink" title="Bean"></a>Bean</h2><h4 id="Bean的声明"><a href="#Bean的声明" class="headerlink" title="Bean的声明"></a>Bean的声明</h4><p>Bean 代指的就是那些被 IoC 容器所管理的对象，可以通过注解或者xml文件配置。</p>
-<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Constructor-arg with &#x27;value&#x27; attribute --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;...&quot;</span> <span class="attr">class</span>=<span class="string">&quot;...&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">&quot;...&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-<p><code>@Component</code> ：通用的注解，可标注任意类为 <code>Spring</code> 组件。如果一个 Bean 不知道属于哪个层，可以使用<code>@Component</code> 注解标注。</p>
-<p><code>@Repository</code> : 对应持久层即 Dao 层，主要用于数据库相关操作。</p>
-<p><code>@Service</code> : 对应服务层，主要涉及一些复杂的逻辑，需要用到 Dao 层。</p>
-<p><code>@Controller</code> : 对应 Spring MVC 控制层，主要用于接受用户请求并调用 <code>Service</code> 层返回数据给前端页面。</p>
-<p><code>@Configuration</code> ：注解声明配置类。</p>
-<p><code>@Import</code> ：导入配置类或者普通的 Bean。</p>
-<h4 id="Component-和-Bean-的区别"><a href="#Component-和-Bean-的区别" class="headerlink" title="@Component 和 @Bean 的区别"></a>@Component 和 @Bean 的区别</h4><ul>
-<li><code>@Component</code> 注解作用于类，而<code>@Bean</code>注解作用于方法。</li>
-<li><code>@Component</code>通常是通过类路径扫描来自动侦测以及自动装配到 Spring 容器中，可以通过 <code>@ComponentScan</code> 注解定义要扫描的路径。<code>@Bean</code> 注解通常是在标有该注解的方法中定义产生这个 bean,<code>@Bean</code>告诉了 Spring 这是某个类的实例，当我需要用它的时候还给我。</li>
-<li><code>@Bean</code> 注解比 <code>@Component</code> 注解的自定义性更强，而且很多地方我们只能通过 <code>@Bean</code> 注解来注册 bean。比如当我们引用第三方库中的类需要装配到 <code>Spring</code>容器时，则只能通过 <code>@Bean</code>来实现。</li>
-</ul>
-<h4 id="Autowired-和-Resource-的区别"><a href="#Autowired-和-Resource-的区别" class="headerlink" title="@Autowired 和 @Resource 的区别"></a>@Autowired 和 @Resource 的区别</h4><ul>
-<li>两者都是注入bean的注解，<code>Autowired</code> 属于 Spring 内置的注解，默认<code>butype</code>，但当一个接口存在多个实现类的话，<code>byType</code>这种方式就无法正确注入对象了，这种情况下，注入方式会变为 <code>byName</code>（根据名称进行匹配），这个名称通常就是类名（首字母小写）。</li>
-<li><code>@Resource</code>属于 JDK 提供的注解，默认注入方式为 <code>byName</code>。如果无法通过名称匹配到对应的 Bean 的话，注入方式会变为<code>byType</code>。</li>
-<li>通过 <code>@Qualifier</code> 注解来显式指定名称而不是依赖变量的名称。</li>
-</ul>
-<h4 id="单例-Bean-的线程安全问题"><a href="#单例-Bean-的线程安全问题" class="headerlink" title="单例 Bean 的线程安全问题"></a>单例 Bean 的线程安全问题</h4><p>单例 Bean 存在线程问题，主要是因为当多个线程操作同一个对象的时候是存在资源竞争的，应对方法有以下两点：</p>
-<ul>
-<li>在 Bean 中尽量避免定义可变的成员变量；</li>
-<li>在类中定义一个 <code>ThreadLocal</code> 成员变量，将需要的可变成员变量保存在 <code>ThreadLocal</code> 中。</li>
-</ul>
-<h4 id="Bean-的生命周期"><a href="#Bean-的生命周期" class="headerlink" title="Bean 的生命周期"></a>Bean 的生命周期</h4><p><img  
+                <h1 id="DeepfakeMAE"><a href="#DeepfakeMAE" class="headerlink" title="DeepfakeMAE"></a>DeepfakeMAE</h1><p>来源: ARXIV<br>Link: <a class="link"   target="_blank" rel="noopener" href="https://arxiv.org/abs/2303.01740" >https://arxiv.org/abs/2303.01740 <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>关键词: MAE<br>备注: 人脸Mae对比学习，复现了landmark mask策略<br>状态: Done</p>
+<p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://images.xiaozhuanlan.com/photo/2019/b5d264565657a5395c2781081a7483e1.jpg"
+                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/DeepfakeMae1.png"
+                      alt="框架"
+                ></p>
+<p>DeepfakeMAE从被蒙面的假人脸和真实人脸重建人脸。我们假设Deepfake视频往往缺乏面部部分之间的一致性(或面部部分一致性)，并且DeepfakeMAE对真实人脸的重构优于对假人脸的重构。例如，操纵嘴唇会使嘴唇的外观与面部其他部位不一致。</p>
+<h1 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h1><p>为了更好地提取未知Deepfake的鲁棒特征，该方法利用人脸掩码自编码器进行特征学习。此外，该方法利用训练好的人脸掩蔽自编码器模型，利用双网络检测真假视频的差异。</p>
+<h2 id="一致性学习阶段"><a href="#一致性学习阶段" class="headerlink" title="一致性学习阶段"></a>一致性学习阶段</h2><p>与训练MAE模型，使用了新的掩码策略，一方面是使用了根据人脸关键点掩码的思路，将人脸分成了三个部分，眼睛、脸颊鼻子、嘴唇；另一方面是降低了掩码率。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/DeepfakeMae2.png"
                      
                 ></p>
-<ul>
-<li>从配置文件中找到bean的定义，利用Java Reflection API 创建bean实例；</li>
-<li>涉及属性的用set方法设置属性，setBeanName()、setBeanClassLoader()方法传入bean名字、classloader对象实例；</li>
-<li>调用 <code>setBeanFactory()</code>方法，传入 <code>BeanFactory</code>对象的实例；</li>
-<li>执行前置处理，<code>postProcessBeforeInitialization()</code> 方法；</li>
-<li>执行<code>afterPropertiesSet()</code>方法；</li>
-<li>如果 Bean 在配置文件中的定义包含 init-method 属性，执行指定的方法；</li>
-<li></li>
-</ul>
+<p>在编码器的处理过程中，去掉被遮挡的人脸块，留下未被遮挡的区域。通过这种方式，解码器根据未被遮挡的区域预测缺失的面部部分。利用MSE损失函数lmae - MSE计算掩膜补丁的重建质量。如果模型学习到面部各部分之间的一致性，则重建的patch与输入patch之间的损失应该会减小。我们的面部部分掩蔽策略使每个部分随机选择，从而强制模型学习不特定于任何面部部分的表示。此外，由于这个阶段只使用真实的视频，而不使用任何Deepfake视频，它可以防止模型过度拟合到任何特定的篡改模式。</p>
+<h1 id="双流网络阶段"><a href="#双流网络阶段" class="headerlink" title="双流网络阶段"></a>双流网络阶段</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/DeepfakeMae3.png"
+                     
+                ></p>
+<p>进入第二阶段，微调网络同时使用真实视频帧和Deepfake视频帧，使用交叉熵损失来提取真假视频间的差异；首先从真实视频帧和虚假视频帧之中提取帧并裁剪出人脸，将这些帧送入一阶段训练好的encoder中，为了聚合多帧的信息，我们使用编码器的最后一层对5帧的输出进行平均。</p>
+<p>由于第一阶段学习真实视频的面部一致性，经过训练的DeepfakeMAE编码器可以提取真实视频的一致性特征。对于假视频，由于一致性被破坏，从编码器中提取的特征可能与真实视频不同。</p>
+<p>双流的第二个网络使用了元学习的方式，元学习由于需要不同类型的人脸而不是大量的人脸，因此我们使用单个帧来训练分支以减少内存消耗，采用了resnet的前三层，<strong>这里有一些疑问，他说提出的face mapping就是56<em>56</em>3的，可以直接和重建的图像计算重建损失，但是resnet block吐出的图像尺寸怎么会是56<em>56</em>3的呢，而且这个重建是根据训练好的decoder重建的，意味着推理阶段使用了完整的MAE。</strong></p>
+<h1 id="元学习阶段"><a href="#元学习阶段" class="headerlink" title="元学习阶段"></a>元学习阶段</h1><p><strong>没有看懂</strong></p>
+<p>对于每个epoch，由相同数量的假视频和真实视频组成一个样本批，构建二值检测任务。元训练阶段通过采样许多检测任务来执行训练，并通过从元测试中采样许多类似的检测任务来验证。然后，可以更新元列车阶段的参数。为了选择最佳的梯度步长，我们设置了一个参考集，记为T ref。我们利用每个梯度步骤来计算T ref的精度。选取精度最高的参数作为最终更新参数。最后，Meta-train阶段利用更新后的参数计算Meta-train损失。</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>实验部分作者表示模型的泛化性比较强，在单一数据集上的效果不一定比得上其他模型。</p>
 
             </div>
 
@@ -317,16 +300,16 @@
                 <div class="post-copyright-info">
                     <div class="article-copyright-info-container">
     <ul>
-        <li><strong>标题:</strong> Java学习--Spring框架相关问题</li>
+        <li><strong>标题:</strong> Paper-DeepfakeMAE</li>
         <li><strong>作者:</strong> Huang Zhiwei</li>
-        <li><strong>创建于:</strong> 2023-04-26 20:19:04</li>
+        <li><strong>创建于:</strong> 2023-05-02 13:21:38</li>
         
             <li>
-                <strong>更新于:</strong> 2023-09-02 23:05:46
+                <strong>更新于:</strong> 2023-09-02 23:42:09
             </li>
         
         <li>
-            <strong>链接:</strong> https://huangzhw0221.github.io/2023/04/26/Java-Spring框架/
+            <strong>链接:</strong> https://huangzhw0221.github.io/2023/05/02/Paper-DeepfakeMAE/
         </li>
         <li>
             <strong>版权声明:</strong> 本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a> 进行许可。
@@ -341,7 +324,7 @@
                 <ul class="post-tags-box">
                     
                         <li class="tag-item">
-                            <a href="/tags/java/">#java</a>&nbsp;
+                            <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">#论文阅读</a>&nbsp;
                         </li>
                     
                 </ul>
@@ -355,13 +338,13 @@
                         <div class="article-prev">
                             <a class="prev"
                             rel="prev"
-                            href="/2023/05/02/Paper-DeepfakeMAE/"
+                            href="/2023/05/03/Learning-%E6%B5%8B%E8%AF%95%E5%9F%BA%E7%A1%80/"
                             >
                                 <span class="left arrow-icon flex-center">
                                     <i class="fa-solid fa-chevron-left"></i>
                                 </span>
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item">Paper-DeepfakeMAE</span>
+                                    <span class="post-nav-title-item">学习记录--测试基础</span>
                                     <span class="post-nav-item">上一篇</span>
                                 </span>
                             </a>
@@ -371,10 +354,10 @@
                         <div class="article-next">
                             <a class="next"
                             rel="next"
-                            href="/2023/04/25/Learning-linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/"
+                            href="/2023/04/26/Java-Spring%E6%A1%86%E6%9E%B6/"
                             >
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item">学习记录--linux常用指令</span>
+                                    <span class="post-nav-title-item">Java学习--Spring框架相关问题</span>
                                     <span class="post-nav-item">下一篇</span>
                                 </span>
                                 <span class="right arrow-icon flex-center">
@@ -439,8 +422,8 @@
                 <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
-        <div class="page-title">Java学习--Spring框架相关问题</div>
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-IoC"><span class="nav-text">Spring IoC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Aop"><span class="nav-text">Spring Aop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bean"><span class="nav-text">Bean</span></a></li></ol>
+        <div class="page-title">Paper-DeepfakeMAE</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DeepfakeMAE"><span class="nav-text">DeepfakeMAE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E5%AD%A6%E4%B9%A0%E9%98%B6%E6%AE%B5"><span class="nav-text">一致性学习阶段</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%8C%E6%B5%81%E7%BD%91%E7%BB%9C%E9%98%B6%E6%AE%B5"><span class="nav-text">双流网络阶段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%83%E5%AD%A6%E4%B9%A0%E9%98%B6%E6%AE%B5"><span class="nav-text">元学习阶段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-text">结论</span></a></li></ol>
 
     </div>
 </div>

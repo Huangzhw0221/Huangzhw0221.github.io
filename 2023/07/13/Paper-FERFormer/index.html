@@ -13,25 +13,27 @@
     
     <!--- Seo Part-->
     
-    <link rel="canonical" href="https://huangzhw0221.github.io/2023/04/26/java-spring框架/"/>
+    <link rel="canonical" href="https://huangzhw0221.github.io/2023/07/13/paper-ferformer/"/>
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
     <meta name="revisit-after" content="1 days">
     
-        <meta name="description" content="Spring IoCIoC（Inversion of Control:控制反转） 是一种设计思想，而不是一个具体的技术实现。IoC 的思想就是将原本在程序中手动创建对象的控制权，交由 Spring 框架来管理。 IoC 容器就像是一个工厂一样，当我们需要创建一个对象的时候，只需要配置好配置文件&#x2F;注解即可，完全不用考虑对象是如何被创建出来的。  对象之间的耦合度或者说依赖程度降低； 资源变">
+        <meta name="description" content="FER-former来源: ARXIVLink: https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;2303.12997.pdf 关键词: FER备注: 静态图像FER任务，Clip多模态，这个比较好理解状态: Done 多模态（CLIP）+CNN-Transformer用于静态图像表情识别 背景介绍1、表情识别中的标签都是one-hot的，用离散的标签表征连续的情感是不合理的，而且野外数据集中存在标注">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java学习--Spring框架相关问题">
-<meta property="og:url" content="https://huangzhw0221.github.io/2023/04/26/Java-Spring%E6%A1%86%E6%9E%B6/index.html">
+<meta property="og:title" content="Paper-FERFormer">
+<meta property="og:url" content="https://huangzhw0221.github.io/2023/07/13/Paper-FERFormer/index.html">
 <meta property="og:site_name" content="Huang&#39;s Matrix">
-<meta property="og:description" content="Spring IoCIoC（Inversion of Control:控制反转） 是一种设计思想，而不是一个具体的技术实现。IoC 的思想就是将原本在程序中手动创建对象的控制权，交由 Spring 框架来管理。 IoC 容器就像是一个工厂一样，当我们需要创建一个对象的时候，只需要配置好配置文件&#x2F;注解即可，完全不用考虑对象是如何被创建出来的。  对象之间的耦合度或者说依赖程度降低； 资源变">
+<meta property="og:description" content="FER-former来源: ARXIVLink: https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;2303.12997.pdf 关键词: FER备注: 静态图像FER任务，Clip多模态，这个比较好理解状态: Done 多模态（CLIP）+CNN-Transformer用于静态图像表情识别 背景介绍1、表情识别中的标签都是one-hot的，用离散的标签表征连续的情感是不合理的，而且野外数据集中存在标注">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://images.xiaozhuanlan.com/photo/2019/b5d264565657a5395c2781081a7483e1.jpg">
-<meta property="article:published_time" content="2023-04-26T12:19:04.000Z">
-<meta property="article:modified_time" content="2023-09-02T15:05:46.226Z">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/FERformer1.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/FERformer2.png">
+<meta property="og:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/FERformer3.png">
+<meta property="article:published_time" content="2023-07-13T15:26:28.000Z">
+<meta property="article:modified_time" content="2023-09-02T15:42:24.443Z">
 <meta property="article:author" content="Huang Zhiwei">
-<meta property="article:tag" content="java">
+<meta property="article:tag" content="论文阅读">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://images.xiaozhuanlan.com/photo/2019/b5d264565657a5395c2781081a7483e1.jpg">
+<meta name="twitter:image" content="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/FERformer1.png">
     
     <!--- Icon Part-->
     <link rel="icon" type="image/png" href="/images/redefine-favicon.svg" sizes="192x192">
@@ -42,7 +44,7 @@
     
     <title>
         
-            Java学习--Spring框架相关问题 -
+            Paper-FERFormer -
         
         Huang&#39;s Matrix
     </title>
@@ -197,7 +199,7 @@
             
             
                 <div class="article-title">
-                    <h1 class="article-title-regular">Java学习--Spring框架相关问题</h1>
+                    <h1 class="article-title-regular">Paper-FERFormer</h1>
                 </div>
             
                 
@@ -219,15 +221,15 @@
                             <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fa-regular fa-pen-fancy"></i>&nbsp;
-        <span class="desktop">2023-04-26 20:19:04</span>
-        <span class="mobile">2023-04-26 20:19</span>
+        <span class="desktop">2023-07-13 23:26:28</span>
+        <span class="mobile">2023-07-13 23:26</span>
         <span class="hover-info">创建</span>
     </span>
     
         <span class="article-date article-meta-item">
             <i class="fa-regular fa-wrench"></i>&nbsp;
-            <span class="desktop">2023-09-02 23:05:46</span>
-            <span class="mobile">2023-09-02 23:05</span>
+            <span class="desktop">2023-09-02 23:42:24</span>
+            <span class="mobile">2023-09-02 23:42</span>
             <span class="hover-info">更新</span>
         </span>
     
@@ -239,7 +241,7 @@
             <ul>
                 
                     <li>
-                        <a href="/tags/java/">java</a>&nbsp;
+                        <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>&nbsp;
                     </li>
                 
             </ul>
@@ -262,54 +264,39 @@
             
 
             <div class="article-content markdown-body">
-                <h2 id="Spring-IoC"><a href="#Spring-IoC" class="headerlink" title="Spring IoC"></a>Spring IoC</h2><p><strong>IoC（Inversion of Control:控制反转）</strong> 是一种设计思想，而不是一个具体的技术实现。IoC 的思想就是将原本在程序中手动创建对象的控制权，交由 Spring 框架来管理。 IoC 容器就像是一个工厂一样，当我们需要创建一个对象的时候，只需要配置好配置文件&#x2F;注解即可，完全不用考虑对象是如何被创建出来的。</p>
-<ol>
-<li>对象之间的耦合度或者说依赖程度降低；</li>
-<li>资源变的容易管理；比如你用 Spring 容器提供的话很容易就可以实现一个单例。</li>
-</ol>
-<h4 id="Spring-IOC-的工作流程"><a href="#Spring-IOC-的工作流程" class="headerlink" title="Spring IOC 的工作流程"></a>Spring IOC 的工作流程</h4><p>大致可以分为两个阶段：</p>
-<p>第一个阶段，就是 IOC 容器的初始化，这个阶段主要是根据程序中定义的 XML 或者注解等 Bean 的声明方式，通过解析和加载后生成 BeanDefinition，然后把 BeanDefinition 注册到 IOC 容器。通过注解或者 xml 声明的 bean 都会解析得到一个 BeanDefinition 实体，实体中包含这个 bean 中定义的基本属性。最后把这个 BeanDefinition 保存到一个 Map 集合里面，从而完成了 IOC 的初始化。IoC 容器的作用就是对这些注册的 Bean 的定义信息进行处理和维护。</p>
-<p>第二个阶段，完成 Bean 初始化及依赖注入，可以分两种情况，通过反射对没有设置 lazy-init 属性的单例 bean 进行初始化，完成 Bean 的依赖注入。针对设置 layy-init 属性以及非单例 bean 的实例化，是在每次获取 bean对象的时候，调用 bean 的初始化方法来完成实例化的，并且 Spring IOC 容器不会去管理这些 Bean。</p>
-<p>第三个阶段，Bean 的使用，会通过@Autowired或者BeanFactory.getBean()从IOC容器中获取指定的 bean 实例。</p>
-<h2 id="Spring-Aop"><a href="#Spring-Aop" class="headerlink" title="Spring Aop"></a>Spring Aop</h2><h2 id="Bean"><a href="#Bean" class="headerlink" title="Bean"></a>Bean</h2><h4 id="Bean的声明"><a href="#Bean的声明" class="headerlink" title="Bean的声明"></a>Bean的声明</h4><p>Bean 代指的就是那些被 IoC 容器所管理的对象，可以通过注解或者xml文件配置。</p>
-<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Constructor-arg with &#x27;value&#x27; attribute --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;...&quot;</span> <span class="attr">class</span>=<span class="string">&quot;...&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">value</span>=<span class="string">&quot;...&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-<p><code>@Component</code> ：通用的注解，可标注任意类为 <code>Spring</code> 组件。如果一个 Bean 不知道属于哪个层，可以使用<code>@Component</code> 注解标注。</p>
-<p><code>@Repository</code> : 对应持久层即 Dao 层，主要用于数据库相关操作。</p>
-<p><code>@Service</code> : 对应服务层，主要涉及一些复杂的逻辑，需要用到 Dao 层。</p>
-<p><code>@Controller</code> : 对应 Spring MVC 控制层，主要用于接受用户请求并调用 <code>Service</code> 层返回数据给前端页面。</p>
-<p><code>@Configuration</code> ：注解声明配置类。</p>
-<p><code>@Import</code> ：导入配置类或者普通的 Bean。</p>
-<h4 id="Component-和-Bean-的区别"><a href="#Component-和-Bean-的区别" class="headerlink" title="@Component 和 @Bean 的区别"></a>@Component 和 @Bean 的区别</h4><ul>
-<li><code>@Component</code> 注解作用于类，而<code>@Bean</code>注解作用于方法。</li>
-<li><code>@Component</code>通常是通过类路径扫描来自动侦测以及自动装配到 Spring 容器中，可以通过 <code>@ComponentScan</code> 注解定义要扫描的路径。<code>@Bean</code> 注解通常是在标有该注解的方法中定义产生这个 bean,<code>@Bean</code>告诉了 Spring 这是某个类的实例，当我需要用它的时候还给我。</li>
-<li><code>@Bean</code> 注解比 <code>@Component</code> 注解的自定义性更强，而且很多地方我们只能通过 <code>@Bean</code> 注解来注册 bean。比如当我们引用第三方库中的类需要装配到 <code>Spring</code>容器时，则只能通过 <code>@Bean</code>来实现。</li>
-</ul>
-<h4 id="Autowired-和-Resource-的区别"><a href="#Autowired-和-Resource-的区别" class="headerlink" title="@Autowired 和 @Resource 的区别"></a>@Autowired 和 @Resource 的区别</h4><ul>
-<li>两者都是注入bean的注解，<code>Autowired</code> 属于 Spring 内置的注解，默认<code>butype</code>，但当一个接口存在多个实现类的话，<code>byType</code>这种方式就无法正确注入对象了，这种情况下，注入方式会变为 <code>byName</code>（根据名称进行匹配），这个名称通常就是类名（首字母小写）。</li>
-<li><code>@Resource</code>属于 JDK 提供的注解，默认注入方式为 <code>byName</code>。如果无法通过名称匹配到对应的 Bean 的话，注入方式会变为<code>byType</code>。</li>
-<li>通过 <code>@Qualifier</code> 注解来显式指定名称而不是依赖变量的名称。</li>
-</ul>
-<h4 id="单例-Bean-的线程安全问题"><a href="#单例-Bean-的线程安全问题" class="headerlink" title="单例 Bean 的线程安全问题"></a>单例 Bean 的线程安全问题</h4><p>单例 Bean 存在线程问题，主要是因为当多个线程操作同一个对象的时候是存在资源竞争的，应对方法有以下两点：</p>
-<ul>
-<li>在 Bean 中尽量避免定义可变的成员变量；</li>
-<li>在类中定义一个 <code>ThreadLocal</code> 成员变量，将需要的可变成员变量保存在 <code>ThreadLocal</code> 中。</li>
-</ul>
-<h4 id="Bean-的生命周期"><a href="#Bean-的生命周期" class="headerlink" title="Bean 的生命周期"></a>Bean 的生命周期</h4><p><img  
+                <h1 id="FER-former"><a href="#FER-former" class="headerlink" title="FER-former"></a>FER-former</h1><p>来源: ARXIV<br>Link: <a class="link"   target="_blank" rel="noopener" href="https://arxiv.org/pdf/2303.12997.pdf" >https://arxiv.org/pdf/2303.12997.pdf <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a><br>关键词: FER<br>备注: 静态图像FER任务，Clip多模态，这个比较好理解<br>状态: Done</p>
+<p>多模态（CLIP）+CNN-Transformer用于静态图像表情识别</p>
+<h1 id="背景介绍"><a href="#背景介绍" class="headerlink" title="背景介绍"></a>背景介绍</h1><p>1、表情识别中的标签都是one-hot的，用离散的标签表征连续的情感是不合理的，而且野外数据集中存在标注歧义，所以使用了文本编码器生成“软监督”作为损失；</p>
+<p>2、ViT模型需要大量的图像训练才能发挥威力，而CNN模型提取的高级特征又存在瓶颈，所以提出CNN-Transformer提取和优化图像特征。</p>
+<p>3、在此基础上，将CNN提取的特征分解成多粒度的，再投影成一组特征用ViT做优化。</p>
+<p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://images.xiaozhuanlan.com/photo/2019/b5d264565657a5395c2781081a7483e1.jpg"
+                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/FERformer1.png"
                      
                 ></p>
-<ul>
-<li>从配置文件中找到bean的定义，利用Java Reflection API 创建bean实例；</li>
-<li>涉及属性的用set方法设置属性，setBeanName()、setBeanClassLoader()方法传入bean名字、classloader对象实例；</li>
-<li>调用 <code>setBeanFactory()</code>方法，传入 <code>BeanFactory</code>对象的实例；</li>
-<li>执行前置处理，<code>postProcessBeforeInitialization()</code> 方法；</li>
-<li>执行<code>afterPropertiesSet()</code>方法；</li>
-<li>如果 Bean 在配置文件中的定义包含 init-method 属性，执行指定的方法；</li>
-<li></li>
-</ul>
+<h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><p>模型由三部分组成：多粒度的embedding、混合注意力模块、异构域（跨模态）监督。CNN路使用在Celeb-1M上预训练的IR-50提取特征，Text Encoder是基于CLIP微调得到的。</p>
+<h2 id="multi-granularity-embedding-integration-MGEI"><a href="#multi-granularity-embedding-integration-MGEI" class="headerlink" title="multi-granularity embedding integration (MGEI)"></a>multi-granularity embedding integration (MGEI)</h2><p>作者认为ViT模型的特征提取性能需要非常大量的数据 （sufficient amounts of data）才能支撑，所以使用预训练的CNN模型Arcface提取图像特征，得到<code>C*H*W</code>的特征，经过池化得到<code>C*12*12</code>的特征；<br>然后下采样获得不同尺度的特征<code>Xpi</code>，使模型能够克服遮挡和姿势差异的问题；将不同尺度的特征展平后投影，得到维度一样的特征，可用送入transformer了。</p>
+<h2 id="hybrid-self-attention"><a href="#hybrid-self-attention" class="headerlink" title="hybrid self-attention"></a>hybrid self-attention</h2><p><code>input feature</code>和<code>class token</code>组成一组输入<code>Z’</code>；为了将图像特征与文本特征相结合，还设计了一个转向token（<code>steering token</code>）；拼接后得到完整的输入Z。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/FERformer2.png"
+                     
+                ></p>
+<h2 id="heterogeneous-domains-steering-supervision-HDSS"><a href="#heterogeneous-domains-steering-supervision-HDSS" class="headerlink" title="heterogeneous domains-steering supervision (HDSS)"></a>heterogeneous domains-steering supervision (HDSS)</h2><p>one hot硬编码标签导致监督标签同质，阻碍了FER性能的进一步提高。收到CLIP的启发，通过监督图像特征与文本特征之间的相似性，使图像特征也具有文本空间语义相关性，从而缓解标注歧义的问题。</p>
+<p>为每一个情感类别生成一句提示语：<code>this is a face image of &#123;expressiong&#125;</code>，提示语经过Text Encoder后得到7个Text Feature：</p>
+<p>$$<br>T &#x3D; \left { T1;T2;…Tm \right } ,T\in R^{m*d}<br>$$</p>
+<p>用生成的转向token（steering token）和这些特征计算相似度得到一个类别；用Transformer的class token做分类。分别计算两个损失。</p>
+<h1 id="实验部分"><a href="#实验部分" class="headerlink" title="实验部分"></a>实验部分</h1><p>在RAF-DB上的实验结果为91.30（SOTA 92.21 来自PosterV2）</p>
+<p>在FERPlus上的实验结果为90.96（SOTA 93.00 来自PosterV2）</p>
+<p>在SFEW2.0上的实验结果为62.18</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://hzw-blogimage.oss-cn-shanghai.aliyuncs.com/blogimages/FERformer3.png"
+                     
+                ></p>
 
             </div>
 
@@ -317,16 +304,16 @@
                 <div class="post-copyright-info">
                     <div class="article-copyright-info-container">
     <ul>
-        <li><strong>标题:</strong> Java学习--Spring框架相关问题</li>
+        <li><strong>标题:</strong> Paper-FERFormer</li>
         <li><strong>作者:</strong> Huang Zhiwei</li>
-        <li><strong>创建于:</strong> 2023-04-26 20:19:04</li>
+        <li><strong>创建于:</strong> 2023-07-13 23:26:28</li>
         
             <li>
-                <strong>更新于:</strong> 2023-09-02 23:05:46
+                <strong>更新于:</strong> 2023-09-02 23:42:24
             </li>
         
         <li>
-            <strong>链接:</strong> https://huangzhw0221.github.io/2023/04/26/Java-Spring框架/
+            <strong>链接:</strong> https://huangzhw0221.github.io/2023/07/13/Paper-FERFormer/
         </li>
         <li>
             <strong>版权声明:</strong> 本文章采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">CC BY-NC-SA 4.0</a> 进行许可。
@@ -341,7 +328,7 @@
                 <ul class="post-tags-box">
                     
                         <li class="tag-item">
-                            <a href="/tags/java/">#java</a>&nbsp;
+                            <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">#论文阅读</a>&nbsp;
                         </li>
                     
                 </ul>
@@ -355,13 +342,13 @@
                         <div class="article-prev">
                             <a class="prev"
                             rel="prev"
-                            href="/2023/05/02/Paper-DeepfakeMAE/"
+                            href="/2023/08/30/Leetcode04/"
                             >
                                 <span class="left arrow-icon flex-center">
                                     <i class="fa-solid fa-chevron-left"></i>
                                 </span>
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item">Paper-DeepfakeMAE</span>
+                                    <span class="post-nav-title-item">力扣学习录04--代码随想录：数组、链表</span>
                                     <span class="post-nav-item">上一篇</span>
                                 </span>
                             </a>
@@ -371,10 +358,10 @@
                         <div class="article-next">
                             <a class="next"
                             rel="next"
-                            href="/2023/04/25/Learning-linux%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/"
+                            href="/2023/06/09/Middleware-Rabbitmq/"
                             >
                                 <span class="title flex-center">
-                                    <span class="post-nav-title-item">学习记录--linux常用指令</span>
+                                    <span class="post-nav-title-item">中间件学习--Rabbitmq 消息队列</span>
                                     <span class="post-nav-item">下一篇</span>
                                 </span>
                                 <span class="right arrow-icon flex-center">
@@ -439,8 +426,8 @@
                 <div class="post-toc-wrap">
     <div class="post-toc">
         <div class="toc-title">此页目录</div>
-        <div class="page-title">Java学习--Spring框架相关问题</div>
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-IoC"><span class="nav-text">Spring IoC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Aop"><span class="nav-text">Spring Aop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bean"><span class="nav-text">Bean</span></a></li></ol>
+        <div class="page-title">Paper-FERFormer</div>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FER-former"><span class="nav-text">FER-former</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E4%BB%8B%E7%BB%8D"><span class="nav-text">背景介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B"><span class="nav-text">模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#multi-granularity-embedding-integration-MGEI"><span class="nav-text">multi-granularity embedding integration (MGEI)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hybrid-self-attention"><span class="nav-text">hybrid self-attention</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#heterogeneous-domains-steering-supervision-HDSS"><span class="nav-text">heterogeneous domains-steering supervision (HDSS)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E9%83%A8%E5%88%86"><span class="nav-text">实验部分</span></a></li></ol>
 
     </div>
 </div>
